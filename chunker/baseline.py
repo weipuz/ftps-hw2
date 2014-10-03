@@ -36,9 +36,9 @@ from collections import defaultdict
 def perc_train(train_data, tagset, numepochs):
     feat_vec = defaultdict(int)
     # insert your code here
+    ct.compare()
     ct = ChunkTrainer()
     feat_vec = ct(train_data, tagset, numepochs)
-    ct.compare()
     # please limit the number of iterations of training to n iterations
     return feat_vec
 
@@ -81,6 +81,7 @@ class ChunkTrainer():
 	def __call__(self, train_data, tagset, iter_num):
 		feat_vec = defaultdict(int)
 		for i in range(0, len(train_data)):
+			print i, len(train_data)
 			labeled_list = train_data[i][0]
 			feat_list = train_data[i][1]
 			#for feat in feat_list:
@@ -104,28 +105,32 @@ class ChunkTrainer():
 					pos2 = labeled_list[index + 2].split()
 				else:
 					pos2 = ["_B+2", "_B+2", "_B+2"]
-				feat_vec[("U00:" + neg2[0], zero[2])] += 1
-				feat_vec[("U01:" + neg1[0], zero[2])] += 1
-				feat_vec[("U02:" + zero[0], zero[2])] += 1
-				feat_vec[("U03:" + pos1[0], zero[2])] += 1
-				feat_vec[("U04:" + pos2[0], zero[2])] += 1
-				feat_vec[("U05:" + neg1[0] + "/" + zero[0], zero[2])] += 1
-				feat_vec[("U06:" + zero[0] + "/" + pos1[0], zero[2])] += 1
-				feat_vec[("U10:" + neg2[1], zero[2])] += 1
-				feat_vec[("U11:" + neg1[1], zero[2])] += 1
-				feat_vec[("U12:" + zero[1] + "q", zero[2])] += 1
-				feat_vec[("U13:" + pos1[1], zero[2])] += 1
-				feat_vec[("U14:" + pos2[1], zero[2])] += 1
-				feat_vec[("U15:" + neg2[1] + "/" + neg1[1], zero[2])] += 1
-				feat_vec[("U16:" + neg1[1] + "/" + zero[1], zero[2])] += 1
-				feat_vec[("U17:" + zero[1] + "/" + pos1[1], zero[2])] += 1
-				feat_vec[("U18:" + pos1[1] + "/" + pos2[1], zero[2])] += 1
-				feat_vec[("U20:" + neg2[1] + "/" + neg1[1] + "/" + zero[1], zero[2])] += 1
-				feat_vec[("U21:" + neg1[1] + "/" + zero[1] + "/" + pos1[1], zero[2])] += 1
-				feat_vec[("U22:" + zero[1] + "/" + pos1[1] + "/" + pos2[1], zero[2])] += 1
-				feat_vec[("B:" + neg1[2] + "/" + zero[2], zero[2])] += 1
-		self.printTest(feat_vec)
-		return feat_vec
+				feat_vec = self.addFeat(feat_vec, "U00", neg2[0], zero[2], tagset)
+				feat_vec = self.addFeat(feat_vec, "U01", neg1[0], zero[2], tagset)
+				feat_vec = self.addFeat(feat_vec, "U02", zero[0], zero[2], tagset)
+				feat_vec = self.addFeat(feat_vec, "U03", pos1[0], zero[2], tagset)
+				feat_vec = self.addFeat(feat_vec, "U04", pos2[0], zero[2], tagset)
+				feat_vec = self.addFeat(feat_vec, "U05", neg1[0] + "/" + zero[0], zero[2], tagset)
+				feat_vec = self.addFeat(feat_vec, "U06", zero[0] + "/" + pos1[0], zero[2], tagset)
+				feat_vec = self.addFeat(feat_vec, "U10", neg2[1], zero[2], tagset)
+				feat_vec = self.addFeat(feat_vec, "U11", neg1[1], zero[2], tagset)
+				feat_vec = self.addFeat(feat_vec, "U12", zero[1] + "q", zero[2], tagset)
+				feat_vec = self.addFeat(feat_vec, "U13", pos1[1], zero[2], tagset)
+				feat_vec = self.addFeat(feat_vec, "U14", pos2[1], zero[2], tagset)
+				feat_vec = self.addFeat(feat_vec, "U15", neg2[1] + "/" + neg1[1], zero[2], tagset)
+				feat_vec = self.addFeat(feat_vec, "U16", neg1[1] + "/" + zero[1], zero[2], tagset)
+				feat_vec = self.addFeat(feat_vec, "U17", zero[1] + "/" + pos1[1], zero[2], tagset)
+				feat_vec = self.addFeat(feat_vec, "U18", pos1[1] + "/" + pos2[1], zero[2], tagset)
+				feat_vec = self.addFeat(feat_vec, "U20", neg2[1] + "/" + neg1[1] + "/" + zero[1], zero[2], tagset)
+				feat_vec = self.addFeat(feat_vec, "U21", neg1[1] + "/" + zero[1] + "/" + pos1[1], zero[2], tagset)
+				feat_vec = self.addFeat(feat_vec, "U22", zero[1] + "/" + pos1[1] + "/" + pos2[1], zero[2], tagset)
+				feat_vec = self.addFeat(feat_vec, "B", neg1[2] + "/" + zero[2], zero[2], tagset)
+		feat_vec1 = defaultdict(int)
+		for index, value in feat_vec.iteritems():
+			if value > 0:
+				feat_vec1[index] = value
+		self.printTest(feat_vec1)
+		return feat_vec1
 
 	def addFeat(self, feat_vec, name, schema, output, tagset):
 		feat_vec[(name + ":" + schema, output)] += 1
