@@ -36,8 +36,8 @@ from collections import defaultdict
 def perc_train(train_data, tagset, numepochs):
     feat_vec = defaultdict(int)
     # insert your code here
-    ct.compare()
     ct = ChunkTrainer()
+    ct.compare()
     feat_vec = ct(train_data, tagset, numepochs)
     # please limit the number of iterations of training to n iterations
     return feat_vec
@@ -81,7 +81,6 @@ class ChunkTrainer():
 	def __call__(self, train_data, tagset, iter_num):
 		feat_vec = defaultdict(int)
 		for i in range(0, len(train_data)):
-			print i, len(train_data)
 			labeled_list = train_data[i][0]
 			feat_list = train_data[i][1]
 			#for feat in feat_list:
@@ -125,6 +124,44 @@ class ChunkTrainer():
 				feat_vec = self.addFeat(feat_vec, "U21", neg1[1] + "/" + zero[1] + "/" + pos1[1], zero[2], tagset)
 				feat_vec = self.addFeat(feat_vec, "U22", zero[1] + "/" + pos1[1] + "/" + pos2[1], zero[2], tagset)
 				feat_vec = self.addFeat(feat_vec, "B", neg1[2] + "/" + zero[2], zero[2], tagset)
+			for index, line in enumerate(labeled_list):
+				if index - 2 >= 0:
+					neg2 = labeled_list[index - 2].split()
+				else:
+					neg2 = ["_B-2", "_B-2", "_B-2"]
+				if index - 1 >= 0:
+					neg1 = labeled_list[index - 1].split()
+				else:
+					neg1 = ["_B-1", "_B-1", "_B-1"]
+				zero = labeled_list[index].split()
+				if index + 1 < len(labeled_list):
+					pos1 = labeled_list[index + 1].split()
+				else:
+					pos1 = ["_B+1", "_B+1", "_B+1"]
+				if index + 2 < len(labeled_list):
+					pos2 = labeled_list[index + 2].split()
+				else:
+					pos2 = ["_B+2", "_B+2", "_B+2"]
+				feat_vec = self.changeFeat(feat_vec, "U00", neg2[0], zero[2], tagset)
+				feat_vec = self.changeFeat(feat_vec, "U01", neg1[0], zero[2], tagset)
+				feat_vec = self.changeFeat(feat_vec, "U02", zero[0], zero[2], tagset)
+				feat_vec = self.changeFeat(feat_vec, "U03", pos1[0], zero[2], tagset)
+				feat_vec = self.changeFeat(feat_vec, "U04", pos2[0], zero[2], tagset)
+				feat_vec = self.changeFeat(feat_vec, "U05", neg1[0] + "/" + zero[0], zero[2], tagset)
+				feat_vec = self.changeFeat(feat_vec, "U06", zero[0] + "/" + pos1[0], zero[2], tagset)
+				feat_vec = self.changeFeat(feat_vec, "U10", neg2[1], zero[2], tagset)
+				feat_vec = self.changeFeat(feat_vec, "U11", neg1[1], zero[2], tagset)
+				feat_vec = self.changeFeat(feat_vec, "U12", zero[1] + "q", zero[2], tagset)
+				feat_vec = self.changeFeat(feat_vec, "U13", pos1[1], zero[2], tagset)
+				feat_vec = self.changeFeat(feat_vec, "U14", pos2[1], zero[2], tagset)
+				feat_vec = self.changeFeat(feat_vec, "U15", neg2[1] + "/" + neg1[1], zero[2], tagset)
+				feat_vec = self.changeFeat(feat_vec, "U16", neg1[1] + "/" + zero[1], zero[2], tagset)
+				feat_vec = self.changeFeat(feat_vec, "U17", zero[1] + "/" + pos1[1], zero[2], tagset)
+				feat_vec = self.changeFeat(feat_vec, "U18", pos1[1] + "/" + pos2[1], zero[2], tagset)
+				feat_vec = self.changeFeat(feat_vec, "U20", neg2[1] + "/" + neg1[1] + "/" + zero[1], zero[2], tagset)
+				feat_vec = self.changeFeat(feat_vec, "U21", neg1[1] + "/" + zero[1] + "/" + pos1[1], zero[2], tagset)
+				feat_vec = self.changeFeat(feat_vec, "U22", zero[1] + "/" + pos1[1] + "/" + pos2[1], zero[2], tagset)
+				feat_vec = self.changeFeat(feat_vec, "B", neg1[2] + "/" + zero[2], zero[2], tagset)
 		feat_vec1 = defaultdict(int)
 		for index, value in feat_vec.iteritems():
 			if value > 0:
@@ -134,8 +171,11 @@ class ChunkTrainer():
 
 	def addFeat(self, feat_vec, name, schema, output, tagset):
 		feat_vec[(name + ":" + schema, output)] += 1
+		return feat_vec
+
+	def changeFeat(self, feat_vec, name, schema, output, tagset):
 		for value in tagset:
-			if value != output:
+			if value != output and ((name + ":" + schema, value) in feat_vec):
 				feat_vec[(name + ":" + schema, value)] -= 1
 		return feat_vec
 
@@ -147,7 +187,7 @@ class ChunkTrainer():
 		for index, sent in enumerate(reference):
 			if index < len(output) and sent != output[index]:
 				count += 1
-				compare.write("line: " + repr(index) + "\noutput:\t" + output[index] + "\nrefer:\t" + sent + "\n\n")
+				compare.write("line: " + repr(index + 1) + "\noutput:\t" + output[index] + "\nrefer:\t" + sent + "\n\n")
 		compare.write("count: " + repr(count) + "\n")
 		compare.close()
 

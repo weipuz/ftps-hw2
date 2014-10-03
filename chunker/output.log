@@ -2193,7 +2193,7 @@ sales NNS I-NP
 organizations NNS I-NP
 and CC O
 focusing VBG B-VP
-more RBR B-ADVP
+more RBR B-NP
 carefully RB B-PP
 the DT B-NP
 company NN I-NP
@@ -9777,7 +9777,7 @@ as IN B-PP
 29 CD B-NP
 3\/4 CD I-NP
 and CC O
-as RB I-NP
+as RB B-ADJP
 low JJ I-NP
 as IN B-PP
 28 CD B-NP
@@ -11114,7 +11114,7 @@ way NN I-NP
 of IN B-PP
 life NN B-NP
 and CC I-NP
-so RB B-ADVP
+so RB O
 large JJ I-NP
 that IN B-PP
 it PRP B-NP
@@ -14963,7 +14963,7 @@ Eastern NNP I-NP
 new JJ I-NP
 plan NN I-NP
 is VBZ B-VP
-financially RB B-VP
+financially RB I-NP
 `` `` O
 overly RB B-NP
 optimistic JJ I-NP
@@ -18208,7 +18208,7 @@ machine NN I-NP
 more RBR I-NP
 responsive JJ I-NP
 , , O
-more RBR I-NP
+more RBR B-NP
 stable JJ I-NP
 and CC I-NP
 in IN B-PP
@@ -20605,7 +20605,7 @@ level NN I-NP
 and CC O
 25 CD I-NP
 % NN I-NP
-higher JJR B-ADVP
+higher JJR B-ADJP
 as IN B-PP
 a DT B-NP
 percentage NN I-NP
@@ -22910,7 +22910,7 @@ were VBD B-VP
 bidding NN I-NP
 bond NN I-NP
 prices NNS I-NP
-higher JJR B-ADVP
+higher JJR B-ADJP
 as IN B-PP
 stocks NNS B-NP
 tumbled VBD B-VP
@@ -25803,7 +25803,7 @@ impassiveness NN B-NP
 : : I-NP
 The DT B-NP
 most RBS I-NP
-actively RB I-VP
+actively RB I-NP
 traded VBN I-VP
 futures NNS I-NP
 contracts NNS I-NP
@@ -29561,7 +29561,7 @@ the DT B-NP
 Kabul NNP I-NP
 regime NN I-NP
 is VBZ B-VP
-increasingly RB B-ADVP
+increasingly RB B-PRT
 successful JJ I-NP
 at IN B-PP
 portraying VBG B-NP
@@ -29662,7 +29662,7 @@ in IN B-PP
 Gulbuddin NNP B-NP
 Hekhmatyar NNP I-NP
 , , O
-perhaps RB B-PP
+perhaps RB B-NP
 the DT B-NP
 most RBS I-NP
 hated VBD B-VP
@@ -29711,7 +29711,7 @@ armor NN I-NP
 and CC O
 expertise NN I-NP
 but CC O
-often RB B-ADVP
+often RB B-NP
 such JJ B-NP
 essentials NNS I-NP
 as IN B-PP
@@ -32994,7 +32994,7 @@ shopping NN I-NP
 the DT B-NP
 confederation NN I-NP
 proposed VBN I-VP
-amending VBG B-PP
+amending VBG I-VP
 controls NNS I-NP
 to TO B-VP
 be VB I-VP
@@ -40158,7 +40158,7 @@ left VBN I-VP
 the DT B-NP
 IMF NNP I-NP
 feeling NN I-NP
-less JJR B-ADVP
+less JJR B-ADJP
 than IN B-PP
 first JJ B-NP
 fiddle NN I-NP
@@ -42253,7 +42253,7 @@ August NNP B-NP
 dragged VBD I-NP
 the DT B-NP
 dollar NN I-NP
-lower JJR I-PP
+lower JJR B-ADJP
 Tuesday NNP I-NP
 , , O
 but CC O
@@ -45973,7 +45973,7 @@ one CD I-NP
 of IN B-PP
 the DT B-NP
 most RBS I-NP
-widely RB I-VP
+widely RB I-NP
 held VBN I-VP
 United NNP I-NP
 Kingdom NNP I-NP
@@ -46334,7 +46334,7 @@ wants VBZ B-VP
 -LCB- ( O
 Jaguar NNP I-NP
 -RCB- ) I-NP
-very RB B-ADVP
+very RB O
 much RB I-NP
 . . O
 '' '' O
@@ -48762,7 +48762,7 @@ Univision NNP I-NP
 Spanish-language JJ I-NP
 network NN I-NP
 , , O
-most RBS B-NP
+most RBS I-NP
 recently RB B-ADVP
 co-founded VBD B-VP
 Nogales NNP I-NP
