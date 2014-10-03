@@ -1,2 +1,6 @@
 default.model
 *.pyc
+data/input.feats
+data/input.txt
+data/train.feats.dev
+data/train.txt
