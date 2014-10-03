@@ -1,5 +1,8 @@
 default.model
 *.pyc
+
+*.model
+test.log
 data/input.feats
 data/input.txt
 data/train.feats.dev
