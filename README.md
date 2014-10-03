@@ -1,12 +1,4 @@
-ftps-hw2
-========
+nlp-class-hw
+============
 
-hw2 for cmpt825.
-
-group "ftps" 
-team member:
-
-fei zhan
-tong wang
-shijie li
-weipu zhao
+Homework files distributed to students for my NLP class.
