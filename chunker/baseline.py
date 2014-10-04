@@ -29,7 +29,7 @@ Inside the perceptron training loop:
 """
 
 import perc
-import sys, optparse, os, codecs
+import sys, optparse, os, codecs, time
 from collections import defaultdict
 
 
@@ -77,20 +77,73 @@ class ChunkTrainer():
 		self.test_file.write(self.stringify(output) + "\n")
 
 	def __call__(self, train_data, tagset, iter_num):
-		for i in range(0, len(train_data)):
-			labeled_list = train_data[i][0]
-			feat_list = train_data[i][1]
-			#for feat in feat_list:
-				#if not(feat in self.feat_vec):
-					#self.feat_vec[feat] = 0
-			self.addFeatures(labeled_list)
-			self.changeFeatures(labeled_list)
-		self.feat_vec = self.simplifyFeatVec()
-		self.printTest(self.feat_vec)
+		return self.chunk(train_data, tagset, iter_num)
+
+	def chunk(self, train_data, tagset, iter_num):
+		iter_num = 1
+		train_size = len(train_data)
+		weight_list = [{}] * train_size
+		weight_count = 0
+		for i in range(0, train_size):
+			for j in range(0, len(train_data[i][0])):
+				weight_count += 1
+				weight_list[i][j] = 1.0
+		for t in range(0, iter_num):
+			print time.clock(), "iteration " + repr(t)
+			print "weight_count ", weight_count
+			for i in range(0, train_size):
+				#feat_list = train_data[i][1]
+				labeled_list = train_data[i][0]
+				self.addFeatures(labeled_list, weight_list[i])
+			print time.clock(), "initialize feature vector done"
+			for i in range(0, train_size):
+				labeled_list = train_data[i][0]
+				feat_list = train_data[i][1]
+				self.changeFeatures(labeled_list, weight_list[i])
+			print time.clock(), "learn features from label done"
+			weight_count = 0
+			weight_list[i] = {}
+			self.printTest("iteration " + repr(t) + ":")
+			for i in range(0, train_size):
+				if 0 == i % 1000:
+					print time.clock(), "learn features from mistake", i
+				for index in weight_list[i]:
+					weight_list[i][index] /= 3.0
+					if weight_list[i][index] < 0.1:
+						weight_list[i][index] = 0.0
+					else:
+						weight_count += 1
+				labeled_list = train_data[i][0]
+				feat_list = train_data[i][1]
+				result = perc.perc_test(self.feat_vec, labeled_list, feat_list, tagset, tagset[0])
+				self.printTest("case " + repr(i) + ":")
+				flag = False
+				for index, value in enumerate(result):
+					labeled = labeled_list[index].split()
+					if value != labeled[2]:
+						flag = True
+						if index in weight_list[i]:
+							weight_list[i][index] += 5.0
+						else:
+							weight_list[i][index] = 5.0
+							weight_count += 1
+						self.printTest(index)
+						self.printTest(labeled_list[index])
+						self.printTest(value)
+				if True == flag:
+					test = "\n".join(perc.conll_format(result, labeled_list))
+					self.printTest(test)
+				self.printTest()
+			print time.clock(), "learn features from mistake done"
+			self.feat_vec = self.simplifyFeatVec()
+			print time.clock(), "simplify feature vector done"
 		return self.feat_vec
 
-	def addFeatures(self, labeled_list):
+	def addFeatures(self, labeled_list, weight_list):
 		for index, line in enumerate(labeled_list):
+			if not (index in weight_list) or weight_list[index] <= 0.0:
+				continue
+			weight = weight_list[index]
 			if index - 2 >= 0:
 				neg2 = labeled_list[index - 2].split()
 			else:
@@ -108,29 +161,32 @@ class ChunkTrainer():
 				pos2 = labeled_list[index + 2].split()
 			else:
 				pos2 = ["_B+2", "_B+2", "_B+2"]
-			self.addFeat("U00", neg2[0], zero[2], tagset)
-			self.addFeat("U01", neg1[0], zero[2], tagset)
-			self.addFeat("U02", zero[0], zero[2], tagset)
-			self.addFeat("U03", pos1[0], zero[2], tagset)
-			self.addFeat("U04", pos2[0], zero[2], tagset)
-			self.addFeat("U05", neg1[0] + "/" + zero[0], zero[2], tagset)
-			self.addFeat("U06", zero[0] + "/" + pos1[0], zero[2], tagset)
-			self.addFeat("U10", neg2[1], zero[2], tagset)
-			self.addFeat("U11", neg1[1], zero[2], tagset)
-			self.addFeat("U12", zero[1] + "q", zero[2], tagset)
-			self.addFeat("U13", pos1[1], zero[2], tagset)
-			self.addFeat("U14", pos2[1], zero[2], tagset)
-			self.addFeat("U15", neg2[1] + "/" + neg1[1], zero[2], tagset)
-			self.addFeat("U16", neg1[1] + "/" + zero[1], zero[2], tagset)
-			self.addFeat("U17", zero[1] + "/" + pos1[1], zero[2], tagset)
-			self.addFeat("U18", pos1[1] + "/" + pos2[1], zero[2], tagset)
-			self.addFeat("U20", neg2[1] + "/" + neg1[1] + "/" + zero[1], zero[2], tagset)
-			self.addFeat("U21", neg1[1] + "/" + zero[1] + "/" + pos1[1], zero[2], tagset)
-			self.addFeat("U22", zero[1] + "/" + pos1[1] + "/" + pos2[1], zero[2], tagset)
-			self.addFeat("B", neg1[2] + "/" + zero[2], zero[2], tagset)
+			self.addFeat("U00", neg2[0], zero[2], weight)
+			self.addFeat("U01", neg1[0], zero[2], weight)
+			self.addFeat("U02", zero[0], zero[2], weight)
+			self.addFeat("U03", pos1[0], zero[2], weight)
+			self.addFeat("U04", pos2[0], zero[2], weight)
+			self.addFeat("U05", neg1[0] + "/" + zero[0], zero[2], weight)
+			self.addFeat("U06", zero[0] + "/" + pos1[0], zero[2], weight)
+			self.addFeat("U10", neg2[1], zero[2], weight)
+			self.addFeat("U11", neg1[1], zero[2], weight)
+			self.addFeat("U12", zero[1] + "q", zero[2], weight)
+			self.addFeat("U13", pos1[1], zero[2], weight)
+			self.addFeat("U14", pos2[1], zero[2], weight)
+			self.addFeat("U15", neg2[1] + "/" + neg1[1], zero[2], weight)
+			self.addFeat("U16", neg1[1] + "/" + zero[1], zero[2], weight)
+			self.addFeat("U17", zero[1] + "/" + pos1[1], zero[2], weight)
+			self.addFeat("U18", pos1[1] + "/" + pos2[1], zero[2], weight)
+			self.addFeat("U20", neg2[1] + "/" + neg1[1] + "/" + zero[1], zero[2], weight)
+			self.addFeat("U21", neg1[1] + "/" + zero[1] + "/" + pos1[1], zero[2], weight)
+			self.addFeat("U22", zero[1] + "/" + pos1[1] + "/" + pos2[1], zero[2], weight)
+			self.addFeat("B", neg1[2] + "/" + zero[2], zero[2], weight)
 
-	def changeFeatures(self, labeled_list):
+	def changeFeatures(self, labeled_list, weight_list):
 		for index, line in enumerate(labeled_list):
+			if not (index in weight_list) or weight_list[index] <= 0.0:
+				continue
+			weight = weight_list[index]
 			if index - 2 >= 0:
 				neg2 = labeled_list[index - 2].split()
 			else:
@@ -148,26 +204,26 @@ class ChunkTrainer():
 				pos2 = labeled_list[index + 2].split()
 			else:
 				pos2 = ["_B+2", "_B+2", "_B+2"]
-			self.changeFeat("U00", neg2[0], zero[2], tagset)
-			self.changeFeat("U01", neg1[0], zero[2], tagset)
-			self.changeFeat("U02", zero[0], zero[2], tagset)
-			self.changeFeat("U03", pos1[0], zero[2], tagset)
-			self.changeFeat("U04", pos2[0], zero[2], tagset)
-			self.changeFeat("U05", neg1[0] + "/" + zero[0], zero[2], tagset)
-			self.changeFeat("U06", zero[0] + "/" + pos1[0], zero[2], tagset)
-			self.changeFeat("U10", neg2[1], zero[2], tagset)
-			self.changeFeat("U11", neg1[1], zero[2], tagset)
-			self.changeFeat("U12", zero[1] + "q", zero[2], tagset)
-			self.changeFeat("U13", pos1[1], zero[2], tagset)
-			self.changeFeat("U14", pos2[1], zero[2], tagset)
-			self.changeFeat("U15", neg2[1] + "/" + neg1[1], zero[2], tagset)
-			self.changeFeat("U16", neg1[1] + "/" + zero[1], zero[2], tagset)
-			self.changeFeat("U17", zero[1] + "/" + pos1[1], zero[2], tagset)
-			self.changeFeat("U18", pos1[1] + "/" + pos2[1], zero[2], tagset)
-			self.changeFeat("U20", neg2[1] + "/" + neg1[1] + "/" + zero[1], zero[2], tagset)
-			self.changeFeat("U21", neg1[1] + "/" + zero[1] + "/" + pos1[1], zero[2], tagset)
-			self.changeFeat("U22", zero[1] + "/" + pos1[1] + "/" + pos2[1], zero[2], tagset)
-			self.changeFeat("B", neg1[2] + "/" + zero[2], zero[2], tagset)
+			self.changeFeat("U00", neg2[0], zero[2], weight, tagset)
+			self.changeFeat("U01", neg1[0], zero[2], weight, tagset)
+			self.changeFeat("U02", zero[0], zero[2], weight, tagset)
+			self.changeFeat("U03", pos1[0], zero[2], weight, tagset)
+			self.changeFeat("U04", pos2[0], zero[2], weight, tagset)
+			self.changeFeat("U05", neg1[0] + "/" + zero[0], zero[2], weight, tagset)
+			self.changeFeat("U06", zero[0] + "/" + pos1[0], zero[2], weight, tagset)
+			self.changeFeat("U10", neg2[1], zero[2], weight, tagset)
+			self.changeFeat("U11", neg1[1], zero[2], weight, tagset)
+			self.changeFeat("U12", zero[1] + "q", zero[2], weight, tagset)
+			self.changeFeat("U13", pos1[1], zero[2], weight, tagset)
+			self.changeFeat("U14", pos2[1], zero[2], weight, tagset)
+			self.changeFeat("U15", neg2[1] + "/" + neg1[1], zero[2], weight, tagset)
+			self.changeFeat("U16", neg1[1] + "/" + zero[1], zero[2], weight, tagset)
+			self.changeFeat("U17", zero[1] + "/" + pos1[1], zero[2], weight, tagset)
+			self.changeFeat("U18", pos1[1] + "/" + pos2[1], zero[2], weight, tagset)
+			self.changeFeat("U20", neg2[1] + "/" + neg1[1] + "/" + zero[1], zero[2], weight, tagset)
+			self.changeFeat("U21", neg1[1] + "/" + zero[1] + "/" + pos1[1], zero[2], weight, tagset)
+			self.changeFeat("U22", zero[1] + "/" + pos1[1] + "/" + pos2[1], zero[2], weight, tagset)
+			self.changeFeat("B", neg1[2] + "/" + zero[2], zero[2], weight, tagset)
 
 	def simplifyFeatVec(self):
 		feat_vec1 = defaultdict(int)
@@ -176,13 +232,13 @@ class ChunkTrainer():
 				feat_vec1[index] = value
 		return feat_vec1
 
-	def addFeat(self, name, schema, output, tagset):
-		self.feat_vec[(name + ":" + schema, output)] += 1
+	def addFeat(self, name, schema, output, weight = 1.0):
+		self.feat_vec[(name + ":" + schema, output)] += weight
 
-	def changeFeat(self, name, schema, output, tagset):
+	def changeFeat(self, name, schema, output, weight, tagset):
 		for value in tagset:
 			if value != output and ((name + ":" + schema, value) in self.feat_vec):
-				self.feat_vec[(name + ":" + schema, value)] -= 1
+				self.feat_vec[(name + ":" + schema, value)] -= 1.0 #weight
 
 	def compare(self):
 		output = [ unicode(text.strip(), "utf-8") for text in open("output.log") ]
@@ -203,7 +259,7 @@ class ChunkTrainer():
 		compare.close()
 		print "comparing done"
 
-	def chunk(self, labeled_list, feat_list, tagset, iter_num):
+	def chunk0(self, labeled_list, feat_list, tagset, iter_num):
 		self.printTest("iter_num: ")
 		self.printTest(iter_num)
 		self.printTest("tagset: ")
@@ -278,3 +334,31 @@ if __name__ == '__main__':
     #
     feat_vec = ct(train_data, tagset, int(opts.numepochs))
     perc.perc_write_to_file(feat_vec, opts.modelfile)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
