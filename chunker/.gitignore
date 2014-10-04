@@ -5,5 +5,5 @@ default.model
 test.log
 data/input.feats
 data/input.txt
-data/train.feats.dev
+data/train.feats
 data/train.txt

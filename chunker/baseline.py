@@ -36,9 +36,6 @@ from collections import defaultdict
 def perc_train(train_data, tagset, numepochs):
     feat_vec = defaultdict(int)
     # insert your code here
-    ct = ChunkTrainer()
-    ct.compare()
-    feat_vec = ct(train_data, tagset, numepochs)
     # please limit the number of iterations of training to n iterations
     return feat_vec
 
@@ -48,6 +45,7 @@ class ChunkTrainer():
 	def __init__(self):
 		self.test_file = codecs.open("test.log", "w", "utf-8")
 		#self.output_file = codecs.open("output.log", "w", "utf-8")
+		self.feat_vec = defaultdict(int)
 
 	# destructor
 	def __exit__(self, type, value, traceback):
@@ -79,117 +77,131 @@ class ChunkTrainer():
 		self.test_file.write(self.stringify(output) + "\n")
 
 	def __call__(self, train_data, tagset, iter_num):
-		feat_vec = defaultdict(int)
 		for i in range(0, len(train_data)):
 			labeled_list = train_data[i][0]
 			feat_list = train_data[i][1]
 			#for feat in feat_list:
-				#if not(feat in feat_vec):
-					#feat_vec[feat] = 0
-			for index, line in enumerate(labeled_list):
-				if index - 2 >= 0:
-					neg2 = labeled_list[index - 2].split()
-				else:
-					neg2 = ["_B-2", "_B-2", "_B-2"]
-				if index - 1 >= 0:
-					neg1 = labeled_list[index - 1].split()
-				else:
-					neg1 = ["_B-1", "_B-1", "_B-1"]
-				zero = labeled_list[index].split()
-				if index + 1 < len(labeled_list):
-					pos1 = labeled_list[index + 1].split()
-				else:
-					pos1 = ["_B+1", "_B+1", "_B+1"]
-				if index + 2 < len(labeled_list):
-					pos2 = labeled_list[index + 2].split()
-				else:
-					pos2 = ["_B+2", "_B+2", "_B+2"]
-				feat_vec = self.addFeat(feat_vec, "U00", neg2[0], zero[2], tagset)
-				feat_vec = self.addFeat(feat_vec, "U01", neg1[0], zero[2], tagset)
-				feat_vec = self.addFeat(feat_vec, "U02", zero[0], zero[2], tagset)
-				feat_vec = self.addFeat(feat_vec, "U03", pos1[0], zero[2], tagset)
-				feat_vec = self.addFeat(feat_vec, "U04", pos2[0], zero[2], tagset)
-				feat_vec = self.addFeat(feat_vec, "U05", neg1[0] + "/" + zero[0], zero[2], tagset)
-				feat_vec = self.addFeat(feat_vec, "U06", zero[0] + "/" + pos1[0], zero[2], tagset)
-				feat_vec = self.addFeat(feat_vec, "U10", neg2[1], zero[2], tagset)
-				feat_vec = self.addFeat(feat_vec, "U11", neg1[1], zero[2], tagset)
-				feat_vec = self.addFeat(feat_vec, "U12", zero[1] + "q", zero[2], tagset)
-				feat_vec = self.addFeat(feat_vec, "U13", pos1[1], zero[2], tagset)
-				feat_vec = self.addFeat(feat_vec, "U14", pos2[1], zero[2], tagset)
-				feat_vec = self.addFeat(feat_vec, "U15", neg2[1] + "/" + neg1[1], zero[2], tagset)
-				feat_vec = self.addFeat(feat_vec, "U16", neg1[1] + "/" + zero[1], zero[2], tagset)
-				feat_vec = self.addFeat(feat_vec, "U17", zero[1] + "/" + pos1[1], zero[2], tagset)
-				feat_vec = self.addFeat(feat_vec, "U18", pos1[1] + "/" + pos2[1], zero[2], tagset)
-				feat_vec = self.addFeat(feat_vec, "U20", neg2[1] + "/" + neg1[1] + "/" + zero[1], zero[2], tagset)
-				feat_vec = self.addFeat(feat_vec, "U21", neg1[1] + "/" + zero[1] + "/" + pos1[1], zero[2], tagset)
-				feat_vec = self.addFeat(feat_vec, "U22", zero[1] + "/" + pos1[1] + "/" + pos2[1], zero[2], tagset)
-				feat_vec = self.addFeat(feat_vec, "B", neg1[2] + "/" + zero[2], zero[2], tagset)
-			for index, line in enumerate(labeled_list):
-				if index - 2 >= 0:
-					neg2 = labeled_list[index - 2].split()
-				else:
-					neg2 = ["_B-2", "_B-2", "_B-2"]
-				if index - 1 >= 0:
-					neg1 = labeled_list[index - 1].split()
-				else:
-					neg1 = ["_B-1", "_B-1", "_B-1"]
-				zero = labeled_list[index].split()
-				if index + 1 < len(labeled_list):
-					pos1 = labeled_list[index + 1].split()
-				else:
-					pos1 = ["_B+1", "_B+1", "_B+1"]
-				if index + 2 < len(labeled_list):
-					pos2 = labeled_list[index + 2].split()
-				else:
-					pos2 = ["_B+2", "_B+2", "_B+2"]
-				feat_vec = self.changeFeat(feat_vec, "U00", neg2[0], zero[2], tagset)
-				feat_vec = self.changeFeat(feat_vec, "U01", neg1[0], zero[2], tagset)
-				feat_vec = self.changeFeat(feat_vec, "U02", zero[0], zero[2], tagset)
-				feat_vec = self.changeFeat(feat_vec, "U03", pos1[0], zero[2], tagset)
-				feat_vec = self.changeFeat(feat_vec, "U04", pos2[0], zero[2], tagset)
-				feat_vec = self.changeFeat(feat_vec, "U05", neg1[0] + "/" + zero[0], zero[2], tagset)
-				feat_vec = self.changeFeat(feat_vec, "U06", zero[0] + "/" + pos1[0], zero[2], tagset)
-				feat_vec = self.changeFeat(feat_vec, "U10", neg2[1], zero[2], tagset)
-				feat_vec = self.changeFeat(feat_vec, "U11", neg1[1], zero[2], tagset)
-				feat_vec = self.changeFeat(feat_vec, "U12", zero[1] + "q", zero[2], tagset)
-				feat_vec = self.changeFeat(feat_vec, "U13", pos1[1], zero[2], tagset)
-				feat_vec = self.changeFeat(feat_vec, "U14", pos2[1], zero[2], tagset)
-				feat_vec = self.changeFeat(feat_vec, "U15", neg2[1] + "/" + neg1[1], zero[2], tagset)
-				feat_vec = self.changeFeat(feat_vec, "U16", neg1[1] + "/" + zero[1], zero[2], tagset)
-				feat_vec = self.changeFeat(feat_vec, "U17", zero[1] + "/" + pos1[1], zero[2], tagset)
-				feat_vec = self.changeFeat(feat_vec, "U18", pos1[1] + "/" + pos2[1], zero[2], tagset)
-				feat_vec = self.changeFeat(feat_vec, "U20", neg2[1] + "/" + neg1[1] + "/" + zero[1], zero[2], tagset)
-				feat_vec = self.changeFeat(feat_vec, "U21", neg1[1] + "/" + zero[1] + "/" + pos1[1], zero[2], tagset)
-				feat_vec = self.changeFeat(feat_vec, "U22", zero[1] + "/" + pos1[1] + "/" + pos2[1], zero[2], tagset)
-				feat_vec = self.changeFeat(feat_vec, "B", neg1[2] + "/" + zero[2], zero[2], tagset)
+				#if not(feat in self.feat_vec):
+					#self.feat_vec[feat] = 0
+			self.addFeatures(labeled_list)
+			self.changeFeatures(labeled_list)
+		self.feat_vec = self.simplifyFeatVec()
+		self.printTest(self.feat_vec)
+		return self.feat_vec
+
+	def addFeatures(self, labeled_list):
+		for index, line in enumerate(labeled_list):
+			if index - 2 >= 0:
+				neg2 = labeled_list[index - 2].split()
+			else:
+				neg2 = ["_B-2", "_B-2", "_B-2"]
+			if index - 1 >= 0:
+				neg1 = labeled_list[index - 1].split()
+			else:
+				neg1 = ["_B-1", "_B-1", "_B-1"]
+			zero = labeled_list[index].split()
+			if index + 1 < len(labeled_list):
+				pos1 = labeled_list[index + 1].split()
+			else:
+				pos1 = ["_B+1", "_B+1", "_B+1"]
+			if index + 2 < len(labeled_list):
+				pos2 = labeled_list[index + 2].split()
+			else:
+				pos2 = ["_B+2", "_B+2", "_B+2"]
+			self.addFeat("U00", neg2[0], zero[2], tagset)
+			self.addFeat("U01", neg1[0], zero[2], tagset)
+			self.addFeat("U02", zero[0], zero[2], tagset)
+			self.addFeat("U03", pos1[0], zero[2], tagset)
+			self.addFeat("U04", pos2[0], zero[2], tagset)
+			self.addFeat("U05", neg1[0] + "/" + zero[0], zero[2], tagset)
+			self.addFeat("U06", zero[0] + "/" + pos1[0], zero[2], tagset)
+			self.addFeat("U10", neg2[1], zero[2], tagset)
+			self.addFeat("U11", neg1[1], zero[2], tagset)
+			self.addFeat("U12", zero[1] + "q", zero[2], tagset)
+			self.addFeat("U13", pos1[1], zero[2], tagset)
+			self.addFeat("U14", pos2[1], zero[2], tagset)
+			self.addFeat("U15", neg2[1] + "/" + neg1[1], zero[2], tagset)
+			self.addFeat("U16", neg1[1] + "/" + zero[1], zero[2], tagset)
+			self.addFeat("U17", zero[1] + "/" + pos1[1], zero[2], tagset)
+			self.addFeat("U18", pos1[1] + "/" + pos2[1], zero[2], tagset)
+			self.addFeat("U20", neg2[1] + "/" + neg1[1] + "/" + zero[1], zero[2], tagset)
+			self.addFeat("U21", neg1[1] + "/" + zero[1] + "/" + pos1[1], zero[2], tagset)
+			self.addFeat("U22", zero[1] + "/" + pos1[1] + "/" + pos2[1], zero[2], tagset)
+			self.addFeat("B", neg1[2] + "/" + zero[2], zero[2], tagset)
+
+	def changeFeatures(self, labeled_list):
+		for index, line in enumerate(labeled_list):
+			if index - 2 >= 0:
+				neg2 = labeled_list[index - 2].split()
+			else:
+				neg2 = ["_B-2", "_B-2", "_B-2"]
+			if index - 1 >= 0:
+				neg1 = labeled_list[index - 1].split()
+			else:
+				neg1 = ["_B-1", "_B-1", "_B-1"]
+			zero = labeled_list[index].split()
+			if index + 1 < len(labeled_list):
+				pos1 = labeled_list[index + 1].split()
+			else:
+				pos1 = ["_B+1", "_B+1", "_B+1"]
+			if index + 2 < len(labeled_list):
+				pos2 = labeled_list[index + 2].split()
+			else:
+				pos2 = ["_B+2", "_B+2", "_B+2"]
+			self.changeFeat("U00", neg2[0], zero[2], tagset)
+			self.changeFeat("U01", neg1[0], zero[2], tagset)
+			self.changeFeat("U02", zero[0], zero[2], tagset)
+			self.changeFeat("U03", pos1[0], zero[2], tagset)
+			self.changeFeat("U04", pos2[0], zero[2], tagset)
+			self.changeFeat("U05", neg1[0] + "/" + zero[0], zero[2], tagset)
+			self.changeFeat("U06", zero[0] + "/" + pos1[0], zero[2], tagset)
+			self.changeFeat("U10", neg2[1], zero[2], tagset)
+			self.changeFeat("U11", neg1[1], zero[2], tagset)
+			self.changeFeat("U12", zero[1] + "q", zero[2], tagset)
+			self.changeFeat("U13", pos1[1], zero[2], tagset)
+			self.changeFeat("U14", pos2[1], zero[2], tagset)
+			self.changeFeat("U15", neg2[1] + "/" + neg1[1], zero[2], tagset)
+			self.changeFeat("U16", neg1[1] + "/" + zero[1], zero[2], tagset)
+			self.changeFeat("U17", zero[1] + "/" + pos1[1], zero[2], tagset)
+			self.changeFeat("U18", pos1[1] + "/" + pos2[1], zero[2], tagset)
+			self.changeFeat("U20", neg2[1] + "/" + neg1[1] + "/" + zero[1], zero[2], tagset)
+			self.changeFeat("U21", neg1[1] + "/" + zero[1] + "/" + pos1[1], zero[2], tagset)
+			self.changeFeat("U22", zero[1] + "/" + pos1[1] + "/" + pos2[1], zero[2], tagset)
+			self.changeFeat("B", neg1[2] + "/" + zero[2], zero[2], tagset)
+
+	def simplifyFeatVec(self):
 		feat_vec1 = defaultdict(int)
-		for index, value in feat_vec.iteritems():
+		for index, value in self.feat_vec.iteritems():
 			if value > 0:
 				feat_vec1[index] = value
-		self.printTest(feat_vec1)
 		return feat_vec1
 
-	def addFeat(self, feat_vec, name, schema, output, tagset):
-		feat_vec[(name + ":" + schema, output)] += 1
-		return feat_vec
+	def addFeat(self, name, schema, output, tagset):
+		self.feat_vec[(name + ":" + schema, output)] += 1
 
-	def changeFeat(self, feat_vec, name, schema, output, tagset):
+	def changeFeat(self, name, schema, output, tagset):
 		for value in tagset:
-			if value != output and ((name + ":" + schema, value) in feat_vec):
-				feat_vec[(name + ":" + schema, value)] -= 1
-		return feat_vec
+			if value != output and ((name + ":" + schema, value) in self.feat_vec):
+				self.feat_vec[(name + ":" + schema, value)] -= 1
 
 	def compare(self):
 		output = [ unicode(text.strip(), "utf-8") for text in open("output.log") ]
 		reference = [ unicode(text.strip(), "utf-8") for text in open("data/reference250.txt") ]
 		compare = codecs.open("compare.log", "w", "utf-8")
 		count = 0
-		for index, sent in enumerate(reference):
-			if index < len(output) and sent != output[index]:
+		output_index = 0
+		for index in range(len(reference)):
+			if "" == reference[index]:
+				continue
+			while "" == output[output_index]:
+				output_index += 1
+			if reference[index] != output[output_index]:
 				count += 1
-				compare.write("line: " + repr(index + 1) + "\noutput:\t" + output[index] + "\nrefer:\t" + sent + "\n\n")
+				compare.write("line: refer " + repr(index + 1) + " / output " + repr(output_index + 1) + "\noutput:\t" + output[output_index] + "\nrefer:\t" + reference[index] + "\n\n")
+			output_index += 1
 		compare.write("count: " + repr(count) + "\n")
 		compare.close()
+		print "comparing done"
 
 	def chunk(self, labeled_list, feat_list, tagset, iter_num):
 		self.printTest("iter_num: ")
@@ -257,9 +269,12 @@ if __name__ == '__main__':
     tagset = []
     train_data = []
 
+    ct = ChunkTrainer()
+    ct.compare()
     tagset = perc.read_tagset(opts.tagsetfile)
     print >>sys.stderr, "reading data ..."
     train_data = perc.read_labeled_data(opts.trainfile, opts.featfile)
     print >>sys.stderr, "done."
-    feat_vec = perc_train(train_data, tagset, int(opts.numepochs))
+    #
+    feat_vec = ct(train_data, tagset, int(opts.numepochs))
     perc.perc_write_to_file(feat_vec, opts.modelfile)
