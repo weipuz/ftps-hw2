@@ -45,7 +45,7 @@ class ChunkTrainer():
 	def __init__(self):
 		self.test_file = codecs.open("test.log", "w", "utf-8")
 		#self.output_file = codecs.open("output.log", "w", "utf-8")
-		self.feat_vec = defaultdict(int)
+		self.feat_vec = defaultdict(float)
 
 	# destructor
 	def __exit__(self, type, value, traceback):
@@ -84,9 +84,16 @@ class ChunkTrainer():
 	# learn chunking from train data
 	def chunk(self, train_data, tagset, iter_num):
 		# number of iteration
-		iter_num = 200
+		iter_num = 100
 		# size of training set
-		train_size = 1000 #len(train_data)
+		train_size = 2000 #len(train_data)
+		# error weight
+		error_weight = 2.0
+		# threshold for simplification
+		simplify_threshold = 0.2
+		print "iter_num", iter_num, "train_size", train_size, "error_weight", error_weight, "simplify_threshold", simplify_threshold
+		self.printTest("iter_num" + repr(iter_num) + "train_size" + repr(train_size) + "error_weight" + repr(error_weight))
+
 		# weight list for each item in the training set
 		weight_list = [{}] * train_size
 		weight_count = 0
@@ -95,6 +102,7 @@ class ChunkTrainer():
 			for j in range(0, len(train_data[i][0])):
 				weight_count += 1
 				weight_list[i][j] = 1.0
+
 		# for each iteration
 		for t in range(0, iter_num):
 			print time.clock(), "iteration " + repr(t)
@@ -120,46 +128,16 @@ class ChunkTrainer():
 			for i in range(0, train_size):
 				if 0 == i % 1000:
 					print time.clock(), "learn from mistake", i, "/", train_size
-				# clear weight list
-				weight_list[i] = {}
-				# reduce previous weights
-				#for index in weight_list[i]:
-					#weight_list[i][index] /= 3.0
-					#if weight_list[i][index] < 0.1:
-						#weight_list[i][index] = 0.0
-					#else:
-						#weight_count += 1
+				self.printTest("=== case " + repr(i) + " ===")
 				labeled_list = train_data[i][0]
 				feat_list = train_data[i][1]
-				# test by perc
-				result = perc.perc_test(self.feat_vec, labeled_list, feat_list, tagset, tagset[0])
-				self.printTest("=== case " + repr(i) + " ===")
-				error_count = 0
-				# for each result
-				for index, value in enumerate(result):
-					# correct labels from training set
-					labeled = labeled_list[index].split()
-					# if error
-					if value != labeled[2]:
-						error_count += 1
-						# update weights
-						if index in weight_list[i]:
-							weight_list[i][index] += 1.0
-						else:
-							weight_list[i][index] = 1.0
-							weight_count += 1
-						self.printTest(index)
-						self.printTest(labeled_list[index])
-						self.printTest(value)
-				# output test in conll format
-				if error_count > 0:
-					test = "\n".join(perc.conll_format(result, labeled_list))
-					self.printTest(test)
-					self.printTest("error_count " + repr(error_count))
-				self.printTest()
+				# update weights based on errors
+				(w_list, w_count) = self.updateWeights(error_weight, labeled_list, feat_list)
+				weight_list[i] = w_list
+				weight_count += w_count
 			print time.clock(), "learn features from mistake done", weight_count
 			# simplify feat_vec
-			self.feat_vec = self.simplifyFeatVec()
+			self.feat_vec = self.simplifyFeatVec(simplify_threshold)
 		return self.feat_vec
 
 	# add features from labeled_list based on weight_list
@@ -266,18 +244,67 @@ class ChunkTrainer():
 			self.changeFeat("B", neg1[2] + "/" + zero[2], zero[2], weight, tagset)
 		return count
 
+	# update weights based on errors
+	def updateWeights(self, error_weight, labeled_list, feat_list):
+		# clear weight list
+		weight_list = {}
+		# reduce previous weights
+		#for index in weight_list[i]:
+			#weight_list[i][index] /= 3.0
+			#if weight_list[i][index] < 0.1:
+				#weight_list[i][index] = 0.0
+			#else:
+				#weight_count += 1
+		# test by perc
+		result = perc.perc_test(self.feat_vec, labeled_list, feat_list, tagset, tagset[0])
+		weight_count = 0
+		error_count = 0
+		# for each result
+		for index, value in enumerate(result):
+			# correct labels from training set
+			labeled = labeled_list[index].split()
+			# if error
+			if value != labeled[2]:
+				error_count += 1
+				# update weights
+				if index in weight_list:
+					weight_list[index] += error_weight
+				else:
+					weight_list[index] = error_weight
+					weight_count += 1
+				self.printTest(index)
+				#self.printTest(labeled_list[index])
+				#self.printTest(value)
+		# output test in conll format
+		if error_count > 0:
+			#test = "\n".join(perc.conll_format(result, labeled_list))
+			#self.printTest(test)
+			self.printTest("error_count " + repr(error_count))
+		self.printTest()
+		return (weight_list, weight_count)
+
 	# simplify feat_vec
-	def simplifyFeatVec(self):
-		feat_vec1 = defaultdict(int)
+	def simplifyFeatVec(self, simplify_threshold):
+		feat_vec1 = defaultdict(float)
 		count = 0
+		feat_sum = 0
 		# for each item in feat_vec
 		for index, value in self.feat_vec.iteritems():
 			# keep items with value > 0
 			if value > 0.0:
 				count += 1
 				feat_vec1[index] = value
-		print time.clock(), "simplify feature vector done", len(self.feat_vec), "=>", count
-		return feat_vec1
+				feat_sum += value
+		feat_vec2 = defaultdict(float)
+		feat_threshold = float(feat_sum) / float(count) * simplify_threshold
+		count = 0
+		for index, value in feat_vec1.iteritems():
+			# keep items above the threshold
+			if value >= feat_threshold:
+				count += 1
+				feat_vec2[index] = value
+		print time.clock(), "simplify feature vector done", "threshold", feat_threshold, len(self.feat_vec), "=>", count
+		return feat_vec2
 
 	# add a feature
 	def addFeat(self, name, schema, output, weight = 1.0):
@@ -285,12 +312,13 @@ class ChunkTrainer():
 
 	# change a feature
 	def changeFeat(self, name, schema, output, weight, tagset):
+		weight = 1.0
 		# for each tag
 		for value in tagset:
 			# if tag exists in feat_vec
 			if value != output and ((name + ":" + schema, value) in self.feat_vec):
 				# reduce features with different tags
-				self.feat_vec[(name + ":" + schema, value)] -= 1.0 #weight
+				self.feat_vec[(name + ":" + schema, value)] -= weight
 
 	# compare output and reference
 	def compare(self):
