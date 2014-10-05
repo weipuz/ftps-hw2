@@ -87,7 +87,7 @@ class ChunkTrainer():
 		# number of iteration
 		iter_num = 10
 		# size of training set
-		train_size = 10000 #len(train_data)
+		train_size = min(10000, len(train_data))
 		# error weight
 		error_weight = 2.0
 		# threshold for simplification
