@@ -1,86 +1,118 @@
-line: refer 36 / output 35
-output:	for IN B-PP
-refer:	for IN B-SBAR
+line: refer 51 / output 49
+output:	include VBP I-NP
+refer:	include VBP B-VP
 
-line: refer 68 / output 66
-output:	torque NN I-NP
-refer:	torque NN B-NP
+line: refer 53 / output 51
+output:	among IN B-SBAR
+refer:	among IN B-PP
 
 line: refer 71 / output 69
 output:	fixed VBN B-VP
 refer:	fixed VBN B-NP
 
 line: refer 72 / output 70
-output:	leading VBG B-VP
+output:	leading VBG B-NP
 refer:	leading VBG I-NP
 
 line: refer 73 / output 71
 output:	edges NNS B-NP
 refer:	edges NNS I-NP
 
-line: refer 96 / output 93
-output:	delivered VBN B-VP
-refer:	delivered VBN I-VP
+line: refer 85 / output 82
+output:	Under IN B-SBAR
+refer:	Under IN B-PP
+
+line: refer 95 / output 92
+output:	already RB B-ADVP
+refer:	already RB I-VP
+
+line: refer 108 / output 104
+output:	based VBN B-NP
+refer:	based VBN B-VP
 
 line: refer 118 / output 114
 output:	, , O
 refer:	, , I-NP
 
+line: refer 119 / output 115
+output:	electronics NNS B-NP
+refer:	electronics NNS I-NP
+
 line: refer 120 / output 116
 output:	, , O
 refer:	, , I-NP
+
+line: refer 121 / output 117
+output:	automotive JJ B-NP
+refer:	automotive JJ I-NP
+
+line: refer 122 / output 118
+output:	and CC O
+refer:	and CC I-NP
 
 line: refer 124 / output 120
 output:	concern VBP B-VP
 refer:	concern VBP I-NP
 
+line: refer 160 / output 154
+output:	old JJ B-NP
+refer:	old JJ B-ADJP
+
+line: refer 207 / output 198
+output:	old JJ B-NP
+refer:	old JJ B-ADJP
+
 line: refer 210 / output 201
-output:	named VBN I-NP
+output:	named VBN B-NP
 refer:	named VBN I-VP
 
-line: refer 211 / output 202
-output:	president NN I-NP
-refer:	president NN B-NP
+line: refer 215 / output 206
+output:	officer NN B-NP
+refer:	officer NN I-NP
+
+line: refer 222 / output 213
+output:	, , O
+refer:	, , I-NP
 
 line: refer 223 / output 214
 output:	Ill. NNP B-NP
 refer:	Ill. NNP I-NP
 
+line: refer 224 / output 215
+output:	, , O
+refer:	, , I-NP
+
 line: refer 225 / output 216
 output:	subsidiary NN B-NP
 refer:	subsidiary NN I-NP
 
-line: refer 250 / output 240
-output:	created VBN B-VP
-refer:	created VBN I-VP
+line: refer 249 / output 239
+output:	newly RB B-ADVP
+refer:	newly RB I-VP
 
-line: refer 258 / output 247
-output:	executive JJ I-NP
-refer:	executive JJ B-NP
+line: refer 257 / output 246
+output:	been VBN B-NP
+refer:	been VBN I-VP
 
-line: refer 280 / output 268
-output:	responsibility NN I-NP
-refer:	responsibility NN B-NP
+line: refer 273 / output 261
+output:	and CC O
+refer:	and CC I-NP
 
-line: refer 283 / output 271
-output:	and CC I-NP
-refer:	and CC O
-
-line: refer 284 / output 272
-output:	property NN I-NP
-refer:	property NN B-NP
-
-line: refer 293 / output 280
-output:	held VBN B-VP
-refer:	held VBN I-VP
+line: refer 279 / output 267
+output:	takes VBZ B-NP
+refer:	takes VBZ B-VP
 
 line: refer 312 / output 298
-output:	about IN B-SBAR
+output:	about IN B-PP
 refer:	about IN B-ADJP
 
 line: refer 313 / output 299
-output:	60%-held JJ B-NP
+output:	60%-held JJ B-ADJP
 refer:	60%-held JJ I-ADJP
+
+line: refer 325 / output 310
+output:	citing VBG B-NP
+refer:	citing VBG B-VP
 
 line: refer 351 / output 335
 output:	earlier RBR I-NP
@@ -90,6 +122,10 @@ line: refer 355 / output 339
 output:	bank VBP B-VP
 refer:	bank VBP I-NP
 
+line: refer 423 / output 405
+output:	after IN B-SBAR
+refer:	after IN B-PP
+
 line: refer 433 / output 415
 output:	and CC O
 refer:	and CC I-NP
@@ -98,9 +134,17 @@ line: refer 434 / output 416
 output:	real JJ B-NP
 refer:	real JJ I-NP
 
-line: refer 454 / output 435
-output:	operating VBG I-NP
-refer:	operating VBG B-NP
+line: refer 455 / output 436
+output:	profit NN B-NP
+refer:	profit NN I-NP
+
+line: refer 459 / output 440
+output:	million CD O
+refer:	million CD I-NP
+
+line: refer 479 / output 459
+output:	real JJ B-NP
+refer:	real JJ I-NP
 
 line: refer 502 / output 481
 output:	bank VBP B-VP
@@ -114,37 +158,49 @@ line: refer 513 / output 492
 output:	and CC O
 refer:	and CC I-NP
 
-line: refer 520 / output 499
-output:	other JJ I-NP
-refer:	other JJ B-NP
+line: refer 514 / output 493
+output:	administrative JJ B-NP
+refer:	administrative JJ I-NP
+
+line: refer 533 / output 512
+output:	mortgage NN B-NP
+refer:	mortgage NN I-NP
+
+line: refer 537 / output 516
+output:	reflecting VBG B-PP
+refer:	reflecting VBG B-VP
 
 line: refer 552 / output 530
-output:	n't RB I-VP
+output:	n't RB B-ADVP
 refer:	n't RB O
 
-line: refer 598 / output 574
-output:	employees NNS B-NP
-refer:	employees NNS I-NP
+line: refer 567 / output 544
+output:	Look VB B-ADVP
+refer:	Look VB B-VP
 
-line: refer 604 / output 580
-output:	takeover NN I-NP
-refer:	takeover NN B-NP
+line: refer 595 / output 571
+output:	some DT I-NP
+refer:	some DT B-NP
 
-line: refer 621 / output 597
-output:	to TO B-VP
-refer:	to TO I-VP
+line: refer 613 / output 589
+output:	and CC O
+refer:	and CC I-NP
 
 line: refer 623 / output 599
-output:	as IN B-PP
+output:	as IN B-NP
 refer:	as IN B-SBAR
 
+line: refer 642 / output 618
+output:	at IN B-PRT
+refer:	at IN B-PP
+
 line: refer 648 / output 623
-output:	Including VBG B-VP
+output:	Including VBG B-NP
 refer:	Including VBG O
 
-line: refer 659 / output 634
-output:	paper NN I-NP
-refer:	paper NN B-NP
+line: refer 666 / output 641
+output:	based VBN B-NP
+refer:	based VBN B-VP
 
 line: refer 673 / output 648
 output:	had VBN I-VP
@@ -154,85 +210,105 @@ line: refer 676 / output 651
 output:	and CC O
 refer:	and CC I-NP
 
-line: refer 681 / output 656
-output:	gone VBN I-NP
-refer:	gone VBN B-VP
+line: refer 677 / output 652
+output:	management-led JJ B-NP
+refer:	management-led JJ I-NP
 
 line: refer 682 / output 657
 output:	through IN B-PP
 refer:	through IN B-ADVP
 
-line: refer 692 / output 666
-output:	bank NN I-NP
-refer:	bank NN B-NP
-
-line: refer 698 / output 672
-output:	last JJ I-NP
-refer:	last JJ B-NP
+line: refer 691 / output 665
+output:	When WRB B-NP
+refer:	When WRB B-ADVP
 
 line: refer 702 / output 676
 output:	did VBD B-VP
 refer:	did VBD O
 
-line: refer 710 / output 683
-output:	if IN B-PP
-refer:	if IN B-SBAR
+line: refer 732 / output 705
+output:	million CD O
+refer:	million CD I-NP
 
 line: refer 733 / output 706
 output:	less JJR I-NP
 refer:	less JJR B-NP
 
-line: refer 749 / output 721
-output:	75,000 CD I-NP
-refer:	75,000 CD B-NP
+line: refer 754 / output 726
+output:	options NNS I-NP
+refer:	options NNS B-NP
 
-line: refer 759 / output 731
-output:	at IN I-NP
+line: refer 762 / output 734
+output:	each DT I-NP
+refer:	each DT B-NP
+
+line: refer 774 / output 745
+output:	about RB B-ADVP
+refer:	about RB B-NP
+
+line: refer 808 / output 777
+output:	old JJ B-NP
+refer:	old JJ B-ADJP
+
+line: refer 830 / output 798
+output:	stock-option NN B-NP
+refer:	stock-option NN I-NP
+
+line: refer 879 / output 845
+output:	-- : I-VP
+refer:	-- : O
+
+line: refer 880 / output 846
+output:	at IN B-SBAR
 refer:	at IN B-PP
-
-line: refer 826 / output 794
-output:	Flying NNP I-NP
-refer:	Flying NNP B-NP
-
-line: refer 878 / output 844
-output:	enough RB I-NP
-refer:	enough RB B-ADVP
 
 line: refer 881 / output 847
 output:	least JJS B-NP
 refer:	least JJS B-ADJP
 
+line: refer 885 / output 851
+output:	-- : B-VP
+refer:	-- : O
+
 line: refer 906 / output 871
-output:	away RB B-VP
+output:	away RB B-ADVP
 refer:	away RB B-PP
 
 line: refer 920 / output 885
 output:	last JJ I-NP
 refer:	last JJ B-NP
 
-line: refer 933 / output 897
-output:	10,000 CD I-NP
-refer:	10,000 CD B-NP
+line: refer 938 / output 902
+output:	options NNS I-NP
+refer:	options NNS B-NP
 
-line: refer 943 / output 907
-output:	at IN I-NP
-refer:	at IN B-PP
+line: refer 946 / output 910
+output:	each DT I-NP
+refer:	each DT B-NP
 
-line: refer 966 / output 929
-output:	$ $ B-NP
-refer:	$ $ I-NP
+line: refer 957 / output 920
+output:	million CD O
+refer:	million CD I-NP
+
+line: refer 958 / output 921
+output:	under IN B-SBAR
+refer:	under IN B-PP
+
+line: refer 976 / output 938
+output:	Of IN B-SBAR
+refer:	Of IN B-PP
+
+line: refer 981 / output 943
+output:	million CD O
+refer:	million CD I-NP
 
 line: refer 1000 / output 962
 output:	just RB B-ADVP
 refer:	just RB B-NP
 
-line: refer 1001 / output 963
-output:	$ $ B-NP
-refer:	$ $ I-NP
-
-line: refer 1006 / output 968
-output:	many NN I-NP
-refer:	many NN B-NP
+line: refer 1005 / output 967
+output:	angering VBG B-NP
+refer:	angering VBG B-VP
 
 line: refer 1013 / output 975
 output:	to TO I-VP
@@ -251,12 +327,8 @@ output:	well RB B-NP
 refer:	well RB I-ADVP
 
 line: refer 1094 / output 1053
-output:	named VBN I-NP
+output:	named VBN B-NP
 refer:	named VBN I-VP
-
-line: refer 1095 / output 1054
-output:	president NN I-NP
-refer:	president NN B-NP
 
 line: refer 1125 / output 1083
 output:	to TO I-VP
@@ -275,80 +347,84 @@ output:	company NN B-NP
 refer:	company NN I-NP
 
 line: refer 1205 / output 1158
-output:	Facilities NNPS B-VP
+output:	Facilities NNPS B-NP
 refer:	Facilities NNPS I-NP
-
-line: refer 1213 / output 1166
-output:	for IN B-PP
-refer:	for IN B-SBAR
 
 line: refer 1237 / output 1189
-output:	Facilities NNPS B-VP
+output:	Facilities NNPS B-NP
 refer:	Facilities NNPS I-NP
 
+line: refer 1265 / output 1216
+output:	Facilities NNPS B-NP
+refer:	Facilities NNPS I-NP
+
+line: refer 1268 / output 1219
+output:	president NN B-NP
+refer:	president NN I-NP
+
 line: refer 1278 / output 1228
-output:	Facilities NNPS B-VP
+output:	Facilities NNPS B-NP
 refer:	Facilities NNPS I-NP
 
 line: refer 1284 / output 1234
-output:	back RB I-NP
+output:	back RB B-NP
 refer:	back RB B-ADVP
 
-line: refer 1307 / output 1255
-output:	about IN B-PP
-refer:	about IN B-NP
+line: refer 1285 / output 1235
+output:	112,000 CD I-NP
+refer:	112,000 CD B-NP
 
-line: refer 1323 / output 1271
-output:	as IN I-NP
-refer:	as IN B-PP
+line: refer 1308 / output 1256
+output:	3 CD B-NP
+refer:	3 CD I-NP
+
+line: refer 1322 / output 1270
+output:	outstanding JJ B-NP
+refer:	outstanding JJ B-ADJP
 
 line: refer 1334 / output 1281
 output:	yesterday NN I-NP
 refer:	yesterday NN B-NP
 
 line: refer 1337 / output 1284
-output:	Facilities NNPS B-VP
+output:	Facilities NNPS B-NP
 refer:	Facilities NNPS I-NP
 
-line: refer 1347 / output 1293
-output:	Three CD B-LST
-refer:	Three CD B-NP
+line: refer 1343 / output 1290
+output:	unchanged JJ B-NP
+refer:	unchanged JJ B-ADJP
+
+line: refer 1349 / output 1295
+output:	drug NN B-NP
+refer:	drug NN I-NP
 
 line: refer 1362 / output 1308
 output:	, , O
 refer:	, , I-NP
 
-line: refer 1368 / output 1314
-output:	hefty JJ I-NP
-refer:	hefty JJ B-NP
+line: refer 1363 / output 1309
+output:	big-selling JJ B-NP
+refer:	big-selling JJ I-NP
 
-line: refer 1390 / output 1335
-output:	22 CD I-NP
-refer:	22 CD B-NP
+line: refer 1395 / output 1340
+output:	& CC O
+refer:	& CC I-NP
 
-line: refer 1393 / output 1338
-output:	Eli NNP I-NP
-refer:	Eli NNP B-NP
-
-line: refer 1413 / output 1357
-output:	' POS I-NP
-refer:	' POS B-NP
-
-line: refer 1427 / output 1369
-output:	, , I-NP
-refer:	, , O
+line: refer 1443 / output 1385
+output:	and CC O
+refer:	and CC I-NP
 
 line: refer 1446 / output 1388
 output:	segment VBP B-VP
 refer:	segment VBP I-NP
 
-line: refer 1455 / output 1396
-output:	third-quarter JJ B-ADJP
-refer:	third-quarter JJ B-NP
-
 line: refer 1456 / output 1397
 output:	and CC O
 refer:	and CC I-NP
+
+line: refer 1457 / output 1398
+output:	first-nine-month JJ B-NP
+refer:	first-nine-month JJ I-NP
 
 line: refer 1460 / output 1401
 output:	2 CD I-NP
@@ -358,61 +434,37 @@ line: refer 1462 / output 1403
 output:	and CC O
 refer:	and CC I-NP
 
-line: refer 1474 / output 1414
-output:	47 CD I-NP
-refer:	47 CD B-NP
-
-line: refer 1485 / output 1425
-output:	compared VBN B-VP
-refer:	compared VBN B-PP
-
-line: refer 1487 / output 1427
-output:	50 CD I-NP
-refer:	50 CD B-NP
+line: refer 1463 / output 1404
+output:	3 CD B-NP
+refer:	3 CD I-NP
 
 line: refer 1491 / output 1431
 output:	earlier RBR I-NP
 refer:	earlier RBR B-ADVP
 
-line: refer 1520 / output 1458
-output:	higher JJR I-NP
-refer:	higher JJR B-NP
+line: refer 1503 / output 1442
+output:	billion CD O
+refer:	billion CD I-NP
 
 line: refer 1522 / output 1460
 output:	than IN B-PP
 refer:	than IN B-SBAR
 
-line: refer 1529 / output 1467
-output:	achieved VBN B-VP
-refer:	achieved VBN I-VP
-
 line: refer 1536 / output 1474
 output:	following VBG I-NP
 refer:	following VBG B-PP
 
-line: refer 1557 / output 1493
-output:	Intense JJ I-NP
-refer:	Intense JJ B-NP
+line: refer 1563 / output 1499
+output:	to TO B-NP
+refer:	to TO B-PP
 
 line: refer 1579 / output 1515
-output:	including VBG B-VP
+output:	including VBG B-NP
 refer:	including VBG B-PP
-
-line: refer 1580 / output 1516
-output:	Aldomet NNP I-NP
-refer:	Aldomet NNP B-NP
 
 line: refer 1593 / output 1528
 output:	yesterday NN I-NP
 refer:	yesterday NN B-NP
-
-line: refer 1603 / output 1538
-output:	50 CD I-NP
-refer:	50 CD B-NP
-
-line: refer 1637 / output 1570
-output:	20 CD I-NP
-refer:	20 CD B-NP
 
 line: refer 1639 / output 1572
 output:	or CC O
@@ -422,17 +474,33 @@ line: refer 1640 / output 1573
 output:	more RBR B-NP
 refer:	more RBR I-NP
 
+line: refer 1643 / output 1576
+output:	growth NN B-NP
+refer:	growth NN I-NP
+
+line: refer 1647 / output 1579
+output:	Spurred VBN B-NP
+refer:	Spurred VBN B-VP
+
 line: refer 1672 / output 1604
 output:	with IN B-PP
 refer:	with IN B-SBAR
 
-line: refer 1709 / output 1639
-output:	9 CD I-NP
-refer:	9 CD B-NP
+line: refer 1680 / output 1612
+output:	20 CD B-NP
+refer:	20 CD I-NP
 
-line: refer 1719 / output 1649
-output:	U.S. NNP I-NP
-refer:	U.S. NNP B-NP
+line: refer 1697 / output 1628
+output:	billion CD O
+refer:	billion CD I-NP
+
+line: refer 1706 / output 1636
+output:	world-wide JJ B-NP
+refer:	world-wide JJ I-NP
+
+line: refer 1717 / output 1647
+output:	million CD O
+refer:	million CD I-NP
 
 line: refer 1764 / output 1692
 output:	such JJ B-ADJP
@@ -442,109 +510,97 @@ line: refer 1765 / output 1693
 output:	as IN B-PP
 refer:	as IN I-PP
 
-line: refer 1770 / output 1698
-output:	Rolaids NNP I-NP
-refer:	Rolaids NNP B-NP
+line: refer 1778 / output 1706
+output:	increased VBN B-NP
+refer:	increased VBN B-VP
 
-line: refer 1774 / output 1702
-output:	Lubriderm NNP I-NP
-refer:	Lubriderm NNP B-NP
+line: refer 1784 / output 1712
+output:	million CD O
+refer:	million CD I-NP
 
-line: refer 1790 / output 1718
-output:	U.S. NNP I-NP
-refer:	U.S. NNP B-NP
-
-line: refer 1793 / output 1721
-output:	5 NN I-NP
-refer:	5 NN B-NP
-
-line: refer 1803 / output 1730
-output:	strong JJ I-NP
-refer:	strong JJ B-NP
-
-line: refer 1817 / output 1743
-output:	Certs NNP I-NP
-refer:	Certs NNP B-NP
-
-line: refer 1822 / output 1748
-output:	Clorets NNP I-NP
-refer:	Clorets NNP B-NP
+line: refer 1828 / output 1754
+output:	increased VBN B-NP
+refer:	increased VBN B-VP
 
 line: refer 1856 / output 1781
 output:	yesterday NN I-NP
 refer:	yesterday NN B-NP
 
-line: refer 1869 / output 1792
-output:	record NN I-NP
-refer:	record NN B-NP
+line: refer 1870 / output 1793
+output:	third-quarter JJ B-NP
+refer:	third-quarter JJ I-NP
 
 line: refer 1871 / output 1794
 output:	and CC O
 refer:	and CC I-NP
 
-line: refer 1880 / output 1803
-output:	medical JJ I-NP
-refer:	medical JJ B-NP
-
-line: refer 1882 / output 1805
-output:	and CC I-NP
-refer:	and CC O
-
-line: refer 1883 / output 1806
-output:	plant-science NN I-NP
-refer:	plant-science NN B-NP
+line: refer 1872 / output 1795
+output:	nine-month JJ B-NP
+refer:	nine-month JJ I-NP
 
 line: refer 1905 / output 1827
 output:	of IN B-PP
 refer:	of IN I-PP
 
+line: refer 1959 / output 1880
+output:	, , O
+refer:	, , I-NP
+
 line: refer 1960 / output 1881
 output:	Ind. NNP B-NP
 refer:	Ind. NNP I-NP
+
+line: refer 1961 / output 1882
+output:	, , O
+refer:	, , I-NP
 
 line: refer 1962 / output 1883
 output:	company NN B-NP
 refer:	company NN I-NP
 
+line: refer 1969 / output 1890
+output:	billion CD O
+refer:	billion CD I-NP
+
+line: refer 1985 / output 1905
+output:	billion CD O
+refer:	billion CD I-NP
+
+line: refer 1989 / output 1909
+output:	billion CD O
+refer:	billion CD I-NP
+
 line: refer 1992 / output 1912
 output:	earlier RBR I-NP
 refer:	earlier RBR B-ADVP
 
-line: refer 2004 / output 1923
-output:	drug-sales NNS I-NP
-refer:	drug-sales NNS B-NP
-
-line: refer 2009 / output 1927
-output:	Higher JJR I-NP
-refer:	Higher JJR B-NP
-
-line: refer 2014 / output 1932
-output:	other JJ I-NP
-refer:	other JJ B-NP
-
-line: refer 2017 / output 1935
-output:	more JJR B-NP
-refer:	more JJR B-VP
-
 line: refer 2018 / output 1936
-output:	than IN B-VP
+output:	than IN B-SBAR
 refer:	than IN I-VP
 
-line: refer 2048 / output 1965
-output:	and CC I-NP
-refer:	and CC O
+line: refer 2019 / output 1937
+output:	offset VB B-VP
+refer:	offset VB I-VP
 
 line: refer 2049 / output 1966
 output:	Cardiac NNP I-NP
 refer:	Cardiac NNP B-NP
 
-line: refer 2054 / output 1971
-output:	growth NN I-NP
-refer:	growth NN B-NP
+line: refer 2051 / output 1968
+output:	Inc. NNP B-NP
+refer:	Inc. NNP I-NP
 
-line: refer 2066 / output 1982
-output:	yesterday NN I-NP
-refer:	yesterday NN B-NP
+line: refer 2053 / output 1970
+output:	led VBD B-NP
+refer:	led VBD B-VP
+
+line: refer 2059 / output 1976
+output:	division NN B-NP
+refer:	division NN I-NP
+
+line: refer 2065 / output 1981
+output:	closed VBD B-NP
+refer:	closed VBD B-VP
 
 line: refer 2079 / output 1995
 output:	12.5 CD I-NP
@@ -555,36 +611,52 @@ output:	`` `` O
 refer:	`` `` B-ADJP
 
 line: refer 2096 / output 2011
-output:	comfortable JJ I-NP
+output:	comfortable JJ B-NP
 refer:	comfortable JJ I-ADJP
+
+line: refer 2098 / output 2013
+output:	with IN B-SBAR
+refer:	with IN B-PP
+
+line: refer 2107 / output 2022
+output:	between IN B-PP
+refer:	between IN B-NP
+
+line: refer 2108 / output 2023
+output:	95 CD B-NP
+refer:	95 CD I-NP
 
 line: refer 2110 / output 2025
 output:	and CC O
 refer:	and CC I-NP
 
-line: refer 2124 / output 2038
-output:	continuing VBG B-VP
-refer:	continuing VBG B-NP
+line: refer 2111 / output 2026
+output:	$ $ B-NP
+refer:	$ $ I-NP
+
+line: refer 2120 / output 2034
+output:	with IN B-SBAR
+refer:	with IN B-PP
 
 line: refer 2125 / output 2039
 output:	operations NNS B-NP
 refer:	operations NNS I-NP
 
 line: refer 2131 / output 2045
-output:	earlier RBR I-NP
+output:	earlier RBR B-VP
 refer:	earlier RBR B-ADVP
+
+line: refer 2132 / output 2046
+output:	; : B-VP
+refer:	; : O
 
 line: refer 2133 / output 2047
 output:	including VBG B-VP
 refer:	including VBG B-PP
 
-line: refer 2134 / output 2048
-output:	discontinued VBN I-NP
-refer:	discontinued VBN B-NP
-
-line: refer 2143 / output 2057
-output:	ago RB I-NP
-refer:	ago RB B-ADVP
+line: refer 2160 / output 2073
+output:	between IN B-SBAR
+refer:	between IN B-NP
 
 line: refer 2161 / output 2074
 output:	$ $ B-NP
@@ -594,6 +666,22 @@ line: refer 2164 / output 2077
 output:	and CC O
 refer:	and CC I-NP
 
+line: refer 2165 / output 2078
+output:	$ $ B-NP
+refer:	$ $ I-NP
+
+line: refer 2172 / output 2085
+output:	million CD O
+refer:	million CD I-NP
+
+line: refer 2183 / output 2095
+output:	world-wide JJ B-ADJP
+refer:	world-wide JJ I-NP
+
+line: refer 2188 / output 2100
+output:	8 CD B-NP
+refer:	8 CD I-NP
+
 line: refer 2211 / output 2122
 output:	and CC I-NP
 refer:	and CC O
@@ -601,6 +689,10 @@ refer:	and CC O
 line: refer 2212 / output 2123
 output:	Europe NNP I-NP
 refer:	Europe NNP B-NP
+
+line: refer 2220 / output 2130
+output:	by IN B-SBAR
+refer:	by IN B-PP
 
 line: refer 2221 / output 2131
 output:	`` `` O
@@ -610,37 +702,37 @@ line: refer 2222 / output 2132
 output:	a DT B-NP
 refer:	a DT I-NP
 
-line: refer 2228 / output 2138
-output:	operating VBG B-VP
-refer:	operating VBG B-NP
+line: refer 2229 / output 2139
+output:	profit NN B-NP
+refer:	profit NN I-NP
 
 line: refer 2250 / output 2159
 output:	and CC O
 refer:	and CC I-NP
 
-line: refer 2254 / output 2163
-output:	25 CD I-NP
-refer:	25 CD B-NP
+line: refer 2251 / output 2160
+output:	personal-care JJ B-NP
+refer:	personal-care JJ I-NP
 
-line: refer 2279 / output 2187
-output:	manufacturing NN I-NP
-refer:	manufacturing NN B-NP
+line: refer 2278 / output 2186
+output:	consolidating VBG B-NP
+refer:	consolidating VBG B-VP
 
 line: refer 2280 / output 2188
 output:	operations NNS I-NP
 refer:	operations NNS B-NP
 
+line: refer 2285 / output 2193
+output:	organizations NNS B-NP
+refer:	organizations NNS I-NP
+
 line: refer 2289 / output 2197
 output:	carefully RB B-ADVP
 refer:	carefully RB I-ADVP
 
-line: refer 2329 / output 2235
-output:	Ajax NNP I-NP
-refer:	Ajax NNP B-NP
-
-line: refer 2360 / output 2265
-output:	operating VBG B-VP
-refer:	operating VBG B-NP
+line: refer 2318 / output 2224
+output:	business NN B-NP
+refer:	business NN I-NP
 
 line: refer 2361 / output 2266
 output:	margins NNS B-NP
@@ -655,7 +747,7 @@ output:	3 CD B-NP
 refer:	3 CD I-NP
 
 line: refer 2383 / output 2287
-output:	mediocre JJ I-NP
+output:	mediocre JJ B-NP
 refer:	mediocre JJ B-ADJP
 
 line: refer 2386 / output 2290
@@ -666,21 +758,13 @@ line: refer 2387 / output 2291
 output:	everywhere RB I-NP
 refer:	everywhere RB B-ADVP
 
-line: refer 2388 / output 2292
-output:	else RB B-ADVP
-refer:	else RB I-ADVP
-
 line: refer 2393 / output 2297
-output:	fine JJ I-VP
+output:	fine JJ B-NP
 refer:	fine JJ B-ADJP
 
 line: refer 2414 / output 2317
-output:	not RB I-NP
+output:	not RB B-ADJP
 refer:	not RB O
-
-line: refer 2415 / output 2318
-output:	mediocre JJ I-ADJP
-refer:	mediocre JJ B-ADJP
 
 line: refer 2429 / output 2331
 output:	that IN B-SBAR
@@ -695,16 +779,12 @@ output:	highly RB I-NP
 refer:	highly RB O
 
 line: refer 2439 / output 2341
-output:	profitable JJ I-ADJP
+output:	profitable JJ B-NP
 refer:	profitable JJ O
 
 line: refer 2440 / output 2342
 output:	Hill NNP I-NP
 refer:	Hill NNP B-NP
-
-line: refer 2459 / output 2360
-output:	-LCB- ( O
-refer:	-LCB- ( B-NP
 
 line: refer 2460 / output 2361
 output:	U.S. NNP B-NP
@@ -714,37 +794,25 @@ line: refer 2461 / output 2362
 output:	. . O
 refer:	. . I-NP
 
+line: refer 2462 / output 2363
+output:	-RCB- ) B-NP
+refer:	-RCB- ) I-NP
+
 line: refer 2481 / output 2381
-output:	Improving VBG I-NP
+output:	Improving VBG B-NP
 refer:	Improving VBG B-VP
 
-line: refer 2482 / output 2382
-output:	profitability NN I-NP
-refer:	profitability NN B-NP
-
 line: refer 2529 / output 2427
-output:	primarily RB B-VP
+output:	primarily RB B-NP
 refer:	primarily RB B-ADVP
 
-line: refer 2551 / output 2448
-output:	Muzak NNP I-NP
-refer:	Muzak NNP B-NP
+line: refer 2538 / output 2436
+output:	increasing VBG B-PP
+refer:	increasing VBG B-VP
 
-line: refer 2554 / output 2451
-output:	entertainment NN I-NP
-refer:	entertainment NN B-NP
-
-line: refer 2557 / output 2454
-output:	small JJ I-NP
-refer:	small JJ B-NP
-
-line: refer 2566 / output 2462
-output:	executive NN I-NP
-refer:	executive NN B-NP
-
-line: refer 2568 / output 2464
-output:	special JJ I-NP
-refer:	special JJ B-NP
+line: refer 2565 / output 2461
+output:	is VBZ I-NP
+refer:	is VBZ B-VP
 
 line: refer 2594 / output 2489
 output:	pages NNS B-NP
@@ -758,21 +826,33 @@ line: refer 2600 / output 2495
 output:	look VB B-VP
 refer:	look VB I-NP
 
+line: refer 2603 / output 2498
+output:	fixtures NNS B-NP
+refer:	fixtures NNS I-NP
+
 line: refer 2610 / output 2505
-output:	more RBR B-NP
+output:	more RBR B-VP
 refer:	more RBR B-ADJP
 
 line: refer 2611 / output 2506
 output:	consistent JJ I-NP
 refer:	consistent JJ I-ADJP
 
+line: refer 2614 / output 2509
+output:	`` `` B-NP
+refer:	`` `` O
+
 line: refer 2615 / output 2510
-output:	easier JJR I-PP
+output:	easier JJR B-VP
 refer:	easier JJR B-ADJP
 
-line: refer 2623 / output 2517
-output:	so RB I-NP
-refer:	so RB I-ADVP
+line: refer 2624 / output 2518
+output:	-- : I-ADJP
+refer:	-- : O
+
+line: refer 2629 / output 2523
+output:	where WRB B-NP
+refer:	where WRB B-ADVP
 
 line: refer 2640 / output 2533
 output:	who WP B-VP
@@ -781,6 +861,10 @@ refer:	who WP B-NP
 line: refer 2641 / output 2534
 output:	spare VB I-VP
 refer:	spare VB B-VP
+
+line: refer 2644 / output 2537
+output:	when WRB B-VP
+refer:	when WRB B-ADVP
 
 line: refer 2646 / output 2539
 output:	on IN B-PP
@@ -791,7 +875,7 @@ output:	such JJ B-ADJP
 refer:	such JJ B-PP
 
 line: refer 2650 / output 2543
-output:	as IN B-PP
+output:	as IN B-SBAR
 refer:	as IN I-PP
 
 line: refer 2652 / output 2545
@@ -826,13 +910,9 @@ line: refer 2667 / output 2560
 output:	'' '' O
 refer:	'' '' I-NP
 
-line: refer 2672 / output 2565
-output:	ridicule NN I-NP
-refer:	ridicule NN B-NP
-
-line: refer 2681 / output 2574
-output:	old JJ I-NP
-refer:	old JJ B-NP
+line: refer 2671 / output 2564
+output:	poured VBD B-NP
+refer:	poured VBD B-VP
 
 line: refer 2700 / output 2592
 output:	Thomas NNP I-NP
@@ -841,6 +921,10 @@ refer:	Thomas NNP B-NP
 line: refer 2723 / output 2614
 output:	least JJS B-NP
 refer:	least JJS B-ADJP
+
+line: refer 2731 / output 2622
+output:	drawings NNS B-NP
+refer:	drawings NNS I-NP
 
 line: refer 2749 / output 2639
 output:	right NN B-NP
@@ -854,28 +938,24 @@ line: refer 2767 / output 2656
 output:	many JJ B-NP
 refer:	many JJ I-NP
 
-line: refer 2798 / output 2687
-output:	away RB B-NP
-refer:	away RB B-ADVP
+line: refer 2776 / output 2665
+output:	so RB B-NP
+refer:	so RB B-ADJP
 
-line: refer 2814 / output 2702
-output:	still RB B-VP
-refer:	still RB B-ADVP
+line: refer 2777 / output 2666
+output:	bad JJ B-ADJP
+refer:	bad JJ I-ADJP
 
-line: refer 2818 / output 2706
-output:	Globe NNP I-NP
-refer:	Globe NNP B-NP
+line: refer 2816 / output 2704
+output:	n't RB B-ADVP
+refer:	n't RB I-VP
 
-line: refer 2833 / output 2721
-output:	while IN B-PP
-refer:	while IN B-SBAR
-
-line: refer 2854 / output 2741
-output:	whipping VBG B-VP
-refer:	whipping VBG I-VP
+line: refer 2817 / output 2705
+output:	forgiven VBN I-NP
+refer:	forgiven VBN I-VP
 
 line: refer 2855 / output 2742
-output:	open JJ I-NP
+output:	open JJ B-NP
 refer:	open JJ I-VP
 
 line: refer 2856 / output 2743
@@ -891,12 +971,8 @@ output:	hardly RB I-VP
 refer:	hardly RB B-ADJP
 
 line: refer 2888 / output 2774
-output:	kinder JJR I-VP
+output:	kinder JJR B-ADJP
 refer:	kinder JJR I-ADJP
-
-line: refer 2906 / output 2792
-output:	Will MD B-VP
-refer:	Will MD B-NP
 
 line: refer 2907 / output 2793
 output:	McDonough NNP B-NP
@@ -906,45 +982,65 @@ line: refer 2912 / output 2798
 output:	if IN B-SBAR
 refer:	if IN I-SBAR
 
-line: refer 2921 / output 2807
-output:	Bella NNP I-NP
-refer:	Bella NNP B-NP
-
 line: refer 2925 / output 2811
 output:	`` `` O
 refer:	`` `` I-NP
+
+line: refer 2926 / output 2812
+output:	little JJ B-NP
+refer:	little JJ I-NP
+
+line: refer 2948 / output 2833
+output:	managing VBG B-NP
+refer:	managing VBG I-NP
+
+line: refer 2949 / output 2834
+output:	editor NN B-NP
+refer:	editor NN I-NP
 
 line: refer 2975 / output 2859
 output:	Howie NNP B-NP
 refer:	Howie NNP I-NP
 
+line: refer 2979 / output 2863
+output:	usually RB B-NP
+refer:	usually RB B-ADVP
+
 line: refer 2983 / output 2867
 output:	`` `` O
 refer:	`` `` I-NP
+
+line: refer 2984 / output 2868
+output:	hacks NNS B-NP
+refer:	hacks NNS I-NP
 
 line: refer 2985 / output 2869
 output:	'' '' O
 refer:	'' '' I-NP
 
+line: refer 2986 / output 2870
+output:	and CC O
+refer:	and CC I-NP
+
+line: refer 2987 / output 2871
+output:	nepotism NN B-NP
+refer:	nepotism NN I-NP
+
 line: refer 2996 / output 2880
-output:	to TO I-VP
+output:	to TO B-PP
 refer:	to TO B-VP
 
 line: refer 3002 / output 2886
-output:	rapidly RB I-VP
+output:	rapidly RB B-ADVP
 refer:	rapidly RB B-ADJP
 
 line: refer 3003 / output 2887
-output:	growing VBG B-VP
+output:	growing VBG I-NP
 refer:	growing VBG I-ADJP
 
-line: refer 3004 / output 2888
-output:	forehead NN I-NP
-refer:	forehead NN B-NP
-
-line: refer 3011 / output 2895
-output:	`` `` O
-refer:	`` `` B-NP
+line: refer 3012 / output 2896
+output:	chinless JJ B-NP
+refer:	chinless JJ I-NP
 
 line: refer 3013 / output 2897
 output:	'' '' O
@@ -954,6 +1050,10 @@ line: refer 3014 / output 2898
 output:	Dan NNP B-NP
 refer:	Dan NNP I-NP
 
+line: refer 3020 / output 2904
+output:	columnist NN B-NP
+refer:	columnist NN I-NP
+
 line: refer 3048 / output 2930
 output:	Instead RB B-ADVP
 refer:	Instead RB B-PP
@@ -962,17 +1062,29 @@ line: refer 3049 / output 2931
 output:	of IN B-PP
 refer:	of IN I-PP
 
-line: refer 3056 / output 2938
-output:	just RB I-VP
-refer:	just RB B-ADVP
+line: refer 3050 / output 2932
+output:	buying VBG B-NP
+refer:	buying VBG B-VP
+
+line: refer 3057 / output 2939
+output:	cut VB I-VP
+refer:	cut VB B-VP
 
 line: refer 3058 / output 2940
 output:	out RP B-NP
 refer:	out RP B-PRT
 
+line: refer 3059 / output 2941
+output:	the IN B-SBAR
+refer:	the IN B-NP
+
 line: refer 3060 / output 2942
 output:	columnists NNS B-NP
 refer:	columnists NNS I-NP
+
+line: refer 3063 / output 2945
+output:	... : B-NP
+refer:	... : O
 
 line: refer 3067 / output 2948
 output:	Deeply RB B-ADVP
@@ -994,9 +1106,9 @@ line: refer 3083 / output 2964
 output:	Leisure NNP I-NP
 refer:	Leisure NNP B-NP
 
-line: refer 3097 / output 2978
-output:	that IN B-PP
-refer:	that IN B-SBAR
+line: refer 3084 / output 2965
+output:	& CC O
+refer:	& CC I-NP
 
 line: refer 3110 / output 2990
 output:	Is VBZ B-VP
@@ -1007,16 +1119,8 @@ output:	a DT B-NP
 refer:	a DT I-NP
 
 line: refer 3124 / output 3003
-output:	would MD B-VP
+output:	would MD B-PP
 refer:	would MD O
-
-line: refer 3127 / output 3006
-output:	enjoy VB I-VP
-refer:	enjoy VB B-VP
-
-line: refer 3139 / output 3017
-output:	not RB B-ADVP
-refer:	not RB I-ADVP
 
 line: refer 3143 / output 3020
 output:	About IN B-PP
@@ -1034,6 +1138,10 @@ line: refer 3169 / output 3045
 output:	Asia NNP I-NP
 refer:	Asia NNP B-NP
 
+line: refer 3180 / output 3055
+output:	natural JJ I-NP
+refer:	natural JJ I-ADJP
+
 line: refer 3181 / output 3056
 output:	-- : I-NP
 refer:	-- : O
@@ -1043,7 +1151,7 @@ output:	nobody NN I-NP
 refer:	nobody NN B-NP
 
 line: refer 3192 / output 3067
-output:	hunting NN I-NP
+output:	hunting NN B-NP
 refer:	hunting NN B-VP
 
 line: refer 3193 / output 3068
@@ -1055,24 +1163,16 @@ output:	around IN B-PP
 refer:	around IN O
 
 line: refer 3226 / output 3099
-output:	probably RB I-NP
+output:	probably RB B-ADVP
 refer:	probably RB I-VP
 
-line: refer 3227 / output 3100
-output:	continuing VBG B-VP
-refer:	continuing VBG I-VP
+line: refer 3238 / output 3111
+output:	of IN I-NP
+refer:	of IN B-PP
 
-line: refer 3240 / output 3113
-output:	present-day JJ I-NP
-refer:	present-day JJ B-NP
-
-line: refer 3265 / output 3137
-output:	global JJ I-NP
-refer:	global JJ B-NP
-
-line: refer 3275 / output 3147
-output:	not RB I-VP
-refer:	not RB B-VP
+line: refer 3287 / output 3159
+output:	warming NN B-NP
+refer:	warming NN I-NP
 
 line: refer 3300 / output 3171
 output:	Astronomy NNP I-NP
@@ -1090,10 +1190,6 @@ line: refer 3314 / output 3184
 output:	more JJR B-VP
 refer:	more JJR B-ADVP
 
-line: refer 3358 / output 3227
-output:	daily JJ I-NP
-refer:	daily JJ B-NP
-
 line: refer 3373 / output 3242
 output:	probably RB B-ADVP
 refer:	probably RB B-NP
@@ -1106,25 +1202,33 @@ line: refer 3378 / output 3247
 output:	base VBP B-VP
 refer:	base VBP I-NP
 
-line: refer 3424 / output 3291
-output:	accountability NN I-NP
-refer:	accountability NN B-NP
+line: refer 3423 / output 3290
+output:	`` `` B-NP
+refer:	`` `` O
 
-line: refer 3453 / output 3319
-output:	My PRP$ I-NP
-refer:	My PRP$ B-NP
+line: refer 3438 / output 3305
+output:	$ $ B-NP
+refer:	$ $ I-NP
 
-line: refer 3455 / output 3321
-output:	and CC I-NP
-refer:	and CC O
+line: refer 3443 / output 3310
+output:	about RB B-ADVP
+refer:	about RB B-NP
 
-line: refer 3456 / output 3322
-output:	everyone NN I-NP
-refer:	everyone NN B-NP
+line: refer 3446 / output 3313
+output:	trillion CD O
+refer:	trillion CD I-NP
+
+line: refer 3472 / output 3338
+output:	responsibly RB B-ADVP
+refer:	responsibly RB B-VP
 
 line: refer 3473 / output 3339
 output:	and CC O
 refer:	and CC I-VP
+
+line: refer 3474 / output 3340
+output:	effectively RB B-NP
+refer:	effectively RB I-VP
 
 line: refer 3476 / output 3342
 output:	and CC O
@@ -1134,37 +1238,29 @@ line: refer 3477 / output 3343
 output:	execute VB B-VP
 refer:	execute VB I-VP
 
-line: refer 3494 / output 3359
-output:	internal JJ I-NP
-refer:	internal JJ B-NP
+line: refer 3496 / output 3361
+output:	and CC O
+refer:	and CC I-NP
+
+line: refer 3497 / output 3362
+output:	discipline NN B-NP
+refer:	discipline NN I-NP
 
 line: refer 3498 / output 3363
 output:	that IN B-SBAR
 refer:	that IN B-NP
 
-line: refer 3501 / output 3366
-output:	to TO B-VP
-refer:	to TO I-VP
-
 line: refer 3503 / output 3368
 output:	to TO I-VP
 refer:	to TO B-VP
-
-line: refer 3505 / output 3370
-output:	$ $ I-NP
-refer:	$ $ B-NP
-
-line: refer 3508 / output 3373
-output:	properly RB I-NP
-refer:	properly RB B-ADVP
 
 line: refer 3518 / output 3382
 output:	over IN B-PP
 refer:	over IN B-PRT
 
-line: refer 3529 / output 3393
-output:	disturbed VBN B-VP
-refer:	disturbed VBN I-VP
+line: refer 3519 / output 3383
+output:	as IN B-NP
+refer:	as IN B-PP
 
 line: refer 3536 / output 3400
 output:	, , O
@@ -1174,13 +1270,33 @@ line: refer 3537 / output 3401
 output:	waste NN B-NP
 refer:	waste NN I-NP
 
-line: refer 3568 / output 3431
-output:	trying VBG B-VP
-refer:	trying VBG I-VP
+line: refer 3582 / output 3444
+output:	throughout IN B-SBAR
+refer:	throughout IN B-PP
+
+line: refer 3595 / output 3457
+output:	under IN B-SBAR
+refer:	under IN B-PP
 
 line: refer 3613 / output 3474
 output:	how WRB B-NP
 refer:	how WRB B-ADVP
+
+line: refer 3650 / output 3510
+output:	and CC O
+refer:	and CC I-NP
+
+line: refer 3651 / output 3511
+output:	execution NN B-NP
+refer:	execution NN I-NP
+
+line: refer 3678 / output 3537
+output:	to TO B-VP
+refer:	to TO I-VP
+
+line: refer 3693 / output 3551
+output:	civil JJ B-NP
+refer:	civil JJ I-NP
 
 line: refer 3696 / output 3554
 output:	within IN B-PP
@@ -1198,10 +1314,6 @@ line: refer 3708 / output 3566
 output:	scour VBP B-VP
 refer:	scour VBP I-VP
 
-line: refer 3723 / output 3580
-output:	Although IN B-PP
-refer:	Although IN B-SBAR
-
 line: refer 3729 / output 3586
 output:	between IN B-PP
 refer:	between IN B-NP
@@ -1214,13 +1326,13 @@ line: refer 3732 / output 3589
 output:	and CC O
 refer:	and CC I-NP
 
-line: refer 3758 / output 3614
-output:	telling VBG B-VP
-refer:	telling VBG I-VP
+line: refer 3733 / output 3590
+output:	$ $ B-NP
+refer:	$ $ I-NP
 
-line: refer 3759 / output 3615
-output:	someone NN I-NP
-refer:	someone NN B-NP
+line: refer 3758 / output 3614
+output:	telling VBG B-NP
+refer:	telling VBG I-VP
 
 line: refer 3767 / output 3623
 output:	four CD B-NP
@@ -1230,6 +1342,10 @@ line: refer 3769 / output 3625
 output:	five CD B-NP
 refer:	five CD I-NP
 
+line: refer 3771 / output 3627
+output:	six CD B-NP
+refer:	six CD I-NP
+
 line: refer 3777 / output 3633
 output:	about IN B-PP
 refer:	about IN B-PRT
@@ -1238,29 +1354,29 @@ line: refer 3781 / output 3637
 output:	and CC O
 refer:	and CC I-NP
 
+line: refer 3782 / output 3638
+output:	costly JJ B-NP
+refer:	costly JJ I-NP
+
 line: refer 3792 / output 3648
 output:	ever RB B-ADVP
 refer:	ever RB B-NP
 
-line: refer 3809 / output 3664
-output:	developing VBG B-VP
-refer:	developing VBG I-VP
-
 line: refer 3811 / output 3666
-output:	making VBG I-NP
+output:	making VBG B-NP
 refer:	making VBG B-VP
 
 line: refer 3812 / output 3667
-output:	work NN I-NP
+output:	work NN B-NP
 refer:	work NN B-VP
 
-line: refer 3813 / output 3668
-output:	financial JJ I-NP
-refer:	financial JJ B-NP
+line: refer 3824 / output 3678
+output:	When WRB O
+refer:	When WRB B-ADVP
 
-line: refer 3844 / output 3698
-output:	several JJ I-NP
-refer:	several JJ B-NP
+line: refer 3839 / output 3693
+output:	buried VBN B-NP
+refer:	buried VBN I-VP
 
 line: refer 3852 / output 3706
 output:	broken VBN I-NP
@@ -1270,10 +1386,6 @@ line: refer 3853 / output 3707
 output:	legs NNS B-NP
 refer:	legs NNS I-NP
 
-line: refer 3867 / output 3720
-output:	Panamanian JJ I-NP
-refer:	Panamanian JJ B-NP
-
 line: refer 3869 / output 3722
 output:	Manuel NNP B-NP
 refer:	Manuel NNP I-NP
@@ -1282,9 +1394,21 @@ line: refer 3880 / output 3732
 output:	and CC O
 refer:	and CC I-NP
 
-line: refer 3914 / output 3765
-output:	rages VBZ B-VP
-refer:	rages VBZ B-NP
+line: refer 3881 / output 3733
+output:	painful JJ B-NP
+refer:	painful JJ I-NP
+
+line: refer 3906 / output 3758
+output:	to TO B-NP
+refer:	to TO B-PP
+
+line: refer 3912 / output 3763
+output:	Leaping VBG O
+refer:	Leaping VBG B-VP
+
+line: refer 3930 / output 3781
+output:	some DT I-NP
+refer:	some DT B-NP
 
 line: refer 3940 / output 3791
 output:	according VBG B-VP
@@ -1298,17 +1422,9 @@ line: refer 3945 / output 3796
 output:	crematoriums NNS I-NP
 refer:	crematoriums NNS B-NP
 
-line: refer 3946 / output 3797
-output:	and CC I-NP
-refer:	and CC O
-
-line: refer 3947 / output 3798
-output:	funeral NN I-NP
-refer:	funeral NN B-NP
-
-line: refer 3958 / output 3808
-output:	changing VBG B-VP
-refer:	changing VBG I-VP
+line: refer 3957 / output 3807
+output:	now RB B-ADJP
+refer:	now RB I-VP
 
 line: refer 3966 / output 3816
 output:	sometimes RB B-ADVP
@@ -1318,25 +1434,21 @@ line: refer 3967 / output 3817
 output:	more JJR B-NP
 refer:	more JJR I-NP
 
-line: refer 3980 / output 3829
-output:	prepared VBN B-VP
-refer:	prepared VBN I-VP
+line: refer 3968 / output 3818
+output:	than IN B-SBAR
+refer:	than IN I-NP
 
-line: refer 4004 / output 3852
-output:	collecting VBG B-VP
-refer:	collecting VBG I-VP
+line: refer 3969 / output 3819
+output:	once RB B-ADVP
+refer:	once RB I-NP
 
-line: refer 4009 / output 3857
-output:	who WP I-NP
-refer:	who WP B-NP
+line: refer 3979 / output 3828
+output:	often RB B-ADVP
+refer:	often RB I-VP
 
-line: refer 4016 / output 3864
-output:	during IN B-VP
-refer:	during IN B-PP
-
-line: refer 4028 / output 3875
-output:	More JJR I-NP
-refer:	More JJR B-NP
+line: refer 3981 / output 3830
+output:	by IN B-SBAR
+refer:	by IN B-PP
 
 line: refer 4033 / output 3880
 output:	with RB B-ADVP
@@ -1347,24 +1459,28 @@ output:	hesitantly RB I-NP
 refer:	hesitantly RB B-VP
 
 line: refer 4049 / output 3895
-output:	backed VBD B-VP
+output:	backed VBD I-NP
 refer:	backed VBD I-VP
+
+line: refer 4055 / output 3901
+output:	at IN B-SBAR
+refer:	at IN B-PP
 
 line: refer 4059 / output 3905
 output:	- : I-NP
 refer:	- : O
 
 line: refer 4061 / output 3907
-output:	efficient JJ I-NP
+output:	efficient JJ B-NP
 refer:	efficient JJ O
 
 line: refer 4062 / output 3908
 output:	- : I-NP
 refer:	- : O
 
-line: refer 4071 / output 3916
-output:	while IN B-PP
-refer:	while IN B-SBAR
+line: refer 4064 / output 3910
+output:	maintaining VBG B-NP
+refer:	maintaining VBG B-VP
 
 line: refer 4085 / output 3930
 output:	merely RB B-ADVP
@@ -1374,14 +1490,6 @@ line: refer 4086 / output 3931
 output:	the DT B-NP
 refer:	the DT I-NP
 
-line: refer 4096 / output 3941
-output:	and CC I-NP
-refer:	and CC O
-
-line: refer 4097 / output 3942
-output:	Washington NNP I-NP
-refer:	Washington NNP B-NP
-
 line: refer 4098 / output 3943
 output:	that IN B-SBAR
 refer:	that IN B-NP
@@ -1389,6 +1497,10 @@ refer:	that IN B-NP
 line: refer 4099 / output 3944
 output:	stretches NNS B-NP
 refer:	stretches NNS B-VP
+
+line: refer 4100 / output 3945
+output:	back RB B-NP
+refer:	back RB B-ADVP
 
 line: refer 4101 / output 3946
 output:	three CD I-NP
@@ -1403,16 +1515,12 @@ output:	Before IN B-PP
 refer:	Before IN B-SBAR
 
 line: refer 4142 / output 3985
-output:	out IN B-PP
+output:	out IN B-SBAR
 refer:	out IN B-PRT
 
-line: refer 4149 / output 3992
-output:	create VB B-VP
-refer:	create VB I-VP
-
-line: refer 4151 / output 3994
-output:	out IN B-VP
-refer:	out IN B-PP
+line: refer 4144 / output 3987
+output:	destroy VB B-NP
+refer:	destroy VB I-VP
 
 line: refer 4169 / output 4011
 output:	of IN B-PP
@@ -1422,6 +1530,14 @@ line: refer 4170 / output 4012
 output:	the DT B-NP
 refer:	the DT I-NP
 
+line: refer 4187 / output 4028
+output:	for IN B-NP
+refer:	for IN B-PP
+
+line: refer 4190 / output 4031
+output:	when WRB B-NP
+refer:	when WRB B-ADVP
+
 line: refer 4194 / output 4035
 output:	both DT B-NP
 refer:	both DT O
@@ -1430,28 +1546,20 @@ line: refer 4221 / output 4062
 output:	allegedly RB B-NP
 refer:	allegedly RB B-ADVP
 
-line: refer 4224 / output 4065
-output:	savagely RB I-NP
-refer:	savagely RB B-VP
-
-line: refer 4225 / output 4066
-output:	beating VBG B-VP
-refer:	beating VBG I-VP
+line: refer 4222 / output 4063
+output:	raping VBG I-NP
+refer:	raping VBG B-VP
 
 line: refer 4229 / output 4070
 output:	according VBG B-VP
 refer:	according VBG B-PP
-
-line: refer 4250 / output 4089
-output:	U.S. NNP I-NP
-refer:	U.S. NNP B-NP
 
 line: refer 4253 / output 4092
 output:	rather RB B-ADVP
 refer:	rather RB B-SBAR
 
 line: refer 4254 / output 4093
-output:	than IN B-PP
+output:	than IN B-NP
 refer:	than IN I-SBAR
 
 line: refer 4255 / output 4094
@@ -1463,24 +1571,24 @@ output:	in IN B-PP
 refer:	in IN B-ADVP
 
 line: refer 4257 / output 4096
-output:	or CC I-NP
+output:	or CC B-NP
 refer:	or CC O
 
 line: refer 4258 / output 4097
-output:	cut NN I-NP
+output:	cut NN B-NP
 refer:	cut NN B-VP
 
 line: refer 4259 / output 4098
 output:	loose JJ I-NP
 refer:	loose JJ B-ADJP
 
+line: refer 4260 / output 4099
+output:	its PRP$ I-NP
+refer:	its PRP$ B-NP
+
 line: refer 4265 / output 4104
 output:	filed VBN I-VP
 refer:	filed VBN B-VP
-
-line: refer 4277 / output 4115
-output:	emerging VBG B-VP
-refer:	emerging VBG B-NP
 
 line: refer 4278 / output 4116
 output:	leftists NNS B-NP
@@ -1494,25 +1602,29 @@ line: refer 4285 / output 4123
 output:	important JJ B-ADJP
 refer:	important JJ I-ADJP
 
-line: refer 4286 / output 4124
-output:	to TO I-NP
-refer:	to TO B-PP
+line: refer 4292 / output 4129
+output:	From IN B-SBAR
+refer:	From IN B-PP
 
 line: refer 4295 / output 4132
 output:	on IN B-PP
 refer:	on IN I-NP
 
+line: refer 4315 / output 4151
+output:	befriended VBN B-NP
+refer:	befriended VBN I-VP
+
 line: refer 4317 / output 4153
-output:	later RB I-NP
+output:	later RB B-NP
 refer:	later RB B-VP
 
 line: refer 4318 / output 4154
 output:	turned VBD B-VP
 refer:	turned VBD I-VP
 
-line: refer 4324 / output 4160
-output:	none NN I-NP
-refer:	none NN B-NP
+line: refer 4319 / output 4155
+output:	against IN B-SBAR
+refer:	against IN B-PP
 
 line: refer 4325 / output 4161
 output:	quite RB B-ADVP
@@ -1522,25 +1634,57 @@ line: refer 4326 / output 4162
 output:	so RB B-ADJP
 refer:	so RB I-ADJP
 
-line: refer 4327 / output 4163
-output:	resourceful JJ B-ADJP
-refer:	resourceful JJ I-ADJP
-
 line: refer 4336 / output 4171
-output:	n't RB I-VP
+output:	n't RB B-ADVP
 refer:	n't RB O
 
 line: refer 4338 / output 4173
 output:	smooth JJ B-ADJP
 refer:	smooth JJ I-ADJP
 
-line: refer 4361 / output 4196
-output:	or CC I-NP
-refer:	or CC O
+line: refer 4339 / output 4174
+output:	as IN B-SBAR
+refer:	as IN B-PP
+
+line: refer 4345 / output 4180
+output:	as RB B-NP
+refer:	as RB B-ADJP
+
+line: refer 4346 / output 4181
+output:	well-born JJ B-ADJP
+refer:	well-born JJ I-ADJP
+
+line: refer 4347 / output 4182
+output:	as IN B-SBAR
+refer:	as IN B-PP
+
+line: refer 4350 / output 4185
+output:	Anastasio NNP B-NP
+refer:	Anastasio NNP I-NP
+
+line: refer 4353 / output 4188
+output:	as RB B-NP
+refer:	as RB B-ADJP
+
+line: refer 4354 / output 4189
+output:	imperial JJ B-ADJP
+refer:	imperial JJ I-ADJP
+
+line: refer 4355 / output 4190
+output:	as IN B-SBAR
+refer:	as IN B-PP
 
 line: refer 4362 / output 4197
-output:	as RB I-NP
+output:	as RB B-NP
 refer:	as RB B-ADJP
+
+line: refer 4363 / output 4198
+output:	bloody JJ B-ADJP
+refer:	bloody JJ I-ADJP
+
+line: refer 4364 / output 4199
+output:	as IN B-SBAR
+refer:	as IN B-PP
 
 line: refer 4373 / output 4207
 output:	Yet RB B-ADVP
@@ -1557,6 +1701,10 @@ refer:	resilient JJ I-ADJP
 line: refer 4387 / output 4220
 output:	out IN B-PP
 refer:	out IN B-ADVP
+
+line: refer 4394 / output 4227
+output:	make VB I-NP
+refer:	make VB I-VP
 
 line: refer 4397 / output 4230
 output:	still JJ B-NP
@@ -1578,9 +1726,9 @@ line: refer 4426 / output 4258
 output:	along IN I-NP
 refer:	along IN I-ADVP
 
-line: refer 4436 / output 4268
-output:	to TO I-NP
-refer:	to TO B-PP
+line: refer 4434 / output 4266
+output:	former JJ B-NP
+refer:	former JJ I-NP
 
 line: refer 4462 / output 4292
 output:	up IN B-PP
@@ -1591,36 +1739,28 @@ output:	rather RB B-ADVP
 refer:	rather RB B-CONJP
 
 line: refer 4472 / output 4302
-output:	than IN B-PP
+output:	than IN B-SBAR
 refer:	than IN I-CONJP
 
 line: refer 4473 / output 4303
 output:	shortened VBN B-NP
 refer:	shortened VBN B-VP
 
-line: refer 4508 / output 4337
-output:	given VBN B-VP
-refer:	given VBN I-VP
-
-line: refer 4510 / output 4339
-output:	additional JJ I-NP
-refer:	additional JJ B-NP
+line: refer 4507 / output 4336
+output:	only RB B-ADVP
+refer:	only RB I-VP
 
 line: refer 4526 / output 4354
 output:	If IN B-PP
 refer:	If IN B-SBAR
 
 line: refer 4533 / output 4361
-output:	done VBN I-NP
+output:	done VBN B-NP
 refer:	done VBN B-VP
 
 line: refer 4534 / output 4362
 output:	nothing NN I-NP
 refer:	nothing NN B-NP
-
-line: refer 4542 / output 4370
-output:	through IN B-VP
-refer:	through IN B-PP
 
 line: refer 4552 / output 4379
 output:	Perhaps RB B-ADVP
@@ -1631,15 +1771,19 @@ output:	most RBS I-NP
 refer:	most RBS I-ADJP
 
 line: refer 4554 / output 4381
-output:	important JJ I-NP
+output:	important JJ B-NP
 refer:	important JJ I-ADJP
 
-line: refer 4584 / output 4410
-output:	One CD B-LST
-refer:	One CD B-NP
+line: refer 4564 / output 4391
+output:	-- : B-NP
+refer:	-- : O
+
+line: refer 4571 / output 4398
+output:	-- : B-NP
+refer:	-- : O
 
 line: refer 4589 / output 4415
-output:	upon IN B-PP
+output:	upon IN B-NP
 refer:	upon IN B-SBAR
 
 line: refer 4590 / output 4416
@@ -1654,17 +1798,25 @@ line: refer 4626 / output 4451
 output:	cornered VBN I-VP
 refer:	cornered VBN B-ADJP
 
-line: refer 4700 / output 4521
-output:	patience NN I-NP
-refer:	patience NN B-NP
+line: refer 4637 / output 4462
+output:	led VBN B-NP
+refer:	led VBN I-VP
 
-line: refer 4716 / output 4537
-output:	little JJ I-NP
-refer:	little JJ B-NP
+line: refer 4655 / output 4479
+output:	out RB B-ADVP
+refer:	out RB I-NP
 
-line: refer 4719 / output 4540
-output:	lasting VBG B-VP
-refer:	lasting VBG B-NP
+line: refer 4668 / output 4491
+output:	have VB B-VP
+refer:	have VB I-VP
+
+line: refer 4696 / output 4517
+output:	often RB O
+refer:	often RB B-ADVP
+
+line: refer 4699 / output 4520
+output:	that WDT B-NP
+refer:	that WDT B-SBAR
 
 line: refer 4720 / output 4541
 output:	confrontation NN B-NP
@@ -1673,6 +1825,10 @@ refer:	confrontation NN I-NP
 line: refer 4750 / output 4570
 output:	according VBG B-VP
 refer:	according VBG B-PP
+
+line: refer 4785 / output 4603
+output:	knowing VBG B-NP
+refer:	knowing VBG B-VP
 
 line: refer 4813 / output 4631
 output:	and CC O
@@ -1683,36 +1839,40 @@ output:	more RBR B-NP
 refer:	more RBR B-ADVP
 
 line: refer 4816 / output 4634
-output:	important JJ I-NP
+output:	important JJ B-NP
 refer:	important JJ I-ADVP
 
-line: refer 4843 / output 4659
-output:	built VBN B-VP
-refer:	built VBN I-NP
+line: refer 4818 / output 4636
+output:	among IN B-SBAR
+refer:	among IN B-PP
+
+line: refer 4841 / output 4657
+output:	and CC O
+refer:	and CC I-NP
 
 line: refer 4844 / output 4660
 output:	Mr. NNP B-NP
 refer:	Mr. NNP I-NP
 
+line: refer 4853 / output 4669
+output:	as IN B-SBAR
+refer:	as IN B-PP
+
 line: refer 4856 / output 4672
 output:	Pina NNP B-NP
 refer:	Pina NNP I-NP
 
-line: refer 4858 / output 4674
-output:	pineapple NN I-NP
-refer:	pineapple NN B-NP
+line: refer 4857 / output 4673
+output:	-- : I-NP
+refer:	-- : O
 
 line: refer 4863 / output 4678
-output:	Born VBN I-VP
+output:	Born VBN O
 refer:	Born VBN B-VP
 
-line: refer 4895 / output 4709
-output:	older JJR I-PP
-refer:	older JJR B-ADJP
-
-line: refer 4896 / output 4710
-output:	than IN I-NP
-refer:	than IN B-PP
+line: refer 4904 / output 4718
+output:	gained VBD B-NP
+refer:	gained VBD B-VP
 
 line: refer 4909 / output 4723
 output:	because IN B-PP
@@ -1727,39 +1887,43 @@ output:	superior JJ B-ADJP
 refer:	superior JJ I-ADJP
 
 line: refer 4925 / output 4738
-output:	to TO I-NP
+output:	to TO B-VP
 refer:	to TO B-PP
-
-line: refer 4934 / output 4747
-output:	wayward JJ I-NP
-refer:	wayward JJ B-NP
 
 line: refer 4945 / output 4758
 output:	, , O
 refer:	, , I-NP
 
-line: refer 4959 / output 4771
-output:	peaked VBD B-VP
-refer:	peaked VBD I-NP
+line: refer 4946 / output 4759
+output:	French-modeled JJ B-NP
+refer:	French-modeled JJ I-NP
+
+line: refer 4960 / output 4772
+output:	military JJ B-NP
+refer:	military JJ I-NP
 
 line: refer 4962 / output 4774
 output:	and CC O
 refer:	and CC I-NP
 
-line: refer 4964 / output 4776
-output:	pressed VBN B-VP
-refer:	pressed VBN I-NP
+line: refer 4963 / output 4775
+output:	neatly RB B-NP
+refer:	neatly RB I-NP
 
 line: refer 4965 / output 4777
 output:	, , O
 refer:	, , I-NP
 
+line: refer 4966 / output 4778
+output:	French-made JJ B-NP
+refer:	French-made JJ I-NP
+
 line: refer 4971 / output 4783
-output:	more RBR I-NP
+output:	more RBR B-NP
 refer:	more RBR B-ADJP
 
 line: refer 4972 / output 4784
-output:	respected VBN B-VP
+output:	respected VBN I-NP
 refer:	respected VBN I-ADJP
 
 line: refer 4973 / output 4785
@@ -1770,33 +1934,37 @@ line: refer 4974 / output 4786
 output:	powerful JJ B-NP
 refer:	powerful JJ I-ADJP
 
-line: refer 4975 / output 4787
-output:	than IN I-NP
-refer:	than IN B-PP
-
 line: refer 5002 / output 4813
 output:	where WRB I-NP
+refer:	where WRB B-ADVP
+
+line: refer 5010 / output 4821
+output:	where WRB B-NP
 refer:	where WRB B-ADVP
 
 line: refer 5050 / output 4860
 output:	1967 CD B-NP
 refer:	1967 CD I-NP
 
-line: refer 5052 / output 4862
-output:	intelligence NN I-NP
-refer:	intelligence NN B-NP
+line: refer 5059 / output 4868
+output:	commanding NN B-NP
+refer:	commanding NN I-NP
 
-line: refer 5104 / output 4912
-output:	political JJ I-NP
-refer:	political JJ B-NP
-
-line: refer 5135 / output 4943
-output:	and CC I-NP
-refer:	and CC O
+line: refer 5118 / output 4926
+output:	Communist NNP B-NP
+refer:	Communist NNP I-NP
 
 line: refer 5136 / output 4944
 output:	Puerto NNP I-NP
 refer:	Puerto NNP B-NP
+
+line: refer 5166 / output 4972
+output:	Panamanian JJ B-NP
+refer:	Panamanian JJ I-NP
+
+line: refer 5177 / output 4982
+output:	only RB B-ADVP
+refer:	only RB B-NP
 
 line: refer 5180 / output 4985
 output:	to TO B-PP
@@ -1806,17 +1974,25 @@ line: refer 5181 / output 4986
 output:	$ $ B-NP
 refer:	$ $ I-NP
 
+line: refer 5192 / output 4997
+output:	groceries NNS B-NP
+refer:	groceries NNS I-NP
+
 line: refer 5202 / output 5007
 output:	says NNS I-NP
 refer:	says NNS B-VP
 
-line: refer 5208 / output 5012
-output:	modest JJ I-NP
-refer:	modest JJ B-NP
+line: refer 5218 / output 5022
+output:	to TO B-VP
+refer:	to TO B-PP
 
-line: refer 5225 / output 5029
-output:	fellow NN I-NP
-refer:	fellow NN B-NP
+line: refer 5228 / output 5032
+output:	as IN B-SBAR
+refer:	as IN B-PP
+
+line: refer 5230 / output 5034
+output:	been VBN B-NP
+refer:	been VBN I-VP
 
 line: refer 5233 / output 5037
 output:	to TO B-PP
@@ -1827,56 +2003,56 @@ output:	$ $ B-NP
 refer:	$ $ I-NP
 
 line: refer 5236 / output 5040
-output:	monthly JJ I-NP
+output:	monthly JJ B-ADJP
 refer:	monthly JJ B-ADVP
 
-line: refer 5244 / output 5047
-output:	very RB B-VP
-refer:	very RB B-ADVP
+line: refer 5256 / output 5059
+output:	who WP O
+refer:	who WP B-NP
 
-line: refer 5245 / output 5048
-output:	well RB B-ADVP
-refer:	well RB I-ADVP
+line: refer 5275 / output 5077
+output:	gain VBP B-NP
+refer:	gain VBP B-VP
 
-line: refer 5261 / output 5064
-output:	his PRP$ I-NP
-refer:	his PRP$ B-NP
+line: refer 5291 / output 5092
+output:	-- : I-NP
+refer:	-- : O
 
-line: refer 5269 / output 5071
-output:	building VBG B-VP
-refer:	building VBG I-VP
+line: refer 5312 / output 5113
+output:	aspiring JJ B-NP
+refer:	aspiring JJ I-NP
 
-line: refer 5319 / output 5119
-output:	taxi NN I-NP
-refer:	taxi NN B-NP
+line: refer 5318 / output 5118
+output:	pressuring VBG B-NP
+refer:	pressuring VBG B-VP
 
-line: refer 5344 / output 5143
-output:	caught VBN B-VP
-refer:	caught VBN I-VP
+line: refer 5340 / output 5139
+output:	local JJ B-NP
+refer:	local JJ I-NP
+
+line: refer 5345 / output 5144
+output:	driving VBG B-NP
+refer:	driving VBG B-VP
 
 line: refer 5346 / output 5145
-output:	drunk JJ I-NP
+output:	drunk JJ B-NP
 refer:	drunk JJ B-ADVP
-
-line: refer 5351 / output 5150
-output:	found VBN B-VP
-refer:	found VBN I-VP
 
 line: refer 5361 / output 5159
 output:	valuable JJ B-ADJP
 refer:	valuable JJ I-ADJP
 
-line: refer 5370 / output 5168
-output:	union NN I-NP
-refer:	union NN B-NP
-
-line: refer 5373 / output 5171
-output:	planning VBG B-VP
-refer:	planning VBG I-VP
+line: refer 5369 / output 5167
+output:	when WRB B-NP
+refer:	when WRB B-ADVP
 
 line: refer 5378 / output 5176
 output:	that IN B-SBAR
 refer:	that IN B-NP
+
+line: refer 5384 / output 5182
+output:	violent JJ B-NP
+refer:	violent JJ B-ADJP
 
 line: refer 5398 / output 5195
 output:	sleeping VBG B-VP
@@ -1898,16 +2074,12 @@ line: refer 5439 / output 5234
 output:	divided VBD B-VP
 refer:	divided VBD I-VP
 
-line: refer 5440 / output 5235
-output:	union NN I-NP
-refer:	union NN B-NP
-
 line: refer 5447 / output 5242
 output:	far RB B-VP
 refer:	far RB B-ADJP
 
 line: refer 5448 / output 5243
-output:	easier JJR I-PP
+output:	easier JJR I-VP
 refer:	easier JJR I-ADJP
 
 line: refer 5491 / output 5282
@@ -1915,60 +2087,88 @@ output:	and CC O
 refer:	and CC I-VP
 
 line: refer 5492 / output 5283
-output:	blackmailing VBG I-NP
+output:	blackmailing VBG B-NP
 refer:	blackmailing VBG I-VP
 
 line: refer 5493 / output 5284
 output:	people NNS I-NP
 refer:	people NNS B-NP
 
-line: refer 5516 / output 5306
-output:	as IN I-NP
-refer:	as IN B-SBAR
+line: refer 5498 / output 5288
+output:	During IN B-SBAR
+refer:	During IN B-PP
+
+line: refer 5504 / output 5294
+output:	however RB B-NP
+refer:	however RB B-ADVP
+
+line: refer 5511 / output 5301
+output:	as IN B-SBAR
+refer:	as IN B-PP
+
+line: refer 5514 / output 5304
+output:	as RB B-VP
+refer:	as RB B-ADJP
+
+line: refer 5515 / output 5305
+output:	perverse JJ B-ADJP
+refer:	perverse JJ I-ADJP
 
 line: refer 5529 / output 5318
 output:	and CC O
 refer:	and CC I-NP
 
+line: refer 5530 / output 5319
+output:	human-rights JJ B-NP
+refer:	human-rights JJ I-NP
+
+line: refer 5535 / output 5324
+output:	intoxicated JJ B-NP
+refer:	intoxicated JJ I-NP
+
 line: refer 5537 / output 5326
 output:	visiting VBG I-NP
 refer:	visiting VBG B-VP
 
+line: refer 5551 / output 5340
+output:	where WRB B-NP
+refer:	where WRB B-ADVP
+
 line: refer 5564 / output 5352
-output:	all DT B-NP
+output:	all DT B-VP
 refer:	all DT B-ADVP
 
 line: refer 5567 / output 5355
-output:	off IN B-PP
+output:	off IN B-PRT
 refer:	off IN O
 
 line: refer 5575 / output 5363
 output:	naked JJ I-NP
 refer:	naked JJ B-ADVP
 
+line: refer 5578 / output 5366
+output:	at IN B-SBAR
+refer:	at IN B-PP
+
 line: refer 5581 / output 5369
-output:	then RB I-NP
+output:	then RB B-VP
 refer:	then RB B-ADVP
 
-line: refer 5592 / output 5379
-output:	wondering VBG B-VP
-refer:	wondering VBG I-VP
+line: refer 5582 / output 5370
+output:	retreating VBG I-VP
+refer:	retreating VBG B-VP
+
+line: refer 5583 / output 5371
+output:	to TO I-VP
+refer:	to TO B-PP
 
 line: refer 5593 / output 5380
 output:	if IN B-PP
 refer:	if IN B-SBAR
 
-line: refer 5597 / output 5384
-output:	with IN I-NP
-refer:	with IN B-PP
-
-line: refer 5613 / output 5399
-output:	far RB B-ADVP
-refer:	far RB I-ADVP
-
-line: refer 5614 / output 5400
-output:	as IN B-PP
-refer:	as IN B-SBAR
+line: refer 5619 / output 5405
+output:	concerned VBN B-NP
+refer:	concerned VBN I-VP
 
 line: refer 5632 / output 5417
 output:	up IN B-ADVP
@@ -1978,9 +2178,17 @@ line: refer 5635 / output 5420
 output:	and CC O
 refer:	and CC I-NP
 
+line: refer 5636 / output 5421
+output:	counter-intelligence JJ B-NP
+refer:	counter-intelligence JJ I-NP
+
 line: refer 5650 / output 5435
 output:	according VBG B-VP
 refer:	according VBG B-PP
+
+line: refer 5658 / output 5443
+output:	with IN B-SBAR
+refer:	with IN B-PP
 
 line: refer 5663 / output 5448
 output:	since IN B-PP
@@ -1994,41 +2202,57 @@ line: refer 5666 / output 5451
 output:	secret NN B-NP
 refer:	secret NN B-ADJP
 
-line: refer 5705 / output 5489
-output:	military JJ I-NP
-refer:	military JJ B-NP
+line: refer 5719 / output 5502
+output:	and CC O
+refer:	and CC I-NP
 
-line: refer 5730 / output 5513
-output:	so RB I-VP
-refer:	so RB B-ADVP
+line: refer 5731 / output 5514
+output:	falsely RB I-ADVP
+refer:	falsely RB B-ADVP
 
-line: refer 5750 / output 5532
-output:	populist JJ I-NP
-refer:	populist JJ B-NP
+line: refer 5737 / output 5519
+output:	to TO B-NP
+refer:	to TO B-PP
+
+line: refer 5749 / output 5531
+output:	providing VBG B-NP
+refer:	providing VBG B-VP
+
+line: refer 5761 / output 5543
+output:	against IN B-SBAR
+refer:	against IN B-PP
 
 line: refer 5765 / output 5547
 output:	earlier RBR I-NP
 refer:	earlier RBR B-ADVP
 
+line: refer 5791 / output 5571
+output:	by IN B-ADVP
+refer:	by IN B-PP
+
+line: refer 5804 / output 5584
+output:	-- : B-VP
+refer:	-- : O
+
 line: refer 5805 / output 5585
-output:	not RB B-ADVP
+output:	not RB B-ADJP
 refer:	not RB B-CONJP
 
 line: refer 5806 / output 5586
-output:	to TO B-VP
+output:	to TO I-VP
 refer:	to TO O
 
 line: refer 5807 / output 5587
 output:	mention VB I-VP
 refer:	mention VB O
 
-line: refer 5813 / output 5593
-output:	and CC I-NP
-refer:	and CC O
-
 line: refer 5820 / output 5600
-output:	knocking VBG B-VP
+output:	knocking VBG B-NP
 refer:	knocking VBG I-VP
+
+line: refer 5824 / output 5603
+output:	When WRB B-NP
+refer:	When WRB B-ADVP
 
 line: refer 5841 / output 5620
 output:	that IN B-SBAR
@@ -2039,11 +2263,15 @@ output:	first JJ B-ADJP
 refer:	first JJ B-ADVP
 
 line: refer 5854 / output 5632
-output:	on IN B-PP
+output:	on IN B-ADVP
 refer:	on IN I-ADVP
 
+line: refer 5862 / output 5640
+output:	to TO I-VP
+refer:	to TO B-PP
+
 line: refer 5863 / output 5641
-output:	calling VBG B-NP
+output:	calling VBG I-VP
 refer:	calling VBG B-VP
 
 line: refer 5873 / output 5651
@@ -2058,56 +2286,60 @@ line: refer 5875 / output 5653
 output:	milk NN I-NP
 refer:	milk NN I-VP
 
+line: refer 5897 / output 5675
+output:	assistant NN B-NP
+refer:	assistant NN I-NP
+
 line: refer 5905 / output 5683
 output:	first JJ B-NP
 refer:	first JJ B-ADVP
+
+line: refer 5919 / output 5696
+output:	of IN B-SBAR
+refer:	of IN B-PP
+
+line: refer 5922 / output 5699
+output:	how WRB B-NP
+refer:	how WRB B-ADVP
 
 line: refer 5937 / output 5714
 output:	just RB B-ADVP
 refer:	just RB B-ADJP
 
 line: refer 5938 / output 5715
-output:	as IN B-PP
+output:	as IN B-SBAR
 refer:	as IN I-ADJP
 
 line: refer 5939 / output 5716
-output:	close RB B-NP
+output:	close RB B-ADJP
 refer:	close RB I-ADJP
-
-line: refer 5955 / output 5731
-output:	additional JJ I-NP
-refer:	additional JJ B-NP
-
-line: refer 5986 / output 5760
-output:	One CD I-NP
-refer:	One CD B-NP
 
 line: refer 5990 / output 5764
 output:	up IN B-PP
 refer:	up IN B-PRT
 
-line: refer 6032 / output 5804
-output:	fly VB B-VP
-refer:	fly VB I-VP
+line: refer 5997 / output 5771
+output:	dealing VBG B-NP
+refer:	dealing VBG B-VP
 
 line: refer 6038 / output 5810
 output:	Torrijos NNP B-NP
 refer:	Torrijos NNP I-NP
 
 line: refer 6047 / output 5819
-output:	including VBG B-VP
+output:	including VBG B-NP
 refer:	including VBG B-PP
 
-line: refer 6074 / output 5844
-output:	Everybody NN I-NP
-refer:	Everybody NN B-NP
+line: refer 6093 / output 5862
+output:	threat NN B-NP
+refer:	threat NN I-NP
 
-line: refer 6098 / output 5867
-output:	U.S. NNP I-NP
-refer:	U.S. NNP B-NP
+line: refer 6097 / output 5866
+output:	when WRB B-NP
+refer:	when WRB B-ADVP
 
 line: refer 6106 / output 5875
-output:	buying VBG B-VP
+output:	buying VBG B-NP
 refer:	buying VBG I-VP
 
 line: refer 6111 / output 5880
@@ -2118,12 +2350,24 @@ line: refer 6139 / output 5907
 output:	according VBG B-VP
 refer:	according VBG B-PP
 
+line: refer 6140 / output 5908
+output:	to TO I-VP
+refer:	to TO B-PP
+
 line: refer 6177 / output 5943
-output:	cutting VBG B-VP
+output:	cutting VBG B-NP
 refer:	cutting VBG I-VP
 
+line: refer 6208 / output 5973
+output:	get VB B-NP
+refer:	get VB I-VP
+
+line: refer 6223 / output 5987
+output:	how WRB B-ADJP
+refer:	how WRB B-ADVP
+
 line: refer 6224 / output 5988
-output:	much JJ B-NP
+output:	much JJ B-ADJP
 refer:	much JJ I-ADVP
 
 line: refer 6228 / output 5992
@@ -2138,10 +2382,6 @@ line: refer 6247 / output 6010
 output:	whether IN B-PP
 refer:	whether IN B-SBAR
 
-line: refer 6251 / output 6014
-output:	sensitive JJ I-NP
-refer:	sensitive JJ B-NP
-
 line: refer 6259 / output 6022
 output:	or CC I-NP
 refer:	or CC O
@@ -2151,20 +2391,20 @@ output:	others NNS I-NP
 refer:	others NNS B-NP
 
 line: refer 6267 / output 6029
-output:	troubled JJ B-ADJP
+output:	troubled JJ B-NP
 refer:	troubled JJ I-VP
 
 line: refer 6268 / output 6030
-output:	enough RB I-NP
+output:	enough RB B-ADJP
 refer:	enough RB B-ADVP
 
 line: refer 6289 / output 6050
 output:	soon RB I-NP
 refer:	soon RB B-ADVP
 
-line: refer 6291 / output 6052
-output:	new JJ I-NP
-refer:	new JJ B-NP
+line: refer 6295 / output 6056
+output:	: : B-NP
+refer:	: : O
 
 line: refer 6296 / output 6057
 output:	gun-running JJ B-ADJP
@@ -2175,47 +2415,55 @@ output:	illegally RB B-NP
 refer:	illegally RB B-VP
 
 line: refer 6311 / output 6071
-output:	running VBG I-NP
+output:	running VBG B-VP
 refer:	running VBG I-VP
+
+line: refer 6337 / output 6096
+output:	and CC O
+refer:	and CC I-NP
+
+line: refer 6338 / output 6097
+output:	business NN B-NP
+refer:	business NN I-NP
 
 line: refer 6352 / output 6110
 output:	in IN B-PP
 refer:	in IN B-PRT
 
-line: refer 6374 / output 6131
-output:	flirting VBG B-VP
-refer:	flirting VBG I-VP
+line: refer 6372 / output 6129
+output:	once RB B-ADVP
+refer:	once RB I-VP
+
+line: refer 6390 / output 6146
+output:	to TO B-NP
+refer:	to TO B-PP
 
 line: refer 6406 / output 6161
 output:	and CC O
 refer:	and CC I-NP
 
+line: refer 6407 / output 6162
+output:	federal JJ B-NP
+refer:	federal JJ I-NP
+
+line: refer 6416 / output 6171
+output:	through IN B-NP
+refer:	through IN B-PP
+
 line: refer 6419 / output 6174
-output:	made VBN I-NP
+output:	made VBN B-NP
 refer:	made VBN B-VP
-
-line: refer 6428 / output 6183
-output:	as RB I-NP
-refer:	as RB B-ADVP
-
-line: refer 6429 / output 6184
-output:	soon RB B-ADVP
-refer:	soon RB I-ADVP
-
-line: refer 6433 / output 6188
-output:	U.S. NNP I-NP
-refer:	U.S. NNP B-NP
 
 line: refer 6455 / output 6207
 output:	According VBG B-VP
 refer:	According VBG B-PP
 
-line: refer 6478 / output 6230
-output:	waiting VBG B-VP
-refer:	waiting VBG I-VP
-
 line: refer 6490 / output 6241
 output:	, , O
 refer:	, , I-NP
 
-count: 555
+line: refer 6491 / output 6242
+output:	unclassified JJ B-NP
+refer:	unclassified JJ I-NP
+
+count: 617

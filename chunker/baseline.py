@@ -79,23 +79,25 @@ class ChunkTrainer():
 
 	# call self to chunk
 	def __call__(self, train_data, tagset, iter_num):
+		self.tagset = tagset
 		return self.chunk(train_data, tagset, iter_num)
 
 	# learn chunking from train data
 	def chunk(self, train_data, tagset, iter_num):
 		# number of iteration
-		iter_num = 100
+		iter_num = 10
 		# size of training set
-		train_size = 2000 #len(train_data)
+		train_size = 10000 #len(train_data)
 		# error weight
 		error_weight = 2.0
 		# threshold for simplification
-		simplify_threshold = 0.2
+		simplify_threshold = 0.8
 		print "iter_num", iter_num, "train_size", train_size, "error_weight", error_weight, "simplify_threshold", simplify_threshold
 		self.printTest("iter_num" + repr(iter_num) + "train_size" + repr(train_size) + "error_weight" + repr(error_weight))
 
 		# weight list for each item in the training set
 		weight_list = [{}] * train_size
+		error_list = [{}] * train_size
 		weight_count = 0
 		# assign initial weight value as one for train data
 		for i in range(0, train_size):
@@ -120,9 +122,9 @@ class ChunkTrainer():
 			count = 0
 			for i in range(0, train_size):
 				labeled_list = train_data[i][0]
-				# change features based on weights
-				count += self.changeFeatures(labeled_list, weight_list[i])
-			print time.clock(), "change features done", count
+				# reduce features based on weights
+				count += self.reduceFeatures(labeled_list, weight_list[i], error_list[i])
+			print time.clock(), "reduce features done", count
 
 			weight_count = 0
 			for i in range(0, train_size):
@@ -132,9 +134,10 @@ class ChunkTrainer():
 				labeled_list = train_data[i][0]
 				feat_list = train_data[i][1]
 				# update weights based on errors
-				(w_list, w_count) = self.updateWeights(error_weight, labeled_list, feat_list)
+				(w_list, w_count, e_list) = self.updateWeights(error_weight, labeled_list, feat_list)
 				weight_list[i] = w_list
 				weight_count += w_count
+				error_list[i] = e_list
 			print time.clock(), "learn features from mistake done", weight_count
 			# simplify feat_vec
 			self.feat_vec = self.simplifyFeatVec(simplify_threshold)
@@ -195,16 +198,23 @@ class ChunkTrainer():
 			self.addFeat("B", neg1[2] + "/" + zero[2], zero[2], weight)
 		return count
 
-	# change features from labeled_list based on weight_list
-	def changeFeatures(self, labeled_list, weight_list):
+	# reduce features from labeled_list based on weight_list
+	def reduceFeatures(self, labeled_list, weight_list, error_list):
+		#if None == error_list or 0 == len(error_list.keys()):
+			#return 0
 		count = 0
 		# for each item in labeled_list
 		for index, line in enumerate(labeled_list):
 			# ignore items with weight less than or equal to zero
 			if (not (index in weight_list)) or weight_list[index] <= 0.0:
 				continue
+			#error_list[index] = self.tagset # inject
+			# ignore items with no error list
+			if not (index in error_list) or None == error_list[index] or 0 == len(error_list[index]):
+				continue
 			count += 1
-			weight = weight_list[index]
+			weight = 1.0
+			errors = error_list[index]
 			if index - 2 >= 0:
 				neg2 = labeled_list[index - 2].split()
 			else:
@@ -222,32 +232,33 @@ class ChunkTrainer():
 				pos2 = labeled_list[index + 2].split()
 			else:
 				pos2 = ["_B+2", "_B+2", "_B+2"]
-			self.changeFeat("U00", neg2[0], zero[2], weight, tagset)
-			self.changeFeat("U01", neg1[0], zero[2], weight, tagset)
-			self.changeFeat("U02", zero[0], zero[2], weight, tagset)
-			self.changeFeat("U03", pos1[0], zero[2], weight, tagset)
-			self.changeFeat("U04", pos2[0], zero[2], weight, tagset)
-			self.changeFeat("U05", neg1[0] + "/" + zero[0], zero[2], weight, tagset)
-			self.changeFeat("U06", zero[0] + "/" + pos1[0], zero[2], weight, tagset)
-			self.changeFeat("U10", neg2[1], zero[2], weight, tagset)
-			self.changeFeat("U11", neg1[1], zero[2], weight, tagset)
-			self.changeFeat("U12", zero[1] + "q", zero[2], weight, tagset)
-			self.changeFeat("U13", pos1[1], zero[2], weight, tagset)
-			self.changeFeat("U14", pos2[1], zero[2], weight, tagset)
-			self.changeFeat("U15", neg2[1] + "/" + neg1[1], zero[2], weight, tagset)
-			self.changeFeat("U16", neg1[1] + "/" + zero[1], zero[2], weight, tagset)
-			self.changeFeat("U17", zero[1] + "/" + pos1[1], zero[2], weight, tagset)
-			self.changeFeat("U18", pos1[1] + "/" + pos2[1], zero[2], weight, tagset)
-			self.changeFeat("U20", neg2[1] + "/" + neg1[1] + "/" + zero[1], zero[2], weight, tagset)
-			self.changeFeat("U21", neg1[1] + "/" + zero[1] + "/" + pos1[1], zero[2], weight, tagset)
-			self.changeFeat("U22", zero[1] + "/" + pos1[1] + "/" + pos2[1], zero[2], weight, tagset)
-			self.changeFeat("B", neg1[2] + "/" + zero[2], zero[2], weight, tagset)
+			self.reduceFeat("U00", neg2[0], zero[2], weight, errors)
+			self.reduceFeat("U01", neg1[0], zero[2], weight, errors)
+			self.reduceFeat("U02", zero[0], zero[2], weight, errors)
+			self.reduceFeat("U03", pos1[0], zero[2], weight, errors)
+			self.reduceFeat("U04", pos2[0], zero[2], weight, errors)
+			self.reduceFeat("U05", neg1[0] + "/" + zero[0], zero[2], weight, errors)
+			self.reduceFeat("U06", zero[0] + "/" + pos1[0], zero[2], weight, errors)
+			self.reduceFeat("U10", neg2[1], zero[2], weight, errors)
+			self.reduceFeat("U11", neg1[1], zero[2], weight, errors)
+			self.reduceFeat("U12", zero[1] + "q", zero[2], weight, errors)
+			self.reduceFeat("U13", pos1[1], zero[2], weight, errors)
+			self.reduceFeat("U14", pos2[1], zero[2], weight, errors)
+			self.reduceFeat("U15", neg2[1] + "/" + neg1[1], zero[2], weight, errors)
+			self.reduceFeat("U16", neg1[1] + "/" + zero[1], zero[2], weight, errors)
+			self.reduceFeat("U17", zero[1] + "/" + pos1[1], zero[2], weight, errors)
+			self.reduceFeat("U18", pos1[1] + "/" + pos2[1], zero[2], weight, errors)
+			self.reduceFeat("U20", neg2[1] + "/" + neg1[1] + "/" + zero[1], zero[2], weight, errors)
+			self.reduceFeat("U21", neg1[1] + "/" + zero[1] + "/" + pos1[1], zero[2], weight, errors)
+			self.reduceFeat("U22", zero[1] + "/" + pos1[1] + "/" + pos2[1], zero[2], weight, errors)
+			self.reduceFeat("B", neg1[2] + "/" + zero[2], zero[2], weight, errors)
 		return count
 
 	# update weights based on errors
 	def updateWeights(self, error_weight, labeled_list, feat_list):
 		# clear weight list
 		weight_list = {}
+		error_list = {}
 		# reduce previous weights
 		#for index in weight_list[i]:
 			#weight_list[i][index] /= 3.0
@@ -256,7 +267,7 @@ class ChunkTrainer():
 			#else:
 				#weight_count += 1
 		# test by perc
-		result = perc.perc_test(self.feat_vec, labeled_list, feat_list, tagset, tagset[0])
+		result = perc.perc_test(self.feat_vec, labeled_list, feat_list, self.tagset, self.tagset[0])
 		weight_count = 0
 		error_count = 0
 		# for each result
@@ -272,6 +283,11 @@ class ChunkTrainer():
 				else:
 					weight_list[index] = error_weight
 					weight_count += 1
+				# update errors
+				if index in error_list:
+					error_list[index].append(value)
+				else:
+					error_list[index] = [value]
 				self.printTest(index)
 				#self.printTest(labeled_list[index])
 				#self.printTest(value)
@@ -281,7 +297,7 @@ class ChunkTrainer():
 			#self.printTest(test)
 			self.printTest("error_count " + repr(error_count))
 		self.printTest()
-		return (weight_list, weight_count)
+		return (weight_list, weight_count, error_list)
 
 	# simplify feat_vec
 	def simplifyFeatVec(self, simplify_threshold):
@@ -310,11 +326,11 @@ class ChunkTrainer():
 	def addFeat(self, name, schema, output, weight = 1.0):
 		self.feat_vec[(name + ":" + schema, output)] += weight
 
-	# change a feature
-	def changeFeat(self, name, schema, output, weight, tagset):
+	# reduce a feature
+	def reduceFeat(self, name, schema, output, weight, error_list):
 		weight = 1.0
 		# for each tag
-		for value in tagset:
+		for value in error_list:
 			# if tag exists in feat_vec
 			if value != output and ((name + ":" + schema, value) in self.feat_vec):
 				# reduce features with different tags
