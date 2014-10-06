@@ -87,11 +87,11 @@ class ChunkTrainer():
 		# number of iteration
 		iter_num = 10
 		# size of training set
-		train_size = min(10000, len(train_data))
+		train_size = len(train_data)
 		# error weight
-		error_weight = 2.0
+		error_weight = 1.0
 		# threshold for simplification
-		simplify_threshold = 0.8
+		simplify_threshold = 0.0
 		print "iter_num", iter_num, "train_size", train_size, "error_weight", error_weight, "simplify_threshold", simplify_threshold
 		self.printTest("iter_num" + repr(iter_num) + "train_size" + repr(train_size) + "error_weight" + repr(error_weight))
 
@@ -206,7 +206,7 @@ class ChunkTrainer():
 		# for each item in labeled_list
 		for index, line in enumerate(labeled_list):
 			# ignore items with weight less than or equal to zero
-			if (not (index in weight_list)) or weight_list[index] <= 0.0:
+			if (not (index in weight_list)):
 				continue
 			#error_list[index] = self.tagset # inject
 			# ignore items with no error list
@@ -307,7 +307,7 @@ class ChunkTrainer():
 		# for each item in feat_vec
 		for index, value in self.feat_vec.iteritems():
 			# keep items with value > 0
-			if value > 0.0:
+			if value <> 0.0:
 				count += 1
 				feat_vec1[index] = value
 				feat_sum += value
@@ -316,7 +316,7 @@ class ChunkTrainer():
 		count = 0
 		for index, value in feat_vec1.iteritems():
 			# keep items above the threshold
-			if value >= feat_threshold:
+			if value <> feat_threshold:
 				count += 1
 				feat_vec2[index] = value
 		print time.clock(), "simplify feature vector done", "threshold", feat_threshold, len(self.feat_vec), "=>", count
