@@ -69,6 +69,7 @@ def perc_train(feat_vec,train_data, tagset, numepochs, delta):
     for m in range(0,len(train_data)): 
     	result = perc.perc_test(feat_vec, train_data[m][0], train_data[m][1], tagset, default_tag)    
         ture_result = []
+		
         current_labeled_list = train_data[m][0]
         #combine all target in one sentence
         for l in range(0,len(train_data[m][0])):
@@ -85,15 +86,28 @@ def perc_train(feat_vec,train_data, tagset, numepochs, delta):
         		error_index.append(n)
         #print error_index
         for p in range(0,len(error_index)):
-        	currrent_index = error_index[p]
-        	feat_vec = update(currrent_index,result[currrent_index],ture_result[currrent_index],feat_vec,train_data[m][0],train_data[m][1])
-        #delta = addfeatvec(feat_vec, delta)	
+        	current_index = error_index[p]
+        	feat_vec = update(current_index,result,ture_result,feat_vec,train_data[m][0],train_data[m][1])
+        #delta = addfeatvec(feat_vec, delta)
     return feat_vec, delta
    
 def update(currrent_index,result,ture_result,feat_vec,label_list,feat_list):
 	for j in range(0,20):       	
-		feat_vec[feat_list[j+20*currrent_index],result] -= 1
-		feat_vec[feat_list[j+20*currrent_index],ture_result] += 1
+		feat=feat_list[j+20*currrent_index]
+		if feat == 'B':
+			if j >= 1:
+				#prevtag = 
+				feat_vec[feat+':'+ result[currrent_index-1], result[currrent_index]] -= 1
+				#ture_prevtag = ture_result[currrent_index-1]
+				feat_vec[feat+':'+ ture_result[currrent_index-1], ture_result[currrent_index]] += 1	
+			else:
+				#prevtag = 'B_-1'
+				#ture_prevtag = 'B_-1'
+				feat_vec[feat+':'+ 'B_-1', result[currrent_index]] -= 1
+				feat_vec[feat+':'+ 'B_-1', ture_result[currrent_index]] += 1	
+		else:
+			feat_vec[feat,result[currrent_index]] -= 1
+			feat_vec[feat,ture_result[currrent_index]] += 1
 	return feat_vec
 	
 def addfeatvec(feat_vec, delta):
@@ -107,7 +121,7 @@ if __name__ == '__main__':
     optparser.add_option("-t", "--tagsetfile", dest="tagsetfile", default=os.path.join("data", "tagset.txt"), help="tagset that contains all the labels produced in the output, i.e. the y in \phi(x,y)")
     optparser.add_option("-i", "--trainfile", dest="trainfile", default=os.path.join("data", "train.txt.gz"), help="input data, i.e. the x in \phi(x,y)")
     optparser.add_option("-f", "--featfile", dest="featfile", default=os.path.join("data", "train.feats.gz"), help="precomputed features for the input data, i.e. the values of \phi(x,_) without y")
-    optparser.add_option("-e", "--numepochs", dest="numepochs", default=int(14), help="number of epochs of training; in each epoch we iterate over over all the training examples")
+    optparser.add_option("-e", "--numepochs", dest="numepochs", default=int(10), help="number of epochs of training; in each epoch we iterate over over all the training examples")
     optparser.add_option("-m", "--modelfile", dest="modelfile", default=os.path.join("data", "default.model"), help="weights for all features stored on disk")
     (opts, _) = optparser.parse_args()
 
