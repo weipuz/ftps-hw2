@@ -32,37 +32,41 @@ import perc
 import sys, optparse, os, codecs, time, types
 from collections import defaultdict
 
-def perc_train_initial(train_data, tagset, numepochs):
-    feat_vec = defaultdict(int)
-    train_data_size = len(train_data)
-    # initial the feat_vec to summarize all the features of the words in all the sentences
-    for i in range(0,train_data_size):
-         for k in range(0,len(train_data[i][0])):
-              for j in range(0,20):           
-                current_feat = train_data[i][1]
-                current_labeled_list = train_data[i][0]
-                current_labeled = current_labeled_list[k]
-                current_labeled = ''.join(current_labeled)
-                current_tag = current_labeled.split()[2]
-                #print current_tag
-                feat_vec[current_feat[j+20*k],current_tag] +=1
-    # 10 iteration
-    for s in range(0,numepochs):
-        feat_vec = perc_train(feat_vec,train_data, tagset, numepochs)
-    return feat_vec
+# def perc_train_initial(train_data, tagset, numepochs):
+    # feat_vec = defaultdict(int)
+    # train_data_size = len(train_data)
+    # # initial the feat_vec to summarize all the features of the words in all the sentences
+    # for i in range(0,train_data_size):
+         # for k in range(0,len(train_data[i][0])):
+              # for j in range(0,20):           
+                # current_feat = train_data[i][1]
+                # current_labeled_list = train_data[i][0]
+                # current_labeled = current_labeled_list[k]
+                # current_labeled = ''.join(current_labeled)
+                # current_tag = current_labeled.split()[2]
+                # #print current_tag
+                # feat_vec[current_feat[j+20*k],current_tag] +=1
+    # # 10 iteration
+    # for s in range(0,numepochs):
+        # feat_vec = perc_train(feat_vec,train_data, tagset, numepochs)
+    # return feat_vec
 
 def perc_train_without_initial(train_data, tagset, numepochs):
-    feat_vec = defaultdict(int)
-    # 10 iteration
-    for s in range(0,numepochs):
-        feat_vec = perc_train(feat_vec,train_data, tagset, numepochs)
-    return feat_vec
-    return feat_vec
+	feat_vec = defaultdict(int)
+	delta = defaultdict(int)
+	feat_vec_aveg = defaultdict(int)
+	# 10 iteration
+	for s in range(0,numepochs):
+		feat_vec, delta = perc_train(feat_vec,train_data, tagset, numepochs, delta)
+	# for index, value in feat_vec.iteritems():
+		# feat_vec_aveg[index] = value/(numepochs * len(train_data))
+		#print index, value, delta[index], feat_vec_aveg[index]
+	return feat_vec
 
-def perc_train(feat_vec,train_data, tagset, numepochs):
+def perc_train(feat_vec,train_data, tagset, numepochs, delta):
     default_tag = tagset[0]
     #get new output
-    for m in range(0,len(train_data)):
+    for m in range(0,len(train_data)): 
     	result = perc.perc_test(feat_vec, train_data[m][0], train_data[m][1], tagset, default_tag)    
         ture_result = []
         current_labeled_list = train_data[m][0]
@@ -83,21 +87,27 @@ def perc_train(feat_vec,train_data, tagset, numepochs):
         for p in range(0,len(error_index)):
         	currrent_index = error_index[p]
         	feat_vec = update(currrent_index,result[currrent_index],ture_result[currrent_index],feat_vec,train_data[m][0],train_data[m][1])
-        	
-    return feat_vec
+        #delta = addfeatvec(feat_vec, delta)	
+    return feat_vec, delta
    
 def update(currrent_index,result,ture_result,feat_vec,label_list,feat_list):
 	for j in range(0,20):       	
 		feat_vec[feat_list[j+20*currrent_index],result] -= 1
 		feat_vec[feat_list[j+20*currrent_index],ture_result] += 1
 	return feat_vec
+	
+def addfeatvec(feat_vec, delta):
+	for index, value in feat_vec.iteritems():
+		delta[index] += value
+	return delta
+
 
 if __name__ == '__main__':
     optparser = optparse.OptionParser()
     optparser.add_option("-t", "--tagsetfile", dest="tagsetfile", default=os.path.join("data", "tagset.txt"), help="tagset that contains all the labels produced in the output, i.e. the y in \phi(x,y)")
     optparser.add_option("-i", "--trainfile", dest="trainfile", default=os.path.join("data", "train.txt.gz"), help="input data, i.e. the x in \phi(x,y)")
     optparser.add_option("-f", "--featfile", dest="featfile", default=os.path.join("data", "train.feats.gz"), help="precomputed features for the input data, i.e. the values of \phi(x,_) without y")
-    optparser.add_option("-e", "--numepochs", dest="numepochs", default=int(7), help="number of epochs of training; in each epoch we iterate over over all the training examples")
+    optparser.add_option("-e", "--numepochs", dest="numepochs", default=int(14), help="number of epochs of training; in each epoch we iterate over over all the training examples")
     optparser.add_option("-m", "--modelfile", dest="modelfile", default=os.path.join("data", "default.model"), help="weights for all features stored on disk")
     (opts, _) = optparser.parse_args()
 
