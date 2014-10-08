@@ -53,23 +53,28 @@ from collections import defaultdict
 
 def perc_train_without_initial(train_data, tagset, numepochs):
 	feat_vec = defaultdict(int)
-	delta = defaultdict(int)
+	aver_feat_vec = defaultdict(int)
 	feat_vec_aveg = defaultdict(int)
+	count = 0
 	# 10 iteration
 	for s in range(0,numepochs):
-		feat_vec, delta = perc_train(feat_vec,train_data, tagset, numepochs, delta)
+		feat_vec, aver_feat_vec ,count = perc_train(feat_vec,train_data, tagset, numepochs, aver_feat_vec, count)
 	# for index, value in feat_vec.iteritems():
 		# feat_vec_aveg[index] = value/(numepochs * len(train_data))
 		#print index, value, delta[index], feat_vec_aveg[index]
-	return feat_vec
+	return aver_feat_vec
 
-def perc_train(feat_vec,train_data, tagset, numepochs, delta):
+def perc_train(feat_vec,train_data, tagset, numepochs, aver_feat_vec, count):
     default_tag = tagset[0]
     #get new output
     for m in range(0,len(train_data)): 
     	result = perc.perc_test(feat_vec, train_data[m][0], train_data[m][1], tagset, default_tag)    
         ture_result = []
-		
+        #count = s * len(train_data) + m
+        step = float(numepochs * len(train_data) - count) / float(numepochs * len(train_data))
+        #print count, step
+        count += 1
+        
         current_labeled_list = train_data[m][0]
         #combine all target in one sentence
         for l in range(0,len(train_data[m][0])):
@@ -87,28 +92,34 @@ def perc_train(feat_vec,train_data, tagset, numepochs, delta):
         #print error_index
         for p in range(0,len(error_index)):
         	current_index = error_index[p]
-        	feat_vec = update(current_index,result,ture_result,feat_vec,train_data[m][0],train_data[m][1])
+        	(feat_vec, aver_feat_vec) = update(current_index,result,ture_result,feat_vec,train_data[m][0],train_data[m][1], aver_feat_vec, step)
         #delta = addfeatvec(feat_vec, delta)
-    return feat_vec, delta
+    return feat_vec, aver_feat_vec, count
    
-def update(currrent_index,result,ture_result,feat_vec,label_list,feat_list):
+def update(currrent_index,result,ture_result,feat_vec,label_list,feat_list, aver_feat_vec, step):
 	for j in range(0,20):       	
 		feat=feat_list[j+20*currrent_index]
 		if feat == 'B':
 			if j >= 1:
 				#prevtag = 
 				feat_vec[feat+':'+ result[currrent_index-1], result[currrent_index]] -= 1
+				aver_feat_vec[feat+':'+ result[currrent_index-1], result[currrent_index]] -= step
 				#ture_prevtag = ture_result[currrent_index-1]
 				feat_vec[feat+':'+ ture_result[currrent_index-1], ture_result[currrent_index]] += 1	
+				aver_feat_vec[feat+':'+ ture_result[currrent_index-1], ture_result[currrent_index]] += step
 			else:
 				#prevtag = 'B_-1'
 				#ture_prevtag = 'B_-1'
 				feat_vec[feat+':'+ 'B_-1', result[currrent_index]] -= 1
+				aver_feat_vec[feat+':'+ 'B_-1', result[currrent_index]] -= step
 				feat_vec[feat+':'+ 'B_-1', ture_result[currrent_index]] += 1	
+				aver_feat_vec[feat+':'+ 'B_-1', ture_result[currrent_index]] += step
 		else:
 			feat_vec[feat,result[currrent_index]] -= 1
+			aver_feat_vec[feat,result[currrent_index]] -= step
 			feat_vec[feat,ture_result[currrent_index]] += 1
-	return feat_vec
+			aver_feat_vec[feat,ture_result[currrent_index]] += step
+	return feat_vec, aver_feat_vec
 	
 def addfeatvec(feat_vec, delta):
 	for index, value in feat_vec.iteritems():
@@ -121,7 +132,7 @@ if __name__ == '__main__':
     optparser.add_option("-t", "--tagsetfile", dest="tagsetfile", default=os.path.join("data", "tagset.txt"), help="tagset that contains all the labels produced in the output, i.e. the y in \phi(x,y)")
     optparser.add_option("-i", "--trainfile", dest="trainfile", default=os.path.join("data", "train.txt.gz"), help="input data, i.e. the x in \phi(x,y)")
     optparser.add_option("-f", "--featfile", dest="featfile", default=os.path.join("data", "train.feats.gz"), help="precomputed features for the input data, i.e. the values of \phi(x,_) without y")
-    optparser.add_option("-e", "--numepochs", dest="numepochs", default=int(10), help="number of epochs of training; in each epoch we iterate over over all the training examples")
+    optparser.add_option("-e", "--numepochs", dest="numepochs", default=int(1), help="number of epochs of training; in each epoch we iterate over over all the training examples")
     optparser.add_option("-m", "--modelfile", dest="modelfile", default=os.path.join("data", "default.model"), help="weights for all features stored on disk")
     (opts, _) = optparser.parse_args()
 
