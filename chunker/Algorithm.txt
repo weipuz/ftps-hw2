@@ -1,0 +1,37 @@
+## Initialization ##
+feat_vec=0
+aver_feat_vec=0
+count = 0
+
+## The main loop ##
+for t= 0,...,T
+   for i= 0,..., n
+		use feat_vec to estimate the tag for each word in i th sentence
+		use count to compute the step at every loop: step =( T*n - count ) / (T*n) 
+		for every tag index in estimated result
+			if estimated tag not equal to real tag
+			    add tag index to error index list 
+		
+		for every error index in error index list
+			update feat_vec with 1 and -1 
+			update aver_feat_vec with +step and -step
+			
+		count += 1	
+return aver_feat_vec
+
+
+##The function to updating feat_vec and aver_feat_vec##
+for feat in feats for word:
+	if feat == "B"
+		substract 1 from element 'feat: previous_estimated_tag, estimated_tag' in feat_vec
+		add 1 to element 'feat: previous_true_tag, true_tag' in feat_vec 
+		
+		substract step from element 'feat: previous_estimated_tag, estimated_tag' in aver_feat_vec
+		add step to element 'feat: previous_true_tag, true_tag' in aver_feat_vec 
+	else
+		substract 1 from element 'feat, estimated_tag' in feat_vec
+		add 1 to element 'feat, true_tag' in feat_vec 
+		
+		substract step from element 'feat, estimated_tag' in aver_feat_vec
+		add step to element 'feat, true_tag' in aver_feat_vec 
+return feat_vec, aver_feat_vec

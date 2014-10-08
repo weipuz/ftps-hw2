@@ -69,7 +69,7 @@ def perc_train(feat_vec,train_data, tagset, numepochs, aver_feat_vec, count):
     #get new output
     for m in range(0,len(train_data)): 
     	result = perc.perc_test(feat_vec, train_data[m][0], train_data[m][1], tagset, default_tag)    
-        ture_result = []
+        true_result = []
         #count = s * len(train_data) + m
         step = float(numepochs * len(train_data) - count) / float(numepochs * len(train_data))
         #print count, step
@@ -81,44 +81,44 @@ def perc_train(feat_vec,train_data, tagset, numepochs, aver_feat_vec, count):
         	current_labeled = current_labeled_list[l]
          	current_labeled = ''.join(current_labeled)
           	current_tag = current_labeled.split()[2]
-          	ture_result.append(current_tag)
+          	true_result.append(current_tag)
         
         error_count =0
         error_index =[]
-        for n in range(0,len(ture_result)):
-        	if result[n] != ture_result[n]:
+        for n in range(0,len(true_result)):
+        	if result[n] != true_result[n]:
         		error_count +=1
         		error_index.append(n)
         #print error_index
         for p in range(0,len(error_index)):
         	current_index = error_index[p]
-        	(feat_vec, aver_feat_vec) = update(current_index,result,ture_result,feat_vec,train_data[m][0],train_data[m][1], aver_feat_vec, step)
+        	(feat_vec, aver_feat_vec) = update(current_index,result,true_result,feat_vec,train_data[m][0],train_data[m][1], aver_feat_vec, step)
         #delta = addfeatvec(feat_vec, delta)
     return feat_vec, aver_feat_vec, count
    
-def update(currrent_index,result,ture_result,feat_vec,label_list,feat_list, aver_feat_vec, step):
+def update(current_index,result,true_result,feat_vec,label_list,feat_list, aver_feat_vec, step):
 	for j in range(0,20):       	
-		feat=feat_list[j+20*currrent_index]
+		feat=feat_list[j+20*current_index]
 		if feat == 'B':
-			if j >= 1:
+			if current_index >= 1:
 				#prevtag = 
-				feat_vec[feat+':'+ result[currrent_index-1], result[currrent_index]] -= 1
-				aver_feat_vec[feat+':'+ result[currrent_index-1], result[currrent_index]] -= step
-				#ture_prevtag = ture_result[currrent_index-1]
-				feat_vec[feat+':'+ ture_result[currrent_index-1], ture_result[currrent_index]] += 1	
-				aver_feat_vec[feat+':'+ ture_result[currrent_index-1], ture_result[currrent_index]] += step
+				feat_vec[feat+':'+ result[current_index-1], result[current_index]] -= 1
+				aver_feat_vec[feat+':'+ result[current_index-1], result[current_index]] -= step
+				#ture_prevtag = true_result[current_index-1]
+				feat_vec[feat+':'+ true_result[current_index-1], true_result[current_index]] += 1	
+				aver_feat_vec[feat+':'+ true_result[current_index-1], true_result[current_index]] += step
 			else:
 				#prevtag = 'B_-1'
 				#ture_prevtag = 'B_-1'
-				feat_vec[feat+':'+ 'B_-1', result[currrent_index]] -= 1
-				aver_feat_vec[feat+':'+ 'B_-1', result[currrent_index]] -= step
-				feat_vec[feat+':'+ 'B_-1', ture_result[currrent_index]] += 1	
-				aver_feat_vec[feat+':'+ 'B_-1', ture_result[currrent_index]] += step
+				feat_vec[feat+':'+ 'B_-1', result[current_index]] -= 1
+				aver_feat_vec[feat+':'+ 'B_-1', result[current_index]] -= step
+				feat_vec[feat+':'+ 'B_-1', true_result[current_index]] += 1	
+				aver_feat_vec[feat+':'+ 'B_-1', true_result[current_index]] += step
 		else:
-			feat_vec[feat,result[currrent_index]] -= 1
-			aver_feat_vec[feat,result[currrent_index]] -= step
-			feat_vec[feat,ture_result[currrent_index]] += 1
-			aver_feat_vec[feat,ture_result[currrent_index]] += step
+			feat_vec[feat,result[current_index]] -= 1
+			aver_feat_vec[feat,result[current_index]] -= step
+			feat_vec[feat,true_result[current_index]] += 1
+			aver_feat_vec[feat,true_result[current_index]] += step
 	return feat_vec, aver_feat_vec
 	
 def addfeatvec(feat_vec, delta):
