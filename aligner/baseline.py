@@ -8,7 +8,6 @@ optparser.add_option("-p", "--prefix", dest="fileprefix", default="hansards", he
 optparser.add_option("-e", "--english", dest="english", default="en", help="suffix of English (target language) filename (default=en)")
 optparser.add_option("-f", "--french", dest="french", default="fr", help="suffix of French (source language) filename (default=fr)")
 optparser.add_option("-l", "--logfile", dest="logfile", default="debug.log", help="filename for logging output")
-optparser.add_option("-t", "--threshold", dest="threshold", default=0.5, type="float", help="threshold for alignment (default=0.5)")
 optparser.add_option("-n", "--num_sentences", dest="num_sents", default=10000, type="int", help="Number of sentences to use for training and alignment") #sys.maxint
 (opts, _) = optparser.parse_args()
 f_data = "%s.%s" % (os.path.join(opts.datadir, opts.fileprefix), opts.french)
@@ -23,12 +22,17 @@ k = 0
 vf = opts.num_sents
 ve = opts.num_sents
 # Initialize t0 ## Easy choice: initialize uniformly ##
-t = [[1.0 / vf] * ve] * vf
-for i in range(0, 2):
+t = defaultdict(int)
+for (f, e) in bitext:
+	for (i, f_i) in enumerate(f):
+		for (j, e_j) in enumerate(e):
+			t[(f_i, e_j)] = 1.0 / float(len(f))
+for i in range(0, 5):
 	k += 1
+	print "iteration", i
 	# Initialize all counts to zero
-	count_fe = [ [0.0] * ve ] * vf
-	count_e = [0.0] * ve
+	count_fe = defaultdict(int)
+	count_e = defaultdict(int)
 	# for each (f,e) in D
 	for (f, e) in bitext:
 		# for each fi in f
@@ -38,22 +42,22 @@ for i in range(0, 2):
 			# for each ej in e
 			for (j, e_j) in enumerate(e):
 				# Z += tk-1(fi|ej)
-				z += t[i][j]
+				z += t[(f_i, e_j)]
 			# for each ej in e
 			for (j, e_j) in enumerate(e):
 				# c = tk-1(fi|ej)/Z
-				c = float(t[i][j]) / float(z)
+				c = float(t[(f_i, e_j)]) / float(z)
 				# count(fi, ej) += c
-				count_fe[i][j] += c
+				count_fe[(f_i, e_j)] += c
 				# count(ej) += c
-				count_e[j] += c
+				count_e[e_j] += c
 	# for each (f, e) in count
-	for (f, count_fe_f) in enumerate(count_fe):
-		for (e, count_fe_e) in enumerate(count_fe_f):
-			if 0.0 != count_e[e]:
-				# Set new parameters: tk(f|e) = count(f,e) / count(e)
-				t[f][e] = float(count_fe[f][e]) / float(count_e[e])
+	for index, value in count_fe.iteritems():
+		if 0.0 != count_e[index[1]]:
+			# Set new parameters: tk(f|e) = count(f,e) / count(e)
+			t[index] = float(count_fe[index]) / float(count_e[index[1]])
 
+#logging.info(t)
 # for each (f,e) in D
 for (f, e) in bitext:
 	# for each fi in f
@@ -63,15 +67,21 @@ for (f, e) in bitext:
 		# for each ej in e
 		for (j, e_j) in enumerate(e):
 			# if t(fi|ej) > bestp
-			if t[i][j] > bestp:
+			if t[(f_i, e_j)] > bestp:
 				# bestp = t(fi|ej)
-				bestp = t[i][j]
+				bestp = t[(f_i, e_j)]
 				# bestj = j
 				bestj = j
-		# align fi to ebestj
-		print "%d-%d" % (i + 1, bestj + 1)
+		if bestj >= 0:
+			# align fi to ebestj
+			print "%d-%d" % (i, bestj),
+		else:
+			print "%d-%d" % (i, 0),
+	print
 
-
+#Precision = 0.533823
+#Recall = 0.704557
+#AER = 0.407746
 
 
 
