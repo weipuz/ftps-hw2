@@ -73,7 +73,7 @@ print ('stop')
 #print test
 #print len(fe_count)
 #print len(t_fe)
-iter_num = 6
+iter_num = 5
 #print ('down.....')
 #print len(fe_count)
 #print ('....')
