@@ -74,6 +74,8 @@ print ('stop')
 #print len(fe_count)
 #print len(t_fe)
 iter_num = 10
+lamda=0.01
+B = 500
 #print ('down.....')
 #print len(fe_count)
 #print ('....')
@@ -114,12 +116,15 @@ for k in range(iter_num):
     #test_count +=1
     #print count_e.viewvalues()
     #print ('down down...')
+	
+	V = len(e_count)+B
+	
     for fe_pair in set(count_fe.keys()):
         #if fe_pair[1] == None:
         #    print fe_pair
         #print ('stop')
         
-        t_fe[fe_pair] = float(count_fe[fe_pair]/count_e[fe_pair[1]])
+        t_fe[fe_pair] = float((count_fe[fe_pair]+lamda)/(count_e[fe_pair[1]]+lamda*V))
         test_count +=1
         if test_count % 100000 == 0:
             sys.stderr.write(".")
@@ -128,7 +133,7 @@ for k in range(iter_num):
     #print ('..............')
     #print len(count_fe)
 
-'''
+
 ## train  ef model	
 k=0
 for k in range(iter_num):
@@ -138,33 +143,28 @@ for k in range(iter_num):
     count_ef = defaultdict(int)
     test_count = 0
     for (n, (f, e)) in enumerate(bitext):
-        #f_index =0
+        e_index =0
         for e_word in set(e):
             #Z = 0 ## Z commonly denotes a normalization term ##
             Z = 0
             #test_count_1 =0
           
-            f_index =0
+            
             for f_word in set(f):
-                if f_index ==0:
-                    Z += t_ef[(e_word,None)]
-                    f_index += 1                   
-                                        
+                if e_index ==0:
+                    Z += t_ef[(None,f_word)]
                 Z += t_ef[(e_word,f_word)]
-                f_index +=1
-            f_index =0
+            
             for f_word_ in set(f):
-                if f_index ==0:
-                    c = t_ef[(e_word,None)]/Z
-                    count_ef[(e_word,None)] += c
-                    count_f[None] += c
-                    f_index += 1
-                    
-                c = t_ef[(e_word,f_word_)]/Z
-                #print c
-                count_ef[(e_word,f_word_)] += c
-                count_f[f_word_] += c 
-                f_index += 1
+				if e_index ==0:
+					c = t_ef[(None,f_word_)]/Z
+					count_ef[(None,f_word_)] += c
+					count_f[f_word_] += c
+				c = t_ef[(e_word,f_word_)]/Z
+				#print c
+				count_ef[(e_word,f_word_)] += c
+				count_f[f_word_] += c 
+            e_index += 1
 
         if n % 500 == 0:  
             sys.stderr.write(".")
@@ -172,12 +172,14 @@ for k in range(iter_num):
     #test_count +=1
     #print count_e.viewvalues()
     #print ('down down...')
+	
+	V = len(f_count)
     for ef_pair in set(count_ef.keys()):
         #if fe_pair[1] == None:
         #    print fe_pair
         #print ('stop')
         
-        t_ef[ef_pair] = count_ef[ef_pair]/count_f[ef_pair[1]]
+        t_ef[ef_pair] = float((count_ef[ef_pair]+lamda)/(count_f[ef_pair[1]]+lamda*V))
         test_count +=1
         if test_count % 100000 == 0:
             sys.stderr.write(".")	
@@ -197,12 +199,11 @@ for (f,e) in bitext:
 			if t_fe[(f_i,e_j)] > bestp:
 				bestp = t_fe[(f_i,e_j)]
 				bestj =j
-		if t_fe[(f_i,None)] < bestp:
-			fe_list.append("%i-%i " % (i,bestj))
+		#if t_fe[(None,f_i)] < bestp:
+		fe_list.append("%i-%i " % (i,bestj))
 			
-	#if abs(i-bestj ) < 10:
-	#print i-bestj
-	#sys.stdout.write("%i-%i " % (i,bestj))
+		#if abs(i-bestj ) < 10:
+		#	fe_list.append("%i-%i " % (i,bestj))
 			
 	for (i, e_i) in enumerate(e):
 		bestp = 0
@@ -211,16 +212,18 @@ for (f,e) in bitext:
 			if t_ef[(e_i,f_j)] > bestp:
 				bestp = t_ef[(e_i,f_j)]
 				bestj =j
-		if t_ef[(e_i,None)] < bestp:
-			ef_list.append("%i-%i " % (bestj,i))      
+		#if t_ef[(None,e_i)] < bestp:
+		ef_list.append("%i-%i " % (bestj,i)) 
+	#if abs(i-bestj ) < 10:
+	#	ef_list.append("%i-%i " % (bestj,i)) 		
 		
 	intersect = [val for val in fe_list if val in ef_list] 
 	for item in intersect:
 		sys.stdout.write(item)      
 		
 	sys.stdout.write("\n")
-'''	
 
+'''
 
 ### decode use f_e model    
 for (f,e) in bitext:
@@ -232,21 +235,16 @@ for (f,e) in bitext:
             if t_fe[(f_i,e_j)] > bestp:
                 bestp = t_fe[(f_i,e_j)]
                 bestj =j
-        if t_fe[(None),e_j] < bestp:
-            sys.stdout.write("%i-%i " % (i,bestj))
+        #if t_fe[(None),e_j] < bestp:
+          #  sys.stdout.write("%i-%i " % (i,bestj))
             
-        #if abs(i-bestj ) < 10:
+        if abs(i-bestj ) < 10:
             #print i-bestj
-            #sys.stdout.write("%i-%i " % (i,bestj))
-            
-            
-        
-        
-        
-        
+            sys.stdout.write("%i-%i " % (i,bestj))
+               
     sys.stdout.write("\n")
 	
-'''
+
 ### decode use e_f model 
 for (f,e) in bitext:
     for (i, e_i) in enumerate(e):
@@ -256,7 +254,7 @@ for (f,e) in bitext:
             if t_ef[(e_i,f_j)] > bestp:
                 bestp = t_ef[(e_i,f_j)]
                 bestj =j
-        if t_ef[(e_i,None)] < bestp:
+        if t_ef[(None,f_j)] < bestp:
             sys.stdout.write("%i-%i " % (bestj,i))
             
         #if abs(i-bestj ) < 10:
@@ -269,7 +267,7 @@ for (f,e) in bitext:
         
         
     sys.stdout.write("\n")
-'''     
+'''    
 '''
 dice = defaultdict(int)
 for (k, (f_i, e_j)) in enumerate(fe_count.keys()):
