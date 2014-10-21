@@ -73,9 +73,9 @@ print ('stop')
 #print test
 #print len(fe_count)
 #print len(t_fe)
-iter_num = 10
+iter_num = 8
 lamda=0.01
-B = 500
+B = 2000
 #print ('down.....')
 #print len(fe_count)
 #print ('....')
