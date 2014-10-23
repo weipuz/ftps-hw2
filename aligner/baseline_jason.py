@@ -74,8 +74,10 @@ print ('stop')
 #print len(fe_count)
 #print len(t_fe)
 iter_num = 8
-lamda=0.01
-B = 2000
+lamda=0.005 # the n in add-n smoothing
+lamda2=0.005 # add n2 for second model add-n smoothing
+B = 0 # the addup factor for the V in add-n smoothing
+#d = 5 # #not using##the max distance between two possible alignment #
 #print ('down.....')
 #print len(fe_count)
 #print ('....')
@@ -173,13 +175,13 @@ for k in range(iter_num):
     #print count_e.viewvalues()
     #print ('down down...')
 	
-	V = len(f_count)
+	V = len(f_count)+B
     for ef_pair in set(count_ef.keys()):
         #if fe_pair[1] == None:
         #    print fe_pair
         #print ('stop')
         
-        t_ef[ef_pair] = float((count_ef[ef_pair]+lamda)/(count_f[ef_pair[1]]+lamda*V))
+        t_ef[ef_pair] = float((count_ef[ef_pair]+lamda2)/(count_f[ef_pair[1]]+lamda2*V))
         test_count +=1
         if test_count % 100000 == 0:
             sys.stderr.write(".")	
@@ -188,41 +190,98 @@ for k in range(iter_num):
 	
 #print t_fe 
 
+def checkalign(i,j,alignment):
+		align = "%i-%i " % (i,j)
+		if align in alignment:
+			return True
+		else: 
+			return False
+
+
 ### decode use two model    
 for (f,e) in bitext:
 	fe_list=[]
 	ef_list=[]
+	
 	for (i, f_i) in enumerate(f):
 		bestp = 0
 		bestj = 0
 		for (j, e_j) in enumerate(e):            
-			if t_fe[(f_i,e_j)] > bestp:
+			if t_fe[(f_i,e_j)] > bestp: #and abs(i-j ) < d:
 				bestp = t_fe[(f_i,e_j)]
 				bestj =j
 		#if t_fe[(None,f_i)] < bestp:
 		fe_list.append("%i-%i " % (i,bestj))
 			
 		#if abs(i-bestj ) < 10:
-		#	fe_list.append("%i-%i " % (i,bestj))
+		#		fe_list.append("%i-%i " % (i,bestj))
 			
 	for (i, e_i) in enumerate(e):
 		bestp = 0
 		bestj = 0
 		for (j, f_j) in enumerate(f):            
-			if t_ef[(e_i,f_j)] > bestp:
+			if t_ef[(e_i,f_j)] > bestp:# and abs(i-j ) < d:
 				bestp = t_ef[(e_i,f_j)]
 				bestj =j
 		#if t_ef[(None,e_i)] < bestp:
 		ef_list.append("%i-%i " % (bestj,i)) 
-	#if abs(i-bestj ) < 10:
-	#	ef_list.append("%i-%i " % (bestj,i)) 		
+		#if abs(i-bestj ) < 10:
+			#ef_list.append("%i-%i " % (bestj,i)) 		
 		
 	intersect = [val for val in fe_list if val in ef_list] 
-	for item in intersect:
-		sys.stdout.write(item)      
+	union = fe_list + ef_list
+	
+	
+		
+	#####Add growing step
+	neighboring = ((-1,0),(0,-1),(1,0),(0,1),(-1,-1),(-1,1),(1,-1),(1,1))
+	newadd = True
+	#grow-diag:
+	align = list([tuple(map(int, x.split("-"))) for x in intersect])
+	#fe_align = list([tuple(map(int, x.split("-"))) for x in fe_list])
+	#ef_align = list([tuple(map(int, x.split("-"))) for x in ef_list])
+	union = set([tuple(map(int, x.split("-"))) for x in union])
+	while newadd:	
+		newadd=False
+		for (i, e_i) in enumerate(e):
+			for (j, f_j) in enumerate(f):	
+				if (i, j) in align:
+					#print i, j
+					for (i_d, j_d) in neighboring:
+						#print i,j,i_d,j_d
+						i_new = min(max(0,i+i_d),len(e)-1)
+						j_new = min(max(0,j+j_d),len(f)-1)
+						if (i_new, j_new) in union:
+							if (i_new not in [a[0] for a in align]) or (j_new not in [a[1] for a in align]):
+								newadd = True
+								align.append((i_new,j_new))
+								#print i_new,j_new
+		if not newadd: break
+	'''	
+	##final(e2f):
+	for i_new in range(0,len(e)):
+		for j_new in range(0,len(f)):	
+			if (i_new, j_new) in ef_align:
+				if (i_new not in [a[0] for a in align]) or (j_new not in [a[1] for a in align]):
+					align.append((i_new,j_new))
+	##final(f2e):
+	for i_new in range(0,len(e)):
+		for j_new in range(0,len(f)):	
+			if (i_new, j_new) in fe_align:
+				if (i_new not in [a[0] for a in align]) or (j_new not in [a[1] for a in align]):
+					align.append((i_new,j_new))
+	'''
+	alignment = sorted(align)
+	for (i, j) in alignment:
+		sys.stdout.write("%i-%i " % (i,j))
+	
+	#for item in intersect:
+	#	sys.stdout.write(item)      
 		
 	sys.stdout.write("\n")
 
+		
+	
 '''
 
 ### decode use f_e model    
@@ -232,15 +291,15 @@ for (f,e) in bitext:
         bestj = 0
 		
         for (j, e_j) in enumerate(e):            
-            if t_fe[(f_i,e_j)] > bestp:
+            if t_fe[(f_i,e_j)] > bestp and abs(i-j ) < d:
                 bestp = t_fe[(f_i,e_j)]
                 bestj =j
         #if t_fe[(None),e_j] < bestp:
-          #  sys.stdout.write("%i-%i " % (i,bestj))
+        sys.stdout.write("%i-%i " % (i,bestj))
             
-        if abs(i-bestj ) < 10:
+        #if abs(i-bestj ) < 10:
             #print i-bestj
-            sys.stdout.write("%i-%i " % (i,bestj))
+            #sys.stdout.write("%i-%i " % (i,bestj))
                
     sys.stdout.write("\n")
 	
@@ -251,7 +310,7 @@ for (f,e) in bitext:
         bestp = 0
         bestj = 0
         for (j, f_j) in enumerate(f):            
-            if t_ef[(e_i,f_j)] > bestp:
+            if t_ef[(e_i,f_j)] > bestp and abs(i-j ) < d:
                 bestp = t_ef[(e_i,f_j)]
                 bestj =j
         if t_ef[(None,f_j)] < bestp:
