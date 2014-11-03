@@ -73,9 +73,9 @@ print ('stop')
 #print test
 #print len(fe_count)
 #print len(t_fe)
-iter_num = 8
-lamda=0.005 # the n in add-n smoothing
-lamda2=0.005 # add n2 for second model add-n smoothing
+iter_num = 9
+lamda=0.003 # the n in add-n smoothing
+lamda2=0.003 # add n2 for second model add-n smoothing
 B = 0 # the addup factor for the V in add-n smoothing
 #d = 5 # #not using##the max distance between two possible alignment #
 #print ('down.....')
@@ -105,7 +105,7 @@ for k in range(iter_num):
 				if f_index ==0:
 					c = float(t_fe[(None,e_word_)]/Z)
 					count_fe[(None,e_word_)] += c
-					count_e[e_word_] += c
+					#count_e[e_word_] += c
 			  
 				c = float(t_fe[(f_word,e_word_)]/Z)
 				#print c
@@ -159,10 +159,10 @@ for k in range(iter_num):
             
             for f_word_ in set(f):
 				if e_index ==0:
-					c = t_ef[(None,f_word_)]/Z
+					c = float(t_ef[(None,f_word_)]/Z)
 					count_ef[(None,f_word_)] += c
-					count_f[f_word_] += c
-				c = t_ef[(e_word,f_word_)]/Z
+					#count_f[f_word_] += c
+				c = float(t_ef[(e_word,f_word_)]/Z)
 				#print c
 				count_ef[(e_word,f_word_)] += c
 				count_f[f_word_] += c 
@@ -199,7 +199,9 @@ def checkalign(i,j,alignment):
 
 
 ### decode use two model    
-for (f,e) in bitext:
+for (n_decode,(f,e)) in enumerate(bitext):
+	if n_decode > 1000:
+		break
 	fe_list=[]
 	ef_list=[]
 	
