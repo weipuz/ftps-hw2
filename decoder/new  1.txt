@@ -1,0 +1,7 @@
+In the above example result:
+
+ ----baseline-s1000-d10-k20.score------ 
+Average corpus log probability (LM+TM): -1263.375212
+
+Does this example use distortion penalty ? Or just use distortion limit in the search range?
+We implemented the second (just use distortion limit) but only get -1314 with the same set of  parameters.  

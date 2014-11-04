@@ -15,7 +15,7 @@ optparser.add_option("-s", "--stack-size", dest="s", default=10, type="int", hel
 optparser.add_option("-v", "--verbose", dest="verbose", action="store_true", default=False,  help="Verbose mode (default=off)")
 opts = optparser.parse_args()[0]
 
-logging.basicConfig(filename="debug.log", filemode='w', level=logging.INFO)
+#logging.basicConfig(filename="debug.log", filemode='w', level=logging.INFO)
 tm = models.TM(opts.tm, opts.k)
 lm = models.LM(opts.lm)
 french = [tuple(line.strip().split()) for line in open(opts.input).readlines()[:opts.num_sents]]
