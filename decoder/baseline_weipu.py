@@ -19,7 +19,7 @@ logging.basicConfig(filename="debug.log", filemode='w', level=logging.INFO)
 tm = models.TM(opts.tm, opts.k)
 lm = models.LM(opts.lm)
 french = [tuple(line.strip().split()) for line in open(opts.input).readlines()[:opts.num_sents]]
-
+d = 10
 def bitmap(sequence):
   """ Generate a coverage bitmap for a sequence of indexes """
   return reduce(lambda x,y: x|y, map(lambda i: long('1'+'0'*i,2), sequence), 0)
@@ -72,7 +72,7 @@ for f in french:
   for i, stack in enumerate(stacks[:-1]):
     for h in sorted(stack.itervalues(),key=lambda h: -h.logprob)[:opts.s]: # prune
 	  firstopen = prefix1bits(h.bitcover)
-	  for k in xrange(firstopen,len(f)):
+	  for k in xrange(firstopen,firstopen+1+d):
 		  for j in xrange(k+1,len(f)+1):
 		    temp_bitmap = bitmap(range(k, j))
 		    if (temp_bitmap & h.bitcover == 0) and f[k:j] in tm:
@@ -90,7 +90,7 @@ for f in french:
 				#stack_count=i+1
 				if lm_state not in stacks[stack_count] or stacks[stack_count][lm_state].logprob < logprob: # second case is recombination
 				  stacks[stack_count][lm_state] = new_hypothesis 
-    logging.info(stacks[i+1])			  
+    #logging.info(stacks[i+1])			  
   # final_index = 0
   # for index, stack in enumerate(stacks):
     # if len(stack) > 0:
