@@ -1,0 +1,23 @@
+Aligning...
+NOTE: TM logprobs may be positive since they do not include segmentation
+SENTENCE PAIR:
+honorables sénateurs , que se est - il passé ici , mardi dernier ?
+what happened , last Tuesday , this honourable Senate ?
+TOTAL LM LOGPROB: -22.836229
+..........
+TOTAL TM LOGPROB: -2.074582
+SENTENCE PAIR:
+un Comité de sélection a été constitué .
+a selection committee was achievement .
+TOTAL LM LOGPROB: -15.185380
+......
+TOTAL TM LOGPROB: -1.531946
+SENTENCE PAIR:
+je ai assisté hier à la première réunion de ce comité .
+yesterday I attended a meeting of the first to committee .
+TOTAL LM LOGPROB: -16.647016
+...........
+TOTAL TM LOGPROB: -1.885905
+
+Total corpus log probability (LM+TM): -60.161058
+ERROR: French and English files are not the same length! Only complete output can be graded!

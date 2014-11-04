@@ -64,7 +64,7 @@ for f in french:
     for h in sorted(stack.itervalues(),key=lambda h: -h.penalLogprob)[:opts.s]: # prune, penalize distortion 
     #for h in sorted(stack.itervalues(),key=lambda h: -h.logprob)[:opts.s]: # prune
 	  firstOpen = prefix1bits(h.coverageVec)
-	  for k in xrange(firstOpen,firstOpen+1+opts.d):
+	  for k in xrange(firstOpen, min(firstOpen+1+opts.d, len(f)+1)):
 		for j in xrange(k+1,len(f)+1):
 		  temp_ph = bitmap(range(k,j))
 		  if (temp_ph & h.coverageVec == 0 ) and f[k:j] in tm:
