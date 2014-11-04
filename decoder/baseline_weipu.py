@@ -72,24 +72,24 @@ for f in french:
   for i, stack in enumerate(stacks[:-1]):
     for h in sorted(stack.itervalues(),key=lambda h: -h.logprob)[:opts.s]: # prune
 	  firstopen = prefix1bits(h.bitcover)
-	  for k in xrange(firstopen,firstopen+1+d):
+	  for k in xrange(firstopen,min(firstopen+1+d,len(f)+1)):
 		  for j in xrange(k+1,len(f)+1):
-		    temp_bitmap = bitmap(range(k, j))
-		    if (temp_bitmap & h.bitcover == 0) and f[k:j] in tm:
-		    #if f[k:j] in tm:
-			  new_b = temp_bitmap | h.bitcover
-			  for phrase in tm[f[k:j]]:
-				logprob = h.logprob + phrase.logprob
-				lm_state = h.lm_state
-				for word in phrase.english.split():
-				  (lm_state, word_logprob) = lm.score(lm_state, word)
-				  logprob += word_logprob
-				logprob += lm.end(lm_state) if j == len(f) else 0.0
-				new_hypothesis = hypothesis(logprob, lm_state, h, phrase, new_b)
-				stack_count=onbits(new_b)
-				#stack_count=i+1
-				if lm_state not in stacks[stack_count] or stacks[stack_count][lm_state].logprob < logprob: # second case is recombination
-				  stacks[stack_count][lm_state] = new_hypothesis 
+		    if f[k:j] in tm:
+				temp_bitmap = bitmap(range(k, j))
+				if temp_bitmap & h.bitcover == 0:	
+				    new_b = temp_bitmap | h.bitcover
+				    for phrase in tm[f[k:j]]:
+					    logprob = h.logprob + phrase.logprob
+					    lm_state = h.lm_state
+					    for word in phrase.english.split():
+							(lm_state, word_logprob) = lm.score(lm_state, word)
+							logprob += word_logprob
+					    logprob += lm.end(lm_state) if j == len(f) else 0.0
+					    new_hypothesis = hypothesis(logprob, lm_state, h, phrase, new_b)
+					    stack_count=onbits(new_b)
+						#stack_count=i+1
+					    if lm_state not in stacks[stack_count] or stacks[stack_count][lm_state].logprob <logprob: # second case is recombination
+							stacks[stack_count][lm_state] = new_hypothesis 
     #logging.info(stacks[i+1])			  
   # final_index = 0
   # for index, stack in enumerate(stacks):

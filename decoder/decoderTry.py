@@ -59,10 +59,10 @@ for f in french:
   initial_bitmap = bitmap([])
   initial_hypothesis = hypothesis(0.0, lm.begin(), None, None, initial_bitmap, 0, 0.0)
   stacks = [{} for _ in f] + [{}]
-  stacks[0][lm.begin()] = initial_hypothesis
+  stacks[0][lm.begin(),initial_bitmap] = initial_hypothesis
   for i, stack in enumerate(stacks[:-1]):
-    for h in sorted(stack.itervalues(),key=lambda h: -h.penalLogprob)[:opts.s]: # prune, penalize distortion 
-    #for h in sorted(stack.itervalues(),key=lambda h: -h.logprob)[:opts.s]: # prune
+    #for h in sorted(stack.itervalues(),key=lambda h: -h.penalLogprob)[:opts.s]: # prune, penalize distortion 
+    for h in sorted(stack.itervalues(),key=lambda h: -h.logprob)[:opts.s]: # prune
 	  firstOpen = prefix1bits(h.coverageVec)
 	  for k in xrange(firstOpen, min(firstOpen+1+opts.d, len(f)+1)):
 		for j in xrange(k+1,len(f)+1):
@@ -80,8 +80,8 @@ for f in french:
 			  logprob += lm.end(lm_state) if covered == len(f) else 0.0            
 			  penalLogprob = logprob + opts.eta * abs(h.fpos+1-k)
 			  new_hypothesis = hypothesis(logprob, lm_state, h, phrase, new_coverage, fpos, penalLogprob)
-			  if lm_state not in stacks[covered] or stacks[covered][lm_state].logprob < logprob: # second case is recombination
-				stacks[covered][lm_state] = new_hypothesis 
+			  if (lm_state, new_coverage) not in stacks[covered] or stacks[covered][lm_state, new_coverage].logprob < logprob: # second case is recombination
+				stacks[covered][lm_state, new_coverage] = new_hypothesis 
   winner = max(stacks[-1].itervalues(), key=lambda h: h.logprob)
   def extract_english(h): 
     return "" if h.predecessor is None else "%s%s " % (extract_english(h.predecessor), h.phrase.english)
