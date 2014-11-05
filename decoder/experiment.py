@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 import optparse, sys, os, logging
 
-start = -10
+start = -5
 end = -1
 step = 1
 for i in xrange(start, end, step):
 	e = float(i) / 10.0
-	output_file = "log/exp_e" + repr(e) + ".log"
-	cmd = "python decoderTry.py -n 3 -e " + repr(e) + " > " + output_file
+	output_file = "log/s1000e" + repr(e) + ".log"
+	cmd = "python decoderTry.py -s 1000 -e " + repr(e) + " > " + output_file
 	print cmd
 	ret = os.system(cmd)
 	if ret:
