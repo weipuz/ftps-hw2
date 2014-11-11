@@ -6,17 +6,24 @@ from collections import namedtuple
 
 translation_candidate = namedtuple("candidate", "sentence, scores, inverse_scores")
 optparser = optparse.OptionParser()
-optparser.add_option("-r", "--reference", dest="reference", default="data/test.en", help="English reference sentences")
 optparser.add_option("-n", "--nbest", dest="nbest", default="data/test.nbest", help="N-best lists")
-optparser.add_option("-e", "--epochs", dest="epochs", default=5, help="epochs")
-optparser.add_option("-x", "--xi", dest="xi", default=100, help="xi")
 optparser.add_option("-t", "--tau", dest="tau", default=5000, help="tau")
+optparser.add_option("-a", "--alpha", dest="alpha", default=0.1, help="alpha")
+optparser.add_option("-x", "--xi", dest="xi", default=100, help="xi")
+optparser.add_option("-z", "--eta", dest="eta", default=0.1, help="eta")
+optparser.add_option("-e", "--epochs", dest="epochs", default=5, help="epochs")
 (opts,_) = optparser.parse_args()
 
 logging.basicConfig(filename="info.log", filemode='w', level=logging.INFO)
 
 if __name__ == '__main__':
-	nbests = opts.nbest
+	nbests = []
+	for n, line in enumerate(open(opts.nbest)):
+		(i, sentence, _) = line.strip().split("|||")
+		(i, sentence) = (int(i), sentence.strip())
+		while len(nbests) <= i:
+			nbests.append([])
+
 	for i in xrange(opts.epochs):
 		sys.stderr.write("epoch %d" % i)
 		(observation, errors) = (0, 0.0)
