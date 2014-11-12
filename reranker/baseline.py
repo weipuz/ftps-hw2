@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 import optparse
-import sys, logging, random
+import sys, logging, random, math
 import bleu
 from collections import namedtuple
 
 translation_candidate = namedtuple("candidate", "sentence, scores, inverse_scores")
 optparser = optparse.OptionParser()
+optparser.add_option("-r", "--reference", dest="reference", default="data/train.en", help="English reference sentences")
 optparser.add_option("-n", "--nbest", dest="nbest", default="data/test.nbest", help="N-best lists")
 optparser.add_option("-t", "--tau", dest="tau", default=5000, help="tau")
 optparser.add_option("-a", "--alpha", dest="alpha", default=0.1, help="alpha")
@@ -17,12 +18,20 @@ optparser.add_option("-e", "--epochs", dest="epochs", default=5, help="epochs")
 logging.basicConfig(filename="info.log", filemode='w', level=logging.INFO)
 
 if __name__ == '__main__':
+	ref = [line.strip().split() for line in open(opts.reference)]
 	nbests = []
 	for n, line in enumerate(open(opts.nbest)):
 		(i, sentence, _) = line.strip().split("|||")
 		(i, sentence) = (int(i), sentence.strip())
+		if len(ref) <= i:
+			break
 		while len(nbests) <= i:
 			nbests.append([])
+		scores = tuple(bleu.bleu_stats(sentence.split(), ref[i]))
+		inverse_scores = tuple([-x for x in scores])
+		nbests[i].append(translation_candidate(sentence, scores, inverse_scores))
+		if n % 2000 == 0:
+			sys.stderr.write(".")
 
 	for i in xrange(opts.epochs):
 		sys.stderr.write("epoch %d" % i)
