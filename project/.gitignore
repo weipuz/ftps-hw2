@@ -1,0 +1,16 @@
+*.pyc
+lm/
+lm/*
+lm/**
+toy/
+toy/*
+toy/**
+small/
+small/*
+small/**
+medium/
+medium/*
+medium/**
+large/
+large/*
+large/**
