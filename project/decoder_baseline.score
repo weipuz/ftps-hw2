@@ -1,0 +1,409 @@
+Aligning...
+NOTE: TM logprobs may be positive since they do not include segmentation
+SENTENCE PAIR:
+英 女皇 伊 利 沙 伯 二 世 陛下 登基 第三 十四 年
+the the 利 陛下 世 伯 伊 登基 sha 女皇 hong years 14
+TOTAL LM LOGPROB: -64.890657
+.............
+TOTAL TM LOGPROB: -5.656092
+SENTENCE PAIR:
+於 一 九 八五年 十月 三十日 开始 的 会期 内 立法 局 辩论 正式 纪录
+in the session of the debate on the first 30 official report council october
+TOTAL LM LOGPROB: -40.369524
+..............
+TOTAL TM LOGPROB: -10.151927
+SENTENCE PAIR:
+立法 局 会议 厅
+the chamber council
+TOTAL LM LOGPROB: -13.928557
+...
+TOTAL TM LOGPROB: -2.324270
+SENTENCE PAIR:
+一 九 八五年 十月 三十日 星期三
+in the 30 wednesday october
+TOTAL LM LOGPROB: -20.724704
+.....
+TOTAL TM LOGPROB: -1.550797
+SENTENCE PAIR:
+下午 四时 四 十分 开始 会议
+at twenty o &apos;clock
+TOTAL LM LOGPROB: -22.406244
+....
+TOTAL TM LOGPROB: -3.607964
+SENTENCE PAIR:
+出席 者 :
+present
+TOTAL LM LOGPROB: -7.975190
+.
+TOTAL TM LOGPROB: -0.000100
+SENTENCE PAIR:
+港 督 尤 德 爵士 , g.c.m.g. , m.b.e. ( 主席 )
+( , the particular , his 德 president ) m.b.e. g.c.m.g.
+TOTAL LM LOGPROB: -42.773015
+...........
+TOTAL TM LOGPROB: -5.242565
+SENTENCE PAIR:
+布 政 司 议员 锺 逸 杰 爵士 , k.b.e. , c.m.g. , j.p.
+david akers-jones , said , c.m.g. , j.p. 布 k.b.e.
+TOTAL LM LOGPROB: -45.876685
+..........
+TOTAL TM LOGPROB: -0.159005
+SENTENCE PAIR:
+财政 司 议员 彭 励 治 爵士 , k.b.e. , j.p.
+members , k.b.e. , john henry bremridge j.p. secretary financial
+TOTAL LM LOGPROB: -48.386293
+..........
+TOTAL TM LOGPROB: -4.348097
+SENTENCE PAIR:
+律 政 司 唐 明治 议员 , c.m.g. , q.c.
+he said , c.m.g. , q.c. 明治 tong
+TOTAL LM LOGPROB: -31.594938
+........
+TOTAL TM LOGPROB: -0.727652
+SENTENCE PAIR:
+邓 莲 如 议员 , c.b.e. , j.p.
+she said , in , c.b.e. j.p.
+TOTAL LM LOGPROB: -23.830681
+.......
+TOTAL TM LOGPROB: -1.904950
+SENTENCE PAIR:
+陈 壽 霖 议员 , c.b.e. , j.p.
+the honourable chen shou-lum , c.b.e. , j.p.
+TOTAL LM LOGPROB: -34.452899
+........
+TOTAL TM LOGPROB: 0.653398
+SENTENCE PAIR:
+王 泽 长 议员 , o.b.e. , j.p.
+peter c. wong , o.b.e. , j.p.
+TOTAL LM LOGPROB: -35.802687
+.......
+TOTAL TM LOGPROB: -0.382205
+SENTENCE PAIR:
+工 商 司 何 鸿 銮 议员 , c.b.e. , j.p.
+members and c.b.e. , any 銮 鸿 operators j.p. secretary
+TOTAL LM LOGPROB: -44.521803
+..........
+TOTAL TM LOGPROB: -6.546481
+SENTENCE PAIR:
+何 锦 辉 议员 , o.b.e. , j.p.
+kam-fai , o.b.e. , any j.p.
+TOTAL LM LOGPROB: -27.535191
+......
+TOTAL TM LOGPROB: -2.033446
+SENTENCE PAIR:
+李鹏 飞 议员 , o.b.e. , j.p.
+members , j.p. 李鹏 飞 o.b.e.
+TOTAL LM LOGPROB: -29.826383
+......
+TOTAL TM LOGPROB: -1.376223
+SENTENCE PAIR:
+胡 法 光 议员 , o.b.e. , j.p.
+hu fa-kuang , o.b.e. , j.p.
+TOTAL LM LOGPROB: -30.433066
+......
+TOTAL TM LOGPROB: -0.338761
+SENTENCE PAIR:
+黄 保 欣 议员 , o.b.e. , j.p.
+po-yan , o.b.e. , j.p. wong
+TOTAL LM LOGPROB: -30.433066
+......
+TOTAL TM LOGPROB: -0.190002
+SENTENCE PAIR:
+政务 司 廖 本 怀 议员 , c.b.e. , j.p.
+the honourable donald liao poon-huai , c.b.e. , j.p.
+TOTAL LM LOGPROB: -39.822520
+.........
+TOTAL TM LOGPROB: 0.583886
+SENTENCE PAIR:
+陈 鉴 泉 议员 , o.b.e. , j.p.
+kam-chuen , o.b.e. , j.p. chan
+TOTAL LM LOGPROB: -30.433066
+......
+TOTAL TM LOGPROB: -0.084645
+SENTENCE PAIR:
+施 伟 贤 议员 , o.b.e. , q.c. , j.p.
+members , q.c. , 贤 伟 o.b.e. 施 j.p.
+TOTAL LM LOGPROB: -43.016672
+.........
+TOTAL TM LOGPROB: -1.296485
+SENTENCE PAIR:
+张 鉴 泉 议员 , o.b.e. , j.p.
+kam-chuen , o.b.e. , j.p. cheung
+TOTAL LM LOGPROB: -30.433066
+......
+TOTAL TM LOGPROB: -0.429482
+SENTENCE PAIR:
+张 人 龙 议员 , o.b.e. , j.p.
+yan-lung , o.b.e. , j.p. cheung
+TOTAL LM LOGPROB: -30.433066
+......
+TOTAL TM LOGPROB: -0.429482
+SENTENCE PAIR:
+周 梁 淑 怡 议员 , o.b.e. , j.p.
+chow , o.b.e. , j.p. mrs.
+TOTAL LM LOGPROB: -30.433066
+......
+TOTAL TM LOGPROB: -0.286460
+SENTENCE PAIR:
+谭 惠 珠 议员 , o.b.e. , j.p.
+wai-chu , o.b.e. , j.p. tam
+TOTAL LM LOGPROB: -30.433066
+......
+TOTAL TM LOGPROB: -0.830312
+SENTENCE PAIR:
+叶 文 庆 议员
+man-hing ip
+TOTAL LM LOGPROB: -14.791730
+..
+TOTAL TM LOGPROB: -1.609540
+SENTENCE PAIR:
+地政 工 务 司 陈 乃 强 议员 , c.b.e. , j.p.
+chan nai-keong , c.b.e. , j.p. lands and
+TOTAL LM LOGPROB: -38.062490
+........
+TOTAL TM LOGPROB: -2.044297
+SENTENCE PAIR:
+陈 英 麟 议员
+chan ying-lun
+TOTAL LM LOGPROB: -14.791730
+..
+TOTAL TM LOGPROB: -0.936193
+SENTENCE PAIR:
+范 徐 丽 泰 议员
+members 丽 范 徐 泰
+TOTAL LM LOGPROB: -28.068491
+.....
+TOTAL TM LOGPROB: -1.098610
+SENTENCE PAIR:
+伍 周 美 莲 议员
+mrs. ng
+TOTAL LM LOGPROB: -14.791730
+..
+TOTAL TM LOGPROB: -0.693147
+SENTENCE PAIR:
+潘 永 祥 议员 , m.b.e. , j.p.
+peter poon wing-cheung , m.b.e. , j.p.
+TOTAL LM LOGPROB: -35.802687
+.......
+TOTAL TM LOGPROB: -0.217061
+SENTENCE PAIR:
+杨 宝 坤 议员 , c.p.m.
+yeung po-kwan , c.p.m.
+TOTAL LM LOGPROB: -22.612398
+....
+TOTAL TM LOGPROB: -0.738533
+SENTENCE PAIR:
+湛 佑 森 议员 , j.p.
+cham , j.p. mr. kim
+TOTAL LM LOGPROB: -27.982019
+.....
+TOTAL TM LOGPROB: -0.103317
+SENTENCE PAIR:
+卫生 福利 司 湛 保 庶 议员 , j.p.
+health and the honourable john walter chambers , j.p. welfare
+TOTAL LM LOGPROB: -42.230871
+..........
+TOTAL TM LOGPROB: -0.086624
+SENTENCE PAIR:
+运输 司 麦 法 诚 议员 , o.b.e. , j.p.
+law , o.b.e. , j.p. 麦 诚 secretary transport
+TOTAL LM LOGPROB: -43.680065
+.........
+TOTAL TM LOGPROB: -3.007832
+SENTENCE PAIR:
+陈 济 强 议员
+members jackie chan
+TOTAL LM LOGPROB: -17.329249
+...
+TOTAL TM LOGPROB: -2.034803
+SENTENCE PAIR:
+郑 汉 钧 议员
+colleague
+TOTAL LM LOGPROB: -9.422109
+.
+TOTAL TM LOGPROB: -2.564950
+SENTENCE PAIR:
+招 显 洸 议员
+chiu sale
+TOTAL LM LOGPROB: -14.791730
+..
+TOTAL TM LOGPROB: -0.000200
+SENTENCE PAIR:
+锺 沛 林 议员
+mr. chung
+TOTAL LM LOGPROB: -14.791730
+..
+TOTAL TM LOGPROB: -1.945910
+SENTENCE PAIR:
+格 士 德 议员
+the honourable thomas clydesdale
+TOTAL LM LOGPROB: -18.811563
+....
+TOTAL TM LOGPROB: -0.000100
+SENTENCE PAIR:
+何 世 柱 议员 , m.b.e. , j.p.
+sai-chu , m.b.e. , any j.p.
+TOTAL LM LOGPROB: -27.535191
+......
+TOTAL TM LOGPROB: -2.069233
+SENTENCE PAIR:
+许 贤 发 议员
+yin-fat hui
+TOTAL LM LOGPROB: -14.791730
+..
+TOTAL TM LOGPROB: -1.163250
+SENTENCE PAIR:
+雷声 隆 议员
+members 雷声 lung
+TOTAL LM LOGPROB: -17.329249
+...
+TOTAL TM LOGPROB: -1.098710
+SENTENCE PAIR:
+林 钜 成 议员
+the members into 钜
+TOTAL LM LOGPROB: -16.166992
+....
+TOTAL TM LOGPROB: -3.806660
+SENTENCE PAIR:
+刘 皇 发 议员 , m.b.e. , j.p.
+wong-fat , m.b.e. , j.p. lau
+TOTAL LM LOGPROB: -30.433066
+......
+TOTAL TM LOGPROB: -0.273355
+SENTENCE PAIR:
+李 柱 铭 议员 , q.c. , j.p.
+martin lee chu-ming , q.c. , j.p.
+TOTAL LM LOGPROB: -35.802687
+.......
+TOTAL TM LOGPROB: -0.547215
+SENTENCE PAIR:
+李 汝 大 议员
+yu-tai mr.
+TOTAL LM LOGPROB: -14.791730
+..
+TOTAL TM LOGPROB: -1.704850
+SENTENCE PAIR:
+李 国宝 议员 , j.p.
+the honourable david li kowk-po
+TOTAL LM LOGPROB: -24.181184
+.....
+TOTAL TM LOGPROB: -1.609440
+SENTENCE PAIR:
+廖 烈 科 议员 , j.p.
+lit-for , j.p. liu
+TOTAL LM LOGPROB: -22.612398
+....
+TOTAL TM LOGPROB: -0.719300
+SENTENCE PAIR:
+倪 少 杰 议员 , o.b.e. , j.p.
+shiu-kit , o.b.e. , j.p. ngai
+TOTAL LM LOGPROB: -30.433066
+......
+TOTAL TM LOGPROB: -0.304019
+SENTENCE PAIR:
+彭 震 海 议员 , m.b.e.
+the honourable pang chun-hoi , m.b.e.
+TOTAL LM LOGPROB: -26.632231
+......
+TOTAL TM LOGPROB: 0.501372
+SENTENCE PAIR:
+潘 志 辉 议员
+chi-fai poon
+TOTAL LM LOGPROB: -14.791730
+..
+TOTAL TM LOGPROB: -1.163250
+SENTENCE PAIR:
+潘 宗 光 议员
+prof . poon
+TOTAL LM LOGPROB: -18.171217
+...
+TOTAL TM LOGPROB: -1.791760
+SENTENCE PAIR:
+苏 海 文 议员
+the honourable helmut sohmen
+TOTAL LM LOGPROB: -18.811563
+....
+TOTAL TM LOGPROB: -0.000100
+SENTENCE PAIR:
+司徒 华 议员
+mr. szeto
+TOTAL LM LOGPROB: -14.791730
+..
+TOTAL TM LOGPROB: -2.302590
+SENTENCE PAIR:
+戴 展 华 议员
+the honourable tai chin-wah
+TOTAL LM LOGPROB: -18.811563
+....
+TOTAL TM LOGPROB: -0.000100
+SENTENCE PAIR:
+谭 王 鸣 议员
+members rosanna tam
+TOTAL LM LOGPROB: -17.329249
+...
+TOTAL TM LOGPROB: -2.780470
+SENTENCE PAIR:
+谭 耀 宗 议员
+members tam yiu-chung
+TOTAL LM LOGPROB: -17.329249
+...
+TOTAL TM LOGPROB: -1.098710
+SENTENCE PAIR:
+谢 志 伟 议员
+members daniel tse chi-wai
+TOTAL LM LOGPROB: -22.698870
+....
+TOTAL TM LOGPROB: -1.504075
+SENTENCE PAIR:
+黄 宏 发 议员
+mr. andrew wong
+TOTAL LM LOGPROB: -20.161351
+...
+TOTAL TM LOGPROB: -1.791760
+SENTENCE PAIR:
+署 理 房屋 司 彭 玉 陵 议员 , i.s.o. , j.p.
+yuk-ling , acting i.s.o. , j.p. housing pang secretary
+TOTAL LM LOGPROB: -44.942767
+.........
+TOTAL TM LOGPROB: -3.875159
+SENTENCE PAIR:
+署 理 教育 统筹 司 柏 景 年 议员 , j.p.
+michelangelo pagliari , education and manpower acting j.p.
+TOTAL LM LOGPROB: -34.590682
+........
+TOTAL TM LOGPROB: -5.454399
+SENTENCE PAIR:
+缺席 者 :
+absent
+TOTAL LM LOGPROB: -9.034526
+.
+TOTAL TM LOGPROB: -0.000100
+SENTENCE PAIR:
+张 有 兴 议员 , c.b.e. , j.p.
+, hilton cheong-leen c.b.e. , j.p.
+TOTAL LM LOGPROB: -30.433066
+......
+TOTAL TM LOGPROB: -0.986720
+SENTENCE PAIR:
+列席 者 :
+in attendance
+TOTAL LM LOGPROB: -9.438134
+..
+TOTAL TM LOGPROB: -0.000100
+SENTENCE PAIR:
+立法 局 执行 秘书 李 荣 先生
+the clerk , mr.
+TOTAL LM LOGPROB: -17.934137
+....
+TOTAL TM LOGPROB: -5.953250
+SENTENCE PAIR:
+文件
+papers
+TOTAL LM LOGPROB: -9.422109
+.
+TOTAL TM LOGPROB: -1.098610
+SENTENCE PAIR:
+确认 陈 济 强 先生 、 锺 沛 林 先生 、 何 世 柱 先生 、 雷声 隆 先生 、 廖 烈 科 先生 、 倪 少 杰 先生 、 彭 震 海 先生 、 潘 志 辉 先生 、 司徒 华 先生 、 戴 展 华 先生 、 谭 耀 宗 先生 及 谢 志 伟 博士 宣读 立法 局 确认 誓言 。
+the , jackie , 确认 interpretation chan sai-chu , , liulit-for , any shiu-kit , 雷声 lung , ngai chi-fai , mr. pang chun-hoi , poon , 司徒 in 华 and 展 戴 耀 chi-wai made the legislation 华 tam council affirmation . oaths dr. daniel tse
+TOTAL LM LOGPROB: -203.937780
+..............

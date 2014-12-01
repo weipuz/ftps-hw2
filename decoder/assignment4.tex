@@ -1,0 +1,134 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LaTeX Example: Project Report
+%
+% Source: http://www.howtotex.com
+%
+% Feel free to distribute this example, but please keep the referral
+% to howtotex.com
+% Date: March 2011 
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% How to use writeLaTeX: 
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% Bookmark this page and share the URL with your co-authors. They can
+% edit at the same time!
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+% If you're new to LaTeX, the wikibook is a great place to start:
+% http://en.wikibooks.org/wiki/LaTeX
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Edit the title below to update the display in My Documents
+%\title{Project Report}
+%
+%%% Preamble
+\documentclass[paper=a4, fontsize=11pt]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+
+\usepackage[english]{babel}															% English language/hyphenation
+\usepackage[protrusion=true,expansion=true]{microtype}	
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage[pdftex]{graphicx}	
+\usepackage{url}
+
+
+%%% Custom sectioning
+\usepackage{sectsty}
+\allsectionsfont{\centering \normalfont\scshape}
+
+
+%%% Custom headers/footers (fancyhdr package)
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\fancyhead{}											% No page header
+\fancyfoot[L]{}											% Empty 
+\fancyfoot[C]{}											% Empty
+\fancyfoot[R]{\thepage}									% Pagenumbering
+\renewcommand{\headrulewidth}{0pt}			% Remove header underlines
+\renewcommand{\footrulewidth}{0pt}				% Remove footer underlines
+\setlength{\headheight}{13.6pt}
+
+
+%%% Equation and float numbering
+\numberwithin{equation}{section}		% Equationnumbering: section.eq#
+\numberwithin{figure}{section}			% Figurenumbering: section.fig#
+\numberwithin{table}{section}				% Tablenumbering: section.tab#
+
+
+%%% Maketitle metadata
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} 	% Horizontal rule
+
+\title{
+		%\vspace{-1in} 	
+		\usefont{OT1}{bch}{b}{n}
+		\normalfont \normalsize \textsc{Simon Fraser University} \\ [25pt]
+		\horrule{0.5pt} \\[0.4cm]
+		\huge Translation Decoding Homework 4 \\
+		\horrule{2pt} \\[0.5cm]
+}
+\author{
+		\normalfont 								\normalsize
+        CMPT 825 FTPS group (Fei Zhan, Weipu Zhao, Tong Wang, Shijie Li) \\[-3pt]		\normalsize
+        %\today
+}
+\date{\today}
+
+
+%%% Begin document
+\begin{document}
+\maketitle
+
+\section{Algorithm Description}
+
+We implemented the Phrase-Based Translation Models described in Michael Collins' note.
+We use bitmap to store the locations of words that have been considered in previous steps.
+In order to find a phrase that has the highest probability among all combinations, we iterate the entire sentence in each round, calculate all existing phrases, and keep the ones with highest scores.
+For each potential phrase, we translate it into bitmap, and compare it with the current bitmap in the hypothesis.
+If the bit and operation between those two bitmaps equals to zero, it means the potential phrase does not take the words that have been used, it is compatible with the current hypothesis.
+We use the previous phrase, the bitmap, and the end position of the source language as the key in the stack.
+If the key is new, or the log likelihood of the new hypothesis is higher than the original one, we take the new one into the stack.
+For each new inner loop, we sort the previous stack based on the penalty log probability, and extract the top-s hypothesis, and compute them.
+The score of the partial translation is calculated using
+
+\begin{equation}
+\alpha = h(e(y)) + \sum_{k=1}^{L} g(p_{k}) + \sum_{k=1}^{L} \eta |t(p_k) + 1 - s(p_{k+1})|
+\end{equation}
+
+We tune parameters $s$, $k$, $d$, and $eta$ to obtain an optimal performance in our system.
+$s$ represents the stack size, the number of hypotheses in one level of the stack.
+$k$ means the translations per phrase.
+$d$ indicates the maximal position distortion of a target word can be.
+$eta$ is the distortion penalty in the model.
+We set $s = 2000$, $k = 20$, $d = 10$, and $e = 0.08$.
+
+\section{Division of Labor}
+
+Weipu Zhao: Organized group meetings and discussions; tested and debugged of the code; implemented a part of the algorithm.
+
+Tong Wang: Implemented a part of the algorithm, tested and debugged of the code; participated in the discussions.
+
+Shijie Li: Implemented a part of the algorithm, tested and debugged of the code; participated in the discussions.
+
+Fei Zhan: Tested and debugged of the code; participated in the discussions; wrote the description text.
+
+%%% End document
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+

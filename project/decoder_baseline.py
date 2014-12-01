@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import optparse
 import sys
-import models
+import decoder_models as models
 from collections import namedtuple
 #some utilitiy function
 
@@ -28,12 +28,12 @@ def last1bit(b):
 
 
 optparser = optparse.OptionParser()
-optparser.add_option("-i", "--input", dest="input", default="data/input", help="File containing sentences to translate (default=data/input)")
-optparser.add_option("-t", "--translation-model", dest="tm", default="data/tm", help="File containing translation model (default=data/tm)")
-optparser.add_option("-l", "--language-model", dest="lm", default="data/lm", help="File containing ARPA-format language model (default=data/lm)")
+optparser.add_option("-i", "--input", dest="input", default="toy/train.cn", help="File containing sentences to translate (default=data/input)")
+optparser.add_option("-t", "--translation-model", dest="tm", default="toy/phrase-table/phrase_table.out", help="File containing translation model (default=data/tm)")
+optparser.add_option("-l", "--language-model", dest="lm", default="lm/en.tiny.3g.arpa", help="File containing ARPA-format language model (default=data/lm)")
 optparser.add_option("-n", "--num_sentences", dest="num_sents", default=sys.maxint, type="int", help="Number of sentences to decode (default=no limit)")
-optparser.add_option("-k", "--translations-per-phrase", dest="k", default=20, type="int", help="Limit on number of translations to consider per phrase (default=1)")
-optparser.add_option("-s", "--stack-size", dest="s", default=100, type="int", help="Maximum stack size (default=5)")
+optparser.add_option("-k", "--translations-per-phrase", dest="k", default=5, type="int", help="Limit on number of translations to consider per phrase (default=1)")
+optparser.add_option("-s", "--stack-size", dest="s", default=5, type="int", help="Maximum stack size (default=5)")
 optparser.add_option("-v", "--verbose", dest="verbose", action="store_true", default=False,  help="Verbose mode (default=off)")
 optparser.add_option("-e", "--eta", dest="eta", default=float(-5), type= "float") 
 optparser.add_option("-d", "--distortionLimit", dest = "d", type ="int",default = 10)
@@ -93,6 +93,3 @@ for f in french:
     tm_logprob = extract_tm_logprob(winner)
     sys.stderr.write("LM = %f, TM = %f, Total = %f\n" %
       (winner.logprob - tm_logprob, tm_logprob, winner.logprob))
-
-f1 = open("stacks.log", 'w')
-print >>f1, stacks[-1]
