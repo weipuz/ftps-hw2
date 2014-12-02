@@ -40,6 +40,7 @@ optparser.add_option("-d", "--distortionLimit", dest = "d", type ="int",default 
 opts = optparser.parse_args()[0]
 
 tm = models.TM(opts.tm, opts.k)
+
 lm = models.LM(opts.lm)
 french = [tuple(line.strip().split()) for line in open(opts.input).readlines()[:opts.num_sents]]
 
@@ -69,14 +70,14 @@ for f in french:
 		  temp_ph = bitmap(range(k,j))
 		  if (temp_ph & h.coverageVec == 0 ) and f[k:j] in tm:
 			for phrase in tm[f[k:j]]:
-			  logprob = h.logprob + phrase.logprob
+			  logprob = h.logprob + phrase.logprob 
 			  lm_state = h.lm_state
 			  new_coverage= temp_ph | h.coverageVec
 			  fpos = j
 			  covered = onbits(new_coverage)
 			  for word in phrase.english.split():
 				(lm_state, word_logprob) = lm.score(lm_state, word)
-				logprob += word_logprob
+				logprob += 0.2*word_logprob
 			  logprob += lm.end(lm_state) if covered == len(f) else 0.0            
 			  penalLogprob = logprob + opts.eta * abs(h.fpos+1-k)
 			  new_hypothesis = hypothesis(logprob, lm_state, h, phrase, new_coverage, fpos, penalLogprob)

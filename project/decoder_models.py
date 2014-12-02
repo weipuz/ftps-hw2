@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # Simple translation model and language model data structures
-import sys
+import sys, os, gzip
 from collections import namedtuple
 
 # A translation model is a dictionary where keys are tuples of French words
@@ -17,8 +17,10 @@ def TM(filename, k):
   for line in open(filename).readlines():
     (f, e, logprob) = line.strip().split(" ||| ")
     # @fzhan
-    logprob = logprob.split(" ")[0]
-    tm.setdefault(tuple(f.split()), []).append(phrase(e, float(logprob)))
+    #logprob = logprob.split(" ")[0]
+    logprob = float(logprob.split(" ")[0])+float(logprob.split(" ")[1])+float(logprob.split(" ")[2])+float(logprob.split(" ")[3])
+    logprob = logprob/5
+    tm.setdefault(tuple(f.split()), []).append(phrase(e, logprob))
   for f in tm: # prune all but top k translations
     tm[f].sort(key=lambda x: -x.logprob)
     del tm[f][k:] 
@@ -39,7 +41,12 @@ class LM:
   def __init__(self, filename):
     sys.stderr.write("Reading language model from %s...\n" % (filename,))
     self.table = {}
-    for line in open(filename):
+    fileName, fileExtension = os.path.splitext(filename)
+    if ".gz" == fileExtension:
+		file_handle = gzip.open(filename, 'r')
+    else:
+		file_handle = open(filename)
+    for line in file_handle:
       entry = line.strip().split("\t")
       if len(entry) > 1 and entry[0] != "ngram":
         (logprob, ngram, backoff) = (float(entry[0]), tuple(entry[1].split()), float(entry[2] if len(entry)==3 else 0.0))
