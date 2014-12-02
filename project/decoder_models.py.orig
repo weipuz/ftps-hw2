@@ -17,15 +17,23 @@ def TM(filename, k):
   for line in open(filename).readlines():
     (f, e, logprob) = line.strip().split(" ||| ")
     # @fzhan
+<<<<<<< HEAD
     #logprob = logprob.split(" ")[0]
     logprob = float(logprob.split(" ")[0])+float(logprob.split(" ")[1])+float(logprob.split(" ")[2])+float(logprob.split(" ")[3])
     logprob = logprob/5
     tm.setdefault(tuple(f.split()), []).append(phrase(e, logprob))
+=======
+    #logprob = logprob.split(" ")[0]
+    logprob = float(logprob.split(" ")[0])+float(logprob.split(" ")[1])+float(logprob.split(" ")[2])+float(logprob.split(" ")[3])
+    logprob = logprob/5
+    tm.setdefault(tuple(f.split()), []).append(phrase(e, logprob))
+>>>>>>> b1f0b6fa114d011665629888b6b8995e5ac7185e
   for f in tm: # prune all but top k translations
     tm[f].sort(key=lambda x: -x.logprob)
     del tm[f][k:] 
   return tm
-
+  
+ 
 # # A language model scores sequences of English words, and must account
 # # for both beginning and end of each sequence. Example API usage:
 # lm = models.LM(filename)

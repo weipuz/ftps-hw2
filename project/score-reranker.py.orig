@@ -4,7 +4,11 @@ import sys
 import bleu
 
 optparser = optparse.OptionParser()
+<<<<<<< HEAD
+optparser.add_option("-r", "--reference", dest="reference", default="toy/train.en", help="English reference sentences")
+=======
 optparser.add_option("-r", "--reference", dest="reference", default="data/test.en", help="English reference sentences")
+>>>>>>> b1f0b6fa114d011665629888b6b8995e5ac7185e
 (opts,_) = optparser.parse_args()
 
 ref = [line.strip().split() for line in open(opts.reference)]

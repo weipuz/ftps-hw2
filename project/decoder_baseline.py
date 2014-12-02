@@ -39,14 +39,18 @@ optparser.add_option("-e", "--eta", dest="eta", default=float(-5), type= "float"
 optparser.add_option("-d", "--distortionLimit", dest = "d", type ="int",default = 10)
 opts = optparser.parse_args()[0]
 
-tm = models.TM(opts.tm, opts.k)
+tm1 = models.TM1(opts.tm, opts.k)
+tm2 = models.TM2(opts.tm, opts.k)
+tm3 = models.TM3(opts.tm, opts.k)
+tm4 = models.TM4(opts.tm, opts.k)
+
 lm = models.LM(opts.lm)
 french = [tuple(line.strip().split()) for line in open(opts.input).readlines()[:opts.num_sents]]
 
 # tm should translate unknown words as-is with probability 1
 for word in set(sum(french,())):
-  if (word,) not in tm:
-    tm[(word,)] = [models.phrase(word, 0.0)]
+  if (word,) not in tm1:
+    tm1[(word,)] = [models.phrase(word, 0.0)]
 
 sys.stderr.write("Decoding %s...\n" % (opts.input,))
 for f in french:
