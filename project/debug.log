@@ -1,0 +1,25 @@
+ssh -p 24 asb9840-a06.csil.sfu.ca
+
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py >
+4featoutput.out
+Reading translation model from large/phrase-table/test-filtered/rules_cnt.final.
+out...
+Reading language model from lm/en.gigaword.3g.filtered.dev_test.arpa.gz...
+Decoding test/all.cn-en.cn...
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r te
+st/all.cn-en.en0 < 4featoutput.out
+0.0462413852568
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r te
+st/all.cn-en.en1 < 4featoutput.out
+0.0377621818541
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r te
+st/all.cn-en.en2 < 4featoutput.out
+0.0482424997406
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r te
+st/all.cn-en.en3 < 4featoutput.out
+0.0423895789465

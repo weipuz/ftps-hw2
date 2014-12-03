@@ -65,8 +65,6 @@ class LM:
       else: #backoff
         score += self.table[ngram[:-1]].backoff if len(ngram) > 1 else 0.0 
         ngram = ngram[1:]
-    if ("<unk>",) not in self.table:
-		self.table[("<unk>",)] = ngram_stats(-5.369621, 0.0)
     return ((), score + self.table[("<unk>",)].logprob)
     
   def end(self, state):
