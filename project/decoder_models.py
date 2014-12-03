@@ -41,6 +41,7 @@ class LM:
   def __init__(self, filename):
     sys.stderr.write("Reading language model from %s...\n" % (filename,))
     self.table = {}
+    self.table[("<unk>",)]=ngram_stats(-5.369621, 0.0)
     fileName, fileExtension = os.path.splitext(filename)
     if ".gz" == fileExtension:
 		file_handle = gzip.open(filename, 'r')
