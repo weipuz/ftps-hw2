@@ -27,3 +27,13 @@ st/all.cn-en.en3 < 4featoutput.out
 D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py -i
  toy/train.cn -t toy/phrase-table/phrase_table.out -l lm/en.tiny.3g.arpa > nbest
 output.out > nbestoutputtest.out
+
+
+E:\Program Files (x86)\putty>pscp D:\Users\wpzhao\Documents\GitHub\ftps-hw2\proj
+ect\decoder_model_4feat.py weipuz@fraser.sfu.ca:/home/weipuz/nlpproject/
+
+scp /home/weipuz/nlpproject/ 
+python decoder_read4feat.py -s 200 -k 50 -i /usr/shared/CMPT/nlp-class/project/dev/all.cn-en.cn -t /usr/shared/CMPT/nlp-class/project/large/phrase-table/dev-filtered/rules_cnt.final.out -l /usr/shared/CMPT/nlp-class/project/lm/en.gigaword.3g.filtered.dev_test.arpa.gz /home/weipuz/sfuhome/nlpproject > /home/weipuz/sfuhome/nlpproject/output/devnests200k20.out
+
+
+ python decoder_read4feat.py -n 500 -s 100 -k 20 -i /usr/shared/CMPT/nlp-class/project/dev/all.cn-en.cn -t /usr/shared/CMPT/nlp-class/project/large/phrase-table/dev-filtered/rules_cnt.final.out -l /usr/shared/CMPT/nlp-class/project/lm/en.gigaword.3g.filtered.dev_test.arpa.gz /home/weipuz/sfuhome/nlpproject > /home/weipuz/sfuhome/nlpproject/output/dev500-2-nests100k10.out
