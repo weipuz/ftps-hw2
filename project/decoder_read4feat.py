@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import optparse
 import sys
-import decoder_models as models
+import decoder_models_4feat as models
 from collections import namedtuple
 #some utilitiy function
 
