@@ -2,6 +2,7 @@
 import optparse
 import sys
 import decoder_models_4feat as models
+import heapq
 from collections import namedtuple
 #some utilitiy function
 
@@ -50,7 +51,7 @@ for word in set(sum(french,())):
     tm[(word,)] = [models.phrase(word, 0.0)]
 
 sys.stderr.write("Decoding %s...\n" % (opts.input,))
-for f in french:
+for idx, f in enumerate(french):
   # The following code implements a monotone decoding
   # algorithm (one that doesn't permute the target phrases).
   # Hence all hypotheses in stacks[i] represent translations of 
@@ -83,11 +84,12 @@ for f in french:
 			  new_hypothesis = hypothesis(logprob, lm_state, h, phrase, new_coverage, fpos, penalLogprob)
 			  if (lm_state, new_coverage, fpos) not in stacks[covered] or stacks[covered][lm_state, new_coverage, fpos].logprob < logprob: # second case is recombination
 				stacks[covered][lm_state, new_coverage, fpos] = new_hypothesis 
-  winner = max(stacks[-1].itervalues(), key=lambda h: h.logprob)
+  winners = heapq.nlargest(10,stacks[-1].itervalues(), key=lambda h: h.logprob)
   def extract_english(h): 
     return "" if h.predecessor is None else "%s%s " % (extract_english(h.predecessor), h.phrase.english)
-  print extract_english(winner)
-
+  
+  for winner in winners:
+	print str(idx) + " ||| " + extract_english(winner) + " ||| " + str(winner.logprob)
   if opts.verbose:
     def extract_tm_logprob(h):
       return 0.0 if h.predecessor is None else h.phrase.logprob + extract_tm_logprob(h.predecessor)
