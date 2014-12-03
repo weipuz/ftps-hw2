@@ -17,12 +17,13 @@ def TM(filename, k):
   for line in open(filename).readlines():
     (f, e, logprob) = line.strip().split(" ||| ")
     # @fzhan
-    #logprob = logprob.split(" ")[0]
-    logprob = float(logprob.split(" ")[0])+float(logprob.split(" ")[1])+float(logprob.split(" ")[2])+float(logprob.split(" ")[3])
-    logprob = logprob/5
+    logprob = logprob.split(" ")  #logprob is now a list with four feature input
+    logprob = [float(p) for p in logprob]
+    #logprob = float(logprob.split(" ")[0])+float(logprob.split(" ")[1])+float(logprob.split(" ")[2])+float(logprob.split(" ")[3])
+    #logprob = logprob/5
     tm.setdefault(tuple(f.split()), []).append(phrase(e, logprob))
   for f in tm: # prune all but top k translations
-    tm[f].sort(key=lambda x: -x.logprob)
+    tm[f].sort(key=lambda x: -x.logprob[0])
     del tm[f][k:] 
   return tm
 
