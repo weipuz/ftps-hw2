@@ -23,3 +23,7 @@ st/all.cn-en.en2 < 4featoutput.out
 D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r te
 st/all.cn-en.en3 < 4featoutput.out
 0.0423895789465
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py -i
+ toy/train.cn -t toy/phrase-table/phrase_table.out -l lm/en.tiny.3g.arpa > nbest
+output.out > nbestoutputtest.out
