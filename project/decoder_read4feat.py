@@ -50,7 +50,7 @@ french = [tuple(line.strip().split()) for line in open(opts.input).readlines()[:
 for word in set(sum(french,())):
   if (word,) not in tm:
     tm[(word,)] = [models.phrase(word, [0.0,0.0,0.0,0.0])]
-w = [0.2,0.2,0.2,0.2,0.2,0.2]
+w = [0.2,0.01,0.2,0.2,0.2,0.2]
 sys.stderr.write("Decoding %s...\n" % (opts.input,))
 for idx, f in enumerate(french):
   # The following code implements a monotone decoding
@@ -73,7 +73,7 @@ for idx, f in enumerate(french):
 		  temp_ph = bitmap(range(k,j))
 		  if (temp_ph & h.coverageVec == 0 ) and f[k:j] in tm:
 			for phrase in tm[f[k:j]]:
-			  logprob_weighted = sum([x*y for x,y in zip(w[2:4], phrase.logprob)])
+			  logprob_weighted = sum([x*y for x,y in zip(w[2:6], phrase.logprob)])
 			  logprob = h.logprob + logprob_weighted 
 			  lm_state = h.lm_state
 			  #namedtuple cant be replaced, use new varible to store the value and creat new nametuple at the end
@@ -88,11 +88,12 @@ for idx, f in enumerate(french):
 			  newrs = h.slogprob.rs
 			  for word in phrase.english.split():
 				(lm_state, word_logprob) = lm.score(lm_state, word)
-				logprob += 0.2*word_logprob
+				logprob += w[0]*word_logprob
 				newlms += word_logprob
-			  logprob += 0.2*lm.end(lm_state) if covered == len(f) else 0.0            
+			  logprob += w[0]*lm.end(lm_state) if covered == len(f) else 0.0            
 			  newlms += lm.end(lm_state) if covered == len(f) else 0.0            
-			  newrs += (h.fpos+1-k)
+			  newrs += (k-h.fpos-1)
+			  logprob += w[1]*(k-h.fpos-1)
 			  new_slogprob=slogprob(newlms,newrs, newpfe, newlfe, newpef, newlef)
 			  new_hypothesis = hypothesis(logprob, lm_state, h, phrase, new_coverage, fpos, new_slogprob)
 			  if (lm_state, new_coverage, fpos) not in stacks[covered] or stacks[covered][lm_state, new_coverage, fpos].logprob < logprob: # second case is recombination
