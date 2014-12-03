@@ -1,9 +1,3 @@
 Reading translation model from /usr/shared/CMPT/nlp-class/project/large/phrase-table/test-filtered/rules_cnt.final.out...
 Reading language model from /usr/shared/CMPT/nlp-class/project/lm/en.gigaword.3g.filtered.dev_test.arpa.gz...
 Decoding /usr/shared/CMPT/nlp-class/project/test/all.cn-en.cn...
-Traceback (most recent call last):
-  File "decoder_read4feat.py", line 79, in <module>
-    (lm_state, word_logprob) = lm.score(lm_state, word)
-  File "/home/fzhan/Documents/cmpt825/decoder_models.py", line 67, in score
-    return ((), score + self.table[("<unk>",)].logprob)
-KeyError: ('<unk>',)

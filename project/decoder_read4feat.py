@@ -100,7 +100,7 @@ for idx, f in enumerate(french):
   winners = heapq.nlargest(100,stacks[-1].itervalues(), key=lambda h: h.logprob)
   def extract_english(h): 
     return "" if h.predecessor is None else "%s%s " % (extract_english(h.predecessor), h.phrase.english)
-  
+  sys.stderr.write("idx = %i\n" % (idx))
   for winner in winners:
 	print str(idx) + " ||| " + extract_english(winner) + " ||| "  + " ".join([str(i) for i in winner.slogprob])
   if opts.verbose:
@@ -109,3 +109,4 @@ for idx, f in enumerate(french):
     tm_logprob = extract_tm_logprob(winner)
     sys.stderr.write("LM = %f, TM = %f, Total = %f\n" %
       (winner.logprob - tm_logprob, tm_logprob, winner.logprob))
+sys.stderr.write("done\n")
