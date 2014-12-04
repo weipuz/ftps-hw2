@@ -29,35 +29,45 @@ def last1bit(b):
 
 
 optparser = optparse.OptionParser()
-optparser.add_option("-i", "--input", dest="input", default="test/all.cn-en.cn", help="File containing sentences to translate (default=data/input)")
-optparser.add_option("-t", "--translation-model", dest="tm", default="large/phrase-table/test-filtered/rules_cnt.final.out", help="File containing translation model (default=data/tm)")
+optparser.add_option("-i", "--input", dest="input", default="dev/all.cn-en.cn", help="File containing sentences to translate (default=data/input)")
+optparser.add_option("-t", "--translation-model", dest="tm", default="large/phrase-table/dev-filtered/rules_cnt.final.out", help="File containing translation model (default=data/tm)")
 optparser.add_option("-l", "--language-model", dest="lm", default="lm/en.gigaword.3g.filtered.dev_test.arpa.gz", help="File containing ARPA-format language model (default=data/lm)")
 optparser.add_option("-n", "--num_sentences", dest="num_sents", default=sys.maxint, type="int", help="Number of sentences to decode (default=no limit)")
+optparser.add_option("-f", "--first_num_sentences", dest="first_num_sents", default=0, type="int", help="Number of sentences to decode (default=no limit)")
 optparser.add_option("-k", "--translations-per-phrase", dest="k", default=20, type="int", help="Limit on number of translations to consider per phrase (default=1)")
 optparser.add_option("-s", "--stack-size", dest="s", default=100, type="int", help="Maximum stack size (default=5)")
 optparser.add_option("-v", "--verbose", dest="verbose", action="store_true", default=False,  help="Verbose mode (default=off)")
 optparser.add_option("-e", "--eta", dest="eta", default=float(-5), type= "float") 
 optparser.add_option("-d", "--distortionLimit", dest = "d", type ="int",default = 10)
+optparser.add_option("-w", "--weight-file", dest="weights", default=None, help="Weight filename, or - for stdin (default=use uniform weights)")
 opts = optparser.parse_args()[0]
 
 tm = models.TM(opts.tm, opts.k)
 # new tm model read phrase table and present four prob:  p(e|f), p(f|e), two lexically- weighted phrase  lex(e|f) and lex(f|e)
 
 lm = models.LM(opts.lm)
-french = [tuple(line.strip().split()) for line in open(opts.input).readlines()[:opts.num_sents]]
+french = [tuple(line.strip().split()) for line in open(opts.input).readlines()[opts.first_num_sents:(opts.first_num_sents+opts.num_sents)]]
 
 # tm should translate unknown words as-is with probability 1
 for word in set(sum(french,())):
   if (word,) not in tm:
     tm[(word,)] = [models.phrase(word, [0.0,0.0,0.0,0.0])]
 w = [0.2,0.01,0.2,0.2,0.2,0.2]
+#w = [0.5254884,-0.9,3.32859,0.351289,-0.266778,2.741809]
+#w = None
+if opts.weights is not None:
+  weights_file = open(opts.weights)
+  w = [float(line.strip()) for line in weights_file]
 sys.stderr.write("Decoding %s...\n" % (opts.input,))
+
+
 for idx, f in enumerate(french):
   # The following code implements a monotone decoding
   # algorithm (one that doesn't permute the target phrases).
   # Hence all hypotheses in stacks[i] represent translations of 
   # the first i words of the input sentence. You should generalize
   # this so that they can represent translations of *any* i words.
+  sys.stderr.write("Decoding %s...\n" % (str(idx),))
   hypothesis = namedtuple("hypothesis", "logprob, lm_state, predecessor, phrase, coverageVec, fpos, slogprob")
   initial_bitmap = bitmap([])
   slogprob = namedtuple("slogprob", "lms, rs, pfe, lfe, pef, lef")
@@ -103,7 +113,7 @@ for idx, f in enumerate(french):
     return "" if h.predecessor is None else "%s%s " % (extract_english(h.predecessor), h.phrase.english)
   sys.stderr.write("idx = %i\n" % (idx))
   for winner in winners:
-	print str(idx) + " ||| " + extract_english(winner) + " ||| "  + " ".join([str(i) for i in winner.slogprob])
+	print str(opts.first_num_sents+idx) + " ||| " + extract_english(winner) + " ||| "  + " ".join([str(i) for i in winner.slogprob])
   if opts.verbose:
     def extract_tm_logprob(h):
       return 0.0 if h.predecessor is None else h.phrase.logprob + extract_tm_logprob(h.predecessor)
