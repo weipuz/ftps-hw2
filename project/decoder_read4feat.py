@@ -38,6 +38,7 @@ optparser.add_option("-s", "--stack-size", dest="s", default=100, type="int", he
 optparser.add_option("-v", "--verbose", dest="verbose", action="store_true", default=False,  help="Verbose mode (default=off)")
 optparser.add_option("-e", "--eta", dest="eta", default=float(-5), type= "float") 
 optparser.add_option("-d", "--distortionLimit", dest = "d", type ="int",default = 10)
+optparser.add_option("-w", "--weight-file", dest="weights", default=None, help="Weight filename, or - for stdin (default=use uniform weights)")
 opts = optparser.parse_args()[0]
 
 tm = models.TM(opts.tm, opts.k)
@@ -50,9 +51,15 @@ french = [tuple(line.strip().split()) for line in open(opts.input).readlines()[:
 for word in set(sum(french,())):
   if (word,) not in tm:
     tm[(word,)] = [models.phrase(word, [0.0,0.0,0.0,0.0])]
-#w = [0.2,0.01,0.2,0.2,0.2,0.2]
-w = [0.5254884,-0.9,3.32859,0.351289,-0.266778,2.741809]
+w = [0.2,0.01,0.2,0.2,0.2,0.2]
+#w = [0.5254884,-0.9,3.32859,0.351289,-0.266778,2.741809]
+#w = None
+if opts.weights is not None:
+  weights_file = open(opts.weights)
+  w = [float(line.strip()) for line in weights_file]
 sys.stderr.write("Decoding %s...\n" % (opts.input,))
+
+
 for idx, f in enumerate(french):
   # The following code implements a monotone decoding
   # algorithm (one that doesn't permute the target phrases).
