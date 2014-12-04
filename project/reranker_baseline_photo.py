@@ -6,7 +6,7 @@ from collections import namedtuple
 
 translation_candidate = namedtuple("candidate", "sentence, features, stats, smoothed_bleu")
 optparser = optparse.OptionParser()
-optparser.add_option("-r", "--reference", dest="reference", default="test/all.cn-en.en0", help="English reference sentences")
+optparser.add_option("-r", "--reference", dest="reference", default="dev/all.cn-en.en0", help="English reference sentences")
 optparser.add_option("-n", "--nbest", dest="nbest", default="outputs/decoder_read4feat_nbest.output", help="N-best lists")
 optparser.add_option("-t", "--tau", dest="tau", default=5000, help="tau")
 optparser.add_option("-a", "--alpha", dest="alpha", default=0.1, help="alpha")

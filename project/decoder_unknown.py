@@ -2,8 +2,11 @@
 import optparse
 import sys
 import decoder_models_4feat as models
-import heapq
+import heapq, datetime, re
 from collections import namedtuple
+
+start_time = datetime.datetime.now()
+
 #some utilitiy function
 
 def bitmap(sequence):
@@ -40,6 +43,7 @@ optparser.add_option("-v", "--verbose", dest="verbose", action="store_true", def
 optparser.add_option("-e", "--eta", dest="eta", default=float(-5), type= "float") 
 optparser.add_option("-d", "--distortionLimit", dest = "d", type ="int",default = 10)
 optparser.add_option("-w", "--weight-file", dest="weights", default=None, help="Weight filename, or - for stdin (default=use uniform weights)")
+optparser.add_option("-z", "--lex-f2e", dest="lexf2e", default=None, help="lex.f2e")
 opts = optparser.parse_args()[0]
 
 tm = models.TM(opts.tm, opts.k)
@@ -48,10 +52,40 @@ tm = models.TM(opts.tm, opts.k)
 lm = models.LM(opts.lm)
 french = [tuple(line.strip().split()) for line in open(opts.input).readlines()[opts.first_num_sents:(opts.first_num_sents+opts.num_sents)]]
 
+class UnknownWords:
+	'''unknown words'''
+
+	def __init__(self, filename):
+		self.f2e = dict()
+		self.unknown = dict()
+		self.regex = re.compile("^[A-Za-z0-9 _.,;:-]*$")
+		for line in open(filename).readlines():
+			(e, f, s) = line.split()
+			if f not in self.f2e:
+				self.f2e[f] = dict()
+			self.f2e[f][s] = e
+		for index in self.f2e:
+			reversed(sorted(self.f2e[index].keys()))
+
+	def __call__(self, french):
+		translation = french
+		if french in self.f2e:
+			translation = self.f2e[french].values()[0]
+		elif self.regex.match(french):
+			translation = "<ok>"
+		else:
+			characters = [ chr for chr in re.compile( '(?s)((?:[\ud800-\udbff][\udc00-\udfff])|.)' ).split( text ) if chr ]
+			for 
+			translation = "<unk>"
+			self.unknown[french] = translation
+		return french + "-" + translation
+
+uw = UnknownWords(opts.lexf2e)
+
 # tm should translate unknown words as-is with probability 1
 for word in set(sum(french,())):
   if (word,) not in tm:
-    tm[(word,)] = [models.phrase(word, [0.0,0.0,0.0,0.0])]
+    tm[(word,)] = [models.phrase(uw(word), [0.0,0.0,0.0,0.0], word)]
 w = [0.2,0.01,0.2,0.2,0.2,0.2]
 #w = [0.5254884,-0.9,3.32859,0.351289,-0.266778,2.741809]
 #w = None
@@ -67,7 +101,7 @@ for idx, f in enumerate(french):
   # Hence all hypotheses in stacks[i] represent translations of 
   # the first i words of the input sentence. You should generalize
   # this so that they can represent translations of *any* i words.
-  sys.stderr.write("Decoding %s...\n" % (str(idx),))
+  sys.stderr.write("index %s...\n" % (str(idx),))
   hypothesis = namedtuple("hypothesis", "logprob, lm_state, predecessor, phrase, coverageVec, fpos, slogprob")
   initial_bitmap = bitmap([])
   slogprob = namedtuple("slogprob", "lms, rs, pfe, lfe, pef, lef")
@@ -110,13 +144,19 @@ for idx, f in enumerate(french):
 				stacks[covered][lm_state, new_coverage, fpos] = new_hypothesis 
   winners = heapq.nlargest(100,stacks[-1].itervalues(), key=lambda h: h.logprob)
   def extract_english(h): 
-    return "" if h.predecessor is None else "%s%s " % (extract_english(h.predecessor), h.phrase.english)
-  
+    return "" if h.predecessor is None else "%s %s " % (extract_english(h.predecessor), h.phrase.english)
+  def extract_french(h): 
+    return "" if h.predecessor is None else "%s %s " % (extract_french(h.predecessor), h.phrase.french)
   for winner in winners:
-	print str(opts.first_num_sents+idx) + " ||| " + extract_english(winner) + " ||| "  + " ".join([str(i) for i in winner.slogprob])
+	print str(opts.first_num_sents+idx) + " ||| " + extract_english(winner) + " ||| "  + " ".join([str(i) for i in winner.slogprob]) #+ " ||| " + extract_french(winner)
   if opts.verbose:
     def extract_tm_logprob(h):
       return 0.0 if h.predecessor is None else h.phrase.logprob + extract_tm_logprob(h.predecessor)
     tm_logprob = extract_tm_logprob(winner)
     sys.stderr.write("LM = %f, TM = %f, Total = %f\n" %
       (winner.logprob - tm_logprob, tm_logprob, winner.logprob))
+
+for word in uw.unknown:
+	print "%s" % word,
+
+sys.stderr.write("done %f ms\n" % ((datetime.datetime.now() - start_time).microseconds))
