@@ -52,7 +52,7 @@ french = [tuple(line.strip().split()) for line in open(opts.input).readlines()[o
 for word in set(sum(french,())):
   if (word,) not in tm:
     tm[(word,)] = [models.phrase(word, [0.0,0.0,0.0,0.0])]
-w = [0.2,0.01,0.2,0.2,0.2,0.2]
+w = [0.2,-0.2,0.2,0.2,0.2,0.2]
 #w = [0.5254884,-0.9,3.32859,0.351289,-0.266778,2.741809]
 #w = None
 if opts.weights is not None:
@@ -102,8 +102,8 @@ for idx, f in enumerate(french):
 				newlms += word_logprob
 			  logprob += w[0]*lm.end(lm_state) if covered == len(f) else 0.0            
 			  newlms += lm.end(lm_state) if covered == len(f) else 0.0            
-			  newrs += (k-h.fpos-1)
-			  logprob += w[1]*(k-h.fpos-1)
+			  newrs += abs(k-h.fpos-1)
+			  logprob += w[1]*abs(k-h.fpos-1)
 			  new_slogprob=slogprob(newlms,newrs, newpfe, newlfe, newpef, newlef)
 			  new_hypothesis = hypothesis(logprob, lm_state, h, phrase, new_coverage, fpos, new_slogprob)
 			  if (lm_state, new_coverage, fpos) not in stacks[covered] or stacks[covered][lm_state, new_coverage, fpos].logprob < logprob: # second case is recombination
