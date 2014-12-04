@@ -10,7 +10,7 @@ from collections import namedtuple
 #   phrase(english='what has', logprob=-0.301030009985), 
 #   phrase(english='what has been', logprob=-0.301030009985)]
 # k is a pruning parameter: only the top k translations are kept for each f.
-phrase = namedtuple("phrase", "english, logprob, french")
+phrase = namedtuple("phrase", "english, logprob")
 def TM(filename, k):
   sys.stderr.write("Reading translation model from %s...\n" % (filename,))
   tm = {}
@@ -21,7 +21,7 @@ def TM(filename, k):
     logprob = [float(p) for p in logprob]
     #logprob = float(logprob.split(" ")[0])+float(logprob.split(" ")[1])+float(logprob.split(" ")[2])+float(logprob.split(" ")[3])
     #logprob = logprob/5
-    tm.setdefault(tuple(f.split()), []).append(phrase(e, logprob, f))
+    tm.setdefault(tuple(f.split()), []).append(phrase(e, logprob))
   for f in tm: # prune all but top k translations
     tm[f].sort(key=lambda x: -x.logprob[0])
     del tm[f][k:] 
