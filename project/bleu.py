@@ -7,13 +7,26 @@ from collections import Counter
 # Summing the columns across calls to this function on an entire corpus will
 # produce a vector of statistics that can be used to compute BLEU (below)
 def bleu_stats(sentence, reference):
-  yield len(sentence)
-  yield len(reference)
-  for n in xrange(1,5):
-    s_ngrams = Counter([tuple(sentence[i:i+n]) for i in xrange(len(sentence)+1-n)])
-    r_ngrams = Counter([tuple(reference[i:i+n]) for i in xrange(len(reference)+1-n)])
-    yield max([sum((s_ngrams & r_ngrams).values()), 0])
-    yield max([len(sentence)+1-n, 0])
+	yield len(sentence)
+	yield len(reference)
+	for n in xrange(1,5):
+		s_ngrams = Counter([tuple(sentence[i:i+n]) for i in xrange(len(sentence)+1-n)])
+		r_ngrams = Counter([tuple(reference[i:i+n]) for i in xrange(len(reference)+1-n)])
+		yield max([sum((s_ngrams & r_ngrams).values()), 0])
+		yield max([len(sentence)+1-n, 0])
+def bleu_stats2(sentence, references):
+	yield len(sentence)
+	lens = [len(ref) for ref in references]
+	yield sum(lens)/len(lens)
+	for n in xrange(1,5):
+		s_ngrams = Counter([tuple(sentence[i:i+n]) for i in xrange(len(sentence)+1-n)])
+		r_ngrams = None
+		for reference in references:			
+			if r_ngrams == None: r_ngrams = Counter([tuple(reference[i:i+n]) for i in xrange(len(reference)+1-n)])
+			else: r_ngrams |= Counter([tuple(reference[i:i+n]) for i in xrange(len(reference)+1-n)])
+
+		yield max([sum((s_ngrams & r_ngrams).values()), 0])
+		yield max([len(sentence)+1-n, 0])
 
 # Compute BLEU from collected statistics obtained by call(s) to bleu_stats
 def bleu(stats):

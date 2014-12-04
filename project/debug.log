@@ -37,3 +37,453 @@ python decoder_read4feat.py -s 200 -k 50 -i /usr/shared/CMPT/nlp-class/project/d
 
 
  python decoder_read4feat.py -n 500 -s 100 -k 20 -i /usr/shared/CMPT/nlp-class/project/dev/all.cn-en.cn -t /usr/shared/CMPT/nlp-class/project/large/phrase-table/dev-filtered/rules_cnt.final.out -l /usr/shared/CMPT/nlp-class/project/lm/en.gigaword.3g.filtered.dev_test.arpa.gz /home/weipuz/sfuhome/nlpproject > /home/weipuz/sfuhome/nlpproject/output/dev500-2-nests100k10.out
+
+Microsoft Windows [Version 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py >
+4featoutput.out
+Traceback (most recent call last):
+  File "decoder_read4feat.py", line 4, in <module>
+    import decoder_models as models
+  File "D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project\decoder_models.py", li
+ne 44
+    self.table[("<unk>",)]=ngram_stats(-5.369621, 0.0)
+    ^
+IndentationError: unexpected indent
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py >
+4featoutput.out
+Reading translation model from large/phrase-table/test-filtered/rules_cnt.final.
+out...
+Reading language model from lm/en.gigaword.3g.filtered.dev_test.arpa.gz...
+Traceback (most recent call last):
+  File "decoder_read4feat.py", line 44, in <module>
+    lm = models.LM(opts.lm)
+  File "D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project\decoder_models.py", li
+ne 47, in __init__
+    file_handle = gzip.open(filename, 'r')
+  File "D:\Users\wpzhao\Anaconda\lib\gzip.py", line 34, in open
+    return GzipFile(filename, mode, compresslevel)
+  File "D:\Users\wpzhao\Anaconda\lib\gzip.py", line 94, in __init__
+    fileobj = self.myfileobj = __builtin__.open(filename, mode or 'rb')
+IOError: [Errno 2] No such file or directory: 'lm/en.gigaword.3g.filtered.dev_te
+st.arpa.gz'
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py >
+4featoutput.out
+Reading translation model from large/phrase-table/test-filtered/rules_cnt.final.
+out...
+Reading language model from lm/en.gigaword.3g.filtered.dev_test.arpa.gz...
+Decoding test/all.cn-en.cn...
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py < 4fe
+atoutput.out
+Traceback (most recent call last):
+  File "score-reranker.py", line 10, in <module>
+    ref = [line.strip().split() for line in open(opts.reference)]
+IOError: [Errno 2] No such file or directory: 'data/test.en'
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r de
+v/all.cn-en.en0 < 4featoutput.out
+0.00117165948587
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r te
+st/all.cn-en.en0 < 4featoutput.out
+0.0462413852568
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r te
+st/all.cn-en.en1 < 4featoutput.out
+0.0377621818541
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r te
+st/all.cn-en.en2 < 4featoutput.out
+0.0482424997406
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r te
+st/all.cn-en.en3 < 4featoutput.out
+0.0423895789465
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py >
+nbestoutput.out
+Reading translation model from large/phrase-table/test-filtered/rules_cnt.final.
+out...
+Traceback (most recent call last):
+  File "decoder_read4feat.py", line 42, in <module>
+    tm = models.TM(opts.tm, opts.k)
+  File "D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project\decoder_models_4feat.p
+y", line 23, in TM
+    tm.setdefault(tuple(f.split()), []).append(phrase(e, logprob))
+KeyboardInterrupt
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py -i
+ toy/train.cn -t toy/phrase-table/tgt_rules.all.out -l lm/en.tiny.3g.arpa > nbes
+toutput.out > nbestoutput.out
+Reading translation model from toy/phrase-table/tgt_rules.all.out...
+Traceback (most recent call last):
+  File "decoder_read4feat.py", line 42, in <module>
+    tm = models.TM(opts.tm, opts.k)
+  File "D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project\decoder_models_4feat.p
+y", line 18, in TM
+    (f, e, logprob) = line.strip().split(" ||| ")
+ValueError: need more than 2 values to unpack
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py -i
+ toy/train.cn -t toy/phrase-table/phrase_table.out -l lm/en.tiny.3g.arpa > nbest
+output.out > nbestoutput.out
+Reading translation model from toy/phrase-table/phrase_table.out...
+Reading language model from lm/en.tiny.3g.arpa...
+Decoding toy/train.cn...
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py -i
+ toy/train.cn -t toy/phrase-table/phrase_table.out -l lm/en.tiny.3g.arpa > nbest
+output.out > nbestoutput.out
+  File "decoder_read4feat.py", line 91
+    for winner in winners
+                        ^
+SyntaxError: invalid syntax
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py -i
+ toy/train.cn -t toy/phrase-table/phrase_table.out -l lm/en.tiny.3g.arpa > nbest
+output.out > nbestoutput.out
+Reading translation model from toy/phrase-table/phrase_table.out...
+Reading language model from lm/en.tiny.3g.arpa...
+Decoding toy/train.cn...
+Traceback (most recent call last):
+  File "decoder_read4feat.py", line 92, in <module>
+    print idx + " ||| " + extract_english(winner) + " ||| " + winner.logprob
+NameError: name 'idx' is not defined
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py -i
+ toy/train.cn -t toy/phrase-table/phrase_table.out -l lm/en.tiny.3g.arpa > nbest
+output.out > nbestoutput.out
+Reading translation model from toy/phrase-table/phrase_table.out...
+Reading language model from lm/en.tiny.3g.arpa...
+Decoding toy/train.cn...
+Traceback (most recent call last):
+  File "decoder_read4feat.py", line 92, in <module>
+    print idx + " ||| " + extract_english(winner) + " ||| " + winner.logprob
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py -i
+ toy/train.cn -t toy/phrase-table/phrase_table.out -l lm/en.tiny.3g.arpa > nbest
+output.out > nbestoutput.out
+Reading translation model from toy/phrase-table/phrase_table.out...
+Reading language model from lm/en.tiny.3g.arpa...
+Decoding toy/train.cn...
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py -i
+ toy/train.cn -t toy/phrase-table/phrase_table.out -l lm/en.tiny.3g.arpa > nbest
+output.out > nbestoutputtest.out
+Traceback (most recent call last):
+  File "decoder_read4feat.py", line 4, in <module>
+    import decoder_models_4feat as models
+  File "D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project\decoder_models_4feat.p
+y", line 21
+    logprob = [float(p) for p in logprob]
+    ^
+IndentationError: unexpected indent
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py -i
+ toy/train.cn -t toy/phrase-table/phrase_table.out -l lm/en.tiny.3g.arpa > nbest
+output.out > nbestoutputtest.out
+Reading translation model from toy/phrase-table/phrase_table.out...
+Reading language model from lm/en.tiny.3g.arpa...
+Decoding toy/train.cn...
+Traceback (most recent call last):
+  File "decoder_read4feat.py", line 80, in <module>
+    new_slogprob.pfe += phrase.logprob[1]
+AttributeError: can't set attribute
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py -i
+ toy/train.cn -t toy/phrase-table/phrase_table.out -l lm/en.tiny.3g.arpa > nbest
+output.out > nbestoutputtest.out
+Reading translation model from toy/phrase-table/phrase_table.out...
+Reading language model from lm/en.tiny.3g.arpa...
+Decoding toy/train.cn...
+Traceback (most recent call last):
+  File "decoder_read4feat.py", line 91, in <module>
+    new_slogprob.lms += word_logprob
+AttributeError: can't set attribute
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py -i
+ toy/train.cn -t toy/phrase-table/phrase_table.out -l lm/en.tiny.3g.arpa > nbest
+output.out > nbestoutputtest.out
+  File "decoder_read4feat.py", line 79
+    print new_slogprob = h.slogprob
+                       ^
+SyntaxError: invalid syntax
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py -i
+ toy/train.cn -t toy/phrase-table/phrase_table.out -l lm/en.tiny.3g.arpa > nbest
+output.out > nbestoutputtest.out
+Reading translation model from toy/phrase-table/phrase_table.out...
+Reading language model from lm/en.tiny.3g.arpa...
+Decoding toy/train.cn...
+Traceback (most recent call last):
+  File "decoder_read4feat.py", line 91, in <module>
+    new_slogprob.lms += word_logprob
+AttributeError: can't set attribute
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py -i
+ toy/train.cn -t toy/phrase-table/phrase_table.out -l lm/en.tiny.3g.arpa > nbest
+output.out > nbestoutputtest.out
+Reading translation model from toy/phrase-table/phrase_table.out...
+Reading language model from lm/en.tiny.3g.arpa...
+Decoding toy/train.cn...
+Traceback (most recent call last):
+  File "decoder_read4feat.py", line 91, in <module>
+    new_slogprob.lms += word_logprob
+AttributeError: can't set attribute
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py -i
+ toy/train.cn -t toy/phrase-table/phrase_table.out -l lm/en.tiny.3g.arpa > nbest
+output.out > nbestoutputtest.out
+Reading translation model from toy/phrase-table/phrase_table.out...
+Reading language model from lm/en.tiny.3g.arpa...
+Decoding toy/train.cn...
+Traceback (most recent call last):
+  File "decoder_read4feat.py", line 73, in <module>
+    temp_ph = bitmap(range(k,j))
+  File "decoder_read4feat.py", line 11, in bitmap
+    return reduce(lambda x,y: x|y, map(lambda i: long('1'+'0'*i,2), sequence), 0
+)
+  File "decoder_read4feat.py", line 11, in <lambda>
+    return reduce(lambda x,y: x|y, map(lambda i: long('1'+'0'*i,2), sequence), 0
+)
+KeyboardInterrupt
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py -i
+ toy/train.cn -t toy/phrase-table/phrase_table.out -l lm/en.tiny.3g.arpa > nbest
+output.out > nbestoutputtest.out
+Reading translation model from toy/phrase-table/phrase_table.out...
+Reading language model from lm/en.tiny.3g.arpa...
+Decoding toy/train.cn...
+Traceback (most recent call last):
+  File "decoder_read4feat.py", line 73, in <module>
+    temp_ph = bitmap(range(k,j))
+  File "decoder_read4feat.py", line 11, in bitmap
+    return reduce(lambda x,y: x|y, map(lambda i: long('1'+'0'*i,2), sequence), 0
+)
+  File "decoder_read4feat.py", line 11, in <lambda>
+    return reduce(lambda x,y: x|y, map(lambda i: long('1'+'0'*i,2), sequence), 0
+)
+KeyboardInterrupt
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py >
+nbestoutput.out
+Reading translation model from large/phrase-table/test-filtered/rules_cnt.final.
+out...
+Reading language model from lm/en.gigaword.3g.filtered.dev_test.arpa.gz...
+Decoding test/all.cn-en.cn...
+Traceback (most recent call last):
+  File "decoder_read4feat.py", line 73, in <module>
+    for j in xrange(k+1,len(f)+1):
+  File "decoder_read4feat.py", line 11, in bitmap
+    return reduce(lambda x,y: x|y, map(lambda i: long('1'+'0'*i,2), sequence), 0
+)
+  File "decoder_read4feat.py", line 11, in <lambda>
+    return reduce(lambda x,y: x|y, map(lambda i: long('1'+'0'*i,2), sequence), 0
+)
+KeyboardInterrupt
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py -n
+ 10 > nbestoutput.out
+Reading translation model from large/phrase-table/dev-filtered/rules_cnt.final.o
+ut...
+Reading language model from lm/en.gigaword.3g.filtered.dev_test.arpa.gz...
+Decoding dev/all.cn-en.cn...
+Decoding 0...
+Decoding 1...
+Decoding 2...
+Decoding 3...
+Decoding 4...
+Decoding 5...
+Decoding 6...
+Decoding 7...
+Decoding 8...
+Decoding 9...
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py -n
+ 100 > dev100-10bestoutput.out
+Reading translation model from large/phrase-table/dev-filtered/rules_cnt.final.o
+ut...
+Traceback (most recent call last):
+  File "decoder_read4feat.py", line 43, in <module>
+    tm = models.TM(opts.tm, opts.k)
+  File "D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project\decoder_models_4feat.p
+y", line 24, in TM
+    tm.setdefault(tuple(f.split()), []).append(phrase(e, logprob))
+KeyboardInterrupt
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder_read4feat.py -n
+ 500 > dev500-100bestoutput.out
+Reading translation model from large/phrase-table/dev-filtered/rules_cnt.final.o
+ut...
+Reading language model from lm/en.gigaword.3g.filtered.dev_test.arpa.gz...
+Decoding dev/all.cn-en.cn...
+Decoding 0...
+
+Decoding 494...
+Decoding 495...
+Decoding 496...
+Decoding 497...
+Decoding 498...
+Decoding 499...
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python baseline_photo -r dev/a
+ll.cn-en.en0 -n dev500-100bestoutput.out > dev500weight.weight
+python: can't open file 'baseline_photo': [Errno 2] No such file or directory
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python baseline_photo.py -r de
+v/all.cn-en.en0 -n dev500-100bestoutput.out > dev500weight.weight
+.........................epoch 0.....classification error rate: 1.000000 (11567
+observation)
+epoch 1.....classification error rate: 1.000000 (11562 observation)
+epoch 2.....classification error rate: 1.000000 (11550 observation)
+epoch 3.....classification error rate: 1.000000 (11601 observation)
+epoch 4.....classification error rate: 1.000000 (11517 observation)
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python rerank.py -n dev500-100
+bestoutput.out -w dev500weight.weight > dev500weightoutput.out
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r de
+v/all.cn-en.en0 -i dev500weightoutput.out
+Usage: score-reranker.py [options]
+
+score-reranker.py: error: no such option: -i
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r de
+v/all.cn-en.en0 < dev500weightoutput.out
+0.0703088402311
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python baseline_photo.py -r de
+v/all.cn-en.en0 -n devnests100k10.out > devalls100k10weight.weight
+................................................................................
+...........epoch 0................classification error rate: 1.000000 (32915 obs
+ervation)
+epoch 1................classification error rate: 1.000000 (32880 observation)
+epoch 2................classification error rate: 1.000000 (32932 observation)
+epoch 3................classification error rate: 1.000000 (32957 observation)
+epoch 4................classification error rate: 1.000000 (32879 observation)
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python rerank.py -n devnests10
+0k10.out -w devalls100k10weight.weight > devalls100k10weightoutput.out
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r de
+v/all.cn-en.en0 < devalls100k10weightoutput.out
+0.0624994238984
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python baseline_photo.py -r de
+v/all.cn-en.en0 -n dev500-2-nests100k10.out > dev500-2-100k10weight.weight
+Traceback (most recent call last):
+  File "baseline_photo.py", line 24, in <module>
+    (i, sentence, features) = line.strip().split("|||")
+ValueError: need more than 2 values to unpack
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python baseline_photo.py -r de
+v/all.cn-en.en0 -n dev500-1000-2-nests100k10.out > dev500-1000-2-100k10weight.we
+ight
+....................epoch 0Traceback (most recent call last):
+  File "baseline_photo.py", line 46, in <module>
+    for c1, c2 in sorted(v(), key=lambda (c1, c2): c2.smoothed_bleu - c1.smoothe
+d_bleu) [: opts.xi]:
+  File "baseline_photo.py", line 42, in v
+    c1 = random.choice(nbest)
+  File "D:\Users\wpzhao\Anaconda\lib\random.py", line 275, in choice
+    return seq[int(self.random() * len(seq))]  # raises IndexError if seq is emp
+ty
+IndexError: list index out of range
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder.py
+Traceback (most recent call last):
+  File "decoder.py", line 2, in <module>
+    import optparse, sys, math, models
+ImportError: No module named models
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder.py
+Traceback (most recent call last):
+  File "decoder.py", line 35, in <module>
+    tm = models.TM(opts.tm, opts.k, weights[1:5])
+NameError: name 'models' is not defined
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python decoder.py
+Reading translation model from large/phrase-table/test-filtered/rules_cnt.final.
+out...
+Traceback (most recent call last):
+  File "decoder.py", line 35, in <module>
+    tm = models_new.TM(opts.tm, opts.k, weights[1:5])
+  File "D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project\models_new.py", line 1
+9, in TM
+    for line in open(filename).readlines():
+KeyboardInterrupt
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python baseline_photo.py -r de
+v/all.cn-en.en0 -n dev500-2-nests100k10.out > dev500-2-100k10weight.weight
+.........................epoch 0...classification error rate: 1.000000 (7718 obs
+ervation)
+epoch 1...classification error rate: 1.000000 (7671 observation)
+epoch 2...classification error rate: 1.000000 (7713 observation)
+epoch 3...classification error rate: 1.000000 (7611 observation)
+epoch 4...classification error rate: 1.000000 (7676 observation)
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python rerank.py -n dev500-2-n
+ests100k10.out -w dev500-2-100k10weight.weight > dev500-2-100k10weightoutput.out
+
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r de
+v/all.cn-en.en0 < dev500-2-100k10weightoutput.out
+0.0373237661271
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python reranker.py -r dev/all.
+cn-en.en0 -n dev500-2-nests100k10.out > dev500-2-100k10weight_newr.weight
+python: can't open file 'reranker.py': [Errno 2] No such file or directory
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python reranker.py -r dev/all.
+cn-en.en0 -n dev500-2-nests100k10.out > dev500-2-100k10weight_newr.weight
+Computing smoothed bleu score for candidates.........................
+Training...
+Completed
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python reranker.py -r dev/all.
+cn-en.en0 -n devnests100k10.out > devalls100k10weight_newr.weight
+Computing smoothed bleu score for candidates....................................
+.......................................................
+Training...
+Completed
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python rerank.py -n devnests10
+0k10.out -w devalls100k10weight_newr.weight > devalls100k10weightoutput_newr.out
+
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r de
+v/all.cn-en.en0 < devalls100k10weightoutput_newr.out
+0.0642121050752
+
+
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python reranker.py -r dev/all.
+cn-en.en0 -n dev500-100bestoutput.out > dev500_s100k20weight_newr.weight
+Computing smoothed bleu score for candidates.........................
+Training...
+Completed
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python rerank.py -n dev500-100
+bestoutput.out -w dev500_s100k20weight_newr.weight > dev500_s100k20weightoutput_
+newr.out
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r de
+v/all.cn-en.en0 < dev500_s100k20weightoutput_newr.out
+0.0723765612573
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python reranker.py -r dev/all.
+cn-en.en0 -n dev500-2-nests100k20.out > dev500-2-s100k20weight_newr.weight
+Computing smoothed bleu score for candidates........................
+Training...
+Completed
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python rerank.py -n dev500-2-n
+ests100k20.out -w dev500-2-s100k20weight_newr.weight > dev500-2-s100k20weightout
+put_newr.out
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r de
+v/all.cn-en.en0 < dev500-2-s100k20weightoutput_newr.out
+0.0123300766317
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>
