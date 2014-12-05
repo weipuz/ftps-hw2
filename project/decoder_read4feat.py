@@ -83,13 +83,15 @@ for idx, f in enumerate(french):
 		  temp_ph = bitmap(range(k,j))
 		  if (temp_ph & h.coverageVec == 0 ) and f[k:j] in tm:
 			for phrase in tm[f[k:j]]:
-			  logprob_weighted = sum([x*y for x,y in zip(w[2:6], phrase.logprob)])
+			  #reorder the phrase logprob into the same order with the weight
+			  phraselogprob=[phrase.logprob[1],phrase.logprob[3],phrase.logprob[0],phrase.logprob[2]]
+			  logprob_weighted = sum([x*y for x,y in zip(w[2:6], phraselogprob)])
 			  logprob = h.logprob + logprob_weighted 
 			  lm_state = h.lm_state
 			  #namedtuple cant be replaced, use new varible to store the value and creat new nametuple at the end
 			  newpfe = h.slogprob.pfe + phrase.logprob[1]
-			  newpef = h.slogprob.pef + phrase.logprob[0]
 			  newlfe = h.slogprob.lfe + phrase.logprob[3]
+			  newpef = h.slogprob.pef + phrase.logprob[0]
 			  newlef = h.slogprob.lef + phrase.logprob[2]
 			  new_coverage= temp_ph | h.coverageVec
 			  fpos = j

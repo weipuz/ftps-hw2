@@ -1,0 +1,5 @@
+python decoder_read4feat.py -i /usr/shared/CMPT/nlp-class/project/toy/train.cn -t /usr/shared/CMPT/nlp-class/project/toy/phrase-table/phrase_table.out -l /usr/shared/CMPT/nlp-class/project/lm/en.tiny.3g.arpa -s 100 -k 20 > output/toy_it1_s100k20.output 2> errortoy1.log 
+python reranker.py -r /usr/shared/CMPT/nlp-class/project/toy/train.en -s /usr/shared/CMPT/nlp-class/project/toy/train.cn -n output/toy_it1_s100k20.output > output/toy_it1_s100k20.weight 2>errortoy2.log
+python rerank.py -n output/toy_it1_s100k20.output -w output/toy_it1_s100k20.weight > output/toy_it1_s100k20weight.out 2> errortoy3.log
+#python score-reranker.py -r /usr/shared/CMPT/nlp-class/project/toy/train.en < toy_it1_s100k20weight.output
+python decoder_read4feat.py -i /usr/shared/CMPT/nlp-class/project/toy/train.cn -t /usr/shared/CMPT/nlp-class/project/toy/phrase-table/phrase_table.out -l /usr/shared/CMPT/nlp-class/project/lm/en.tiny.3g.arpa -s 100 -k 20 -w output/toy_it1_s100k20.weight > output/toy_it2_s100k20.output 2> errortoy4.log 

@@ -9,10 +9,11 @@ optparser = optparse.OptionParser()
 optparser.add_option("-r", "--reference", dest="reference", default=os.path.join("dev", "all.cn-en.en0"), help="English reference sentences")
 optparser.add_option("-s", "--source", dest="source", default=os.path.join("dev", "all.cn-en.cn"), help="Source sentences file")
 optparser.add_option("-n", "--nbest", dest="nbest", default=os.path.join("dev2.nbest"), help="N-best file")
+optparser.add_option("-w", "--weight-file", dest="weights", default=None, help="Weight filename, or - for stdin (default=use uniform weights)")
 (opts, _) = optparser.parse_args()
 
 ref = [line.strip().split() for line in open(opts.reference)]
-multiple_references = True
+multiple_references = False
 if multiple_references:
 	ref = zip(ref, [line.strip().split() for line in open(os.path.join("dev", "all.cn-en.en1"))], [line.strip().split() for line in open(os.path.join("dev", "all.cn-en.en2"))],[line.strip().split() for line in open(os.path.join("dev", "all.cn-en.en3"))])
 
@@ -30,6 +31,9 @@ rand_seed = 30 # random seed #30
 # Variables
 nbests = []
 w = []
+if opts.weights is not None:
+  weights_file = open(opts.weights)
+  w = matrix([float(line.strip()) for line in weights_file])
 
 sys.stderr.write("Computing smoothed bleu score for candidates")
 for n, line in enumerate(open(opts.nbest)):

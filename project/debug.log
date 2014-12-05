@@ -486,4 +486,22 @@ D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r de
 v/all.cn-en.en0 < dev500-2-s100k20weightoutput_newr.out
 0.0123300766317
 
-D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python rerank.py -n dev_it1_0_
+500_s100k20.output -w dev_it1_0_500_s100k20.weight > dev_it1_0_500_s100k20_weigh
+toutput.output
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r de
+v/all.cn-en.en0 < dev_it1_0_500_s100k20_weightoutput.output
+0.0824232614861
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python reranker.py -r dev/all.cn-en.en0 -n dev_it2_0_500_s100k20.output > dev_it2_0_500_s100k20.weight
+Computing smoothed bleu score for candidates.........................
+Training...
+Completed
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python rerank.py -n dev_it2_0_
+500_s100k20.output -w dev_it2_0_500_s100k20.weight > dev_it2_0_500_s100k20_weigh
+toutput.output
+
+D:\Users\wpzhao\Documents\GitHub\ftps-hw2\project>python score-reranker.py -r de
+v/all.cn-en.en0 < dev_it2_0_500_s100k20_weightoutput.output
+0.0115172398878
